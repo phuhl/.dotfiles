@@ -1,0 +1,102 @@
+Xcursor.theme:    Vanilla-DMZ-AA
+
+!urxvt color scheme:
+
+! Unechte Transparanz, geht auch ohne compositing
+!URxvt*transparent: true
+!urxvt*shading: 15
+
+URxvt*depth: 32
+
+URxvt*colorUL: #86a2b0
+
+!fore/background
+URxvt.foreground: #696969
+!#282626
+! Echte Transparanz, benötigt compositing
+URxvt.background: rgba:0000/0000/0000/c800
+!black
+URxvt.color0:  #333333
+URxvt.color8:  #666666
+!red
+URxvt.color1:  #A94952
+URxvt.color9:  #ED6975
+!green
+URxvt.color2:  #83A949
+URxvt.color10: #B8ED69
+!yellow
+URxvt.color3:  #A99F49
+URxvt.color11: #EDE169
+!blue
+URxvt.color4:  #4983A9
+URxvt.color12: #69B8ED
+!magenta
+URxvt.color5:  #A94983
+URxvt.color13: #ED69B8
+!cyan
+URxvt.color6:  #49A99F
+URxvt.color14: #69EDE1
+!white
+URxvt.color7:  #AAAAAA
+URxvt.color15: #CCCCCC
+
+!colors:
+!scheme: pnevma
+!URxvt*foreground: #6F6767
+!URxvt*background: #3A3636
+!URxvt*color0: #363636
+!URxvt*color8: #424242
+!URxvt*color1: #C37561
+!URxvt*color9: #D19485
+!URxvt*color2: #A0A57E
+!URxvt*color10: #B6B99D
+!URxvt*color3: #D1A375
+!URxvt*color11: #DEBC9C
+!URxvt*color4: #7985A3
+!URxvt*color12: #98A1B9
+!URxvt*color5: #AB716D
+!URxvt*color13: #BE918E
+!URxvt*color6: #98B9B1
+!URxvt*color14: #CBE6CB
+!URxvt*color7: #D0D0D0
+!URxvt*color15: #E6E6E6
+
+
+!urxvt fonts:
+
+URxvt*font: xft:Monospace:pixelsize=12
+URxvt*boldFont: xft:Monospace:bold:pixelsize=12
+
+
+!urxvt extensions:
+
+URxvt.perl-ext-common:  default,matcher,tabbedex
+
+!enabling clickable links:
+
+URxvt.urlLauncher:      /usr/bin/chromium
+URxvt.matcher.button:   1
+
+!urxvt scrolling options and cursor style:
+
+URxvt*saveLines: 12000
+URxvt*scrollstyle:plain
+URxvt*scrollBar: false
+URxvt*cursorBlink: true
+URxvt*cursorUnderline: false
+
+! urxvt tabs settings:
+
+URxvt.tabbed.tabbar-fg: 2
+URxvt.tabbed.tabbar-bg: 0
+URxvt.tabbed.tab-fg: 2
+URxvt.tabbed.tab-bg: 8
+URxvt.tabbed.autohide:  yes
+URxvt.tabbed.new-button:  no
+URxvt.tabbed.title: no
+
+
+URxvt.perl-ext-common: default,matcher,clipboard
+URxvt.keysym.M-c:   perl:clipboard:copy
+URxvt.keysym.M-v:   perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped

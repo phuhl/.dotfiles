@@ -1,0 +1,40 @@
+#!/bin/sh
+lock1 (){
+    i3lock -i "$HOME/.dotfiles/misc/arch.png" -c "000000" -I 5
+    sleep 1
+    xset dpms force suspend
+}
+
+quitBspc () {
+    for window_id in $(bspc query -W); do
+	bspc window $window_id -c
+    done
+    bspc quit
+}
+
+case "$1" in
+    lock)
+	lock1
+	;;
+    logout)
+	bspc quit
+	logout
+	;;
+    suspend)
+	lock1 && systemctl suspend
+	;;
+    hibernate)
+	lock1 && systemctl hibernate
+	;;
+    reboot)
+	systemctl reboot
+	;;
+    shutdown)
+	systemctl poweroff
+	;;
+    *)
+	echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown}"
+	exit 2
+esac
+
+exit 0

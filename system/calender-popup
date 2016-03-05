@@ -1,0 +1,42 @@
+#!/bin/sh
+
+if [ $(pgrep -cx calender-popup) -gt 1 ] ; then
+	printf "%s\n" "The panel is already running." >&2
+	exit 1
+fi
+
+
+screen_width=1366
+panel_height=18
+font='Monospace:size=9'
+color_se='#4A90D8'
+color_sf='#f9f9f9'
+
+# Light theme
+#color_fg='#555555'
+#color_bg='#EDEDED'
+
+# Dark theme
+color_fg='#eeeeee'
+#color_bg='#263238'
+color_bg='#2b2b2b'
+
+x=$((screen_width - 126))
+y=18
+
+TODAY=$(expr `date +'%d'` + 0)
+MONTH=`date +'%m'`
+YEAR=`date +'%Y'`
+
+(
+echo `date +'%A %d/%m/%y %n'`
+
+cal | sed -re "s/^(.*[A-Za-z][A-Za-z]*.*)$/^fg($color_se)^bg($color_bg)\1/;s/(^|[ ])($TODAY)($|[ ])/\1^bg($color_se) ^fg($color_sf)\2^fg($color_fg) ^bg($color_bg)\3/"
+
+# next month, hilight header
+#[ $MONTH -eq 12 ] && YEAR=`expr $YEAR + 1`
+#cal `expr \( $MONTH + 1 \) % 12` $YEAR \
+#    | sed -e 's/^\(.*[A-Za-z][A-Za-z]*.*\)$/^fg($color_se)^bg($color_bg)\1/'
+
+) | dzen2 -fn "$font" -fg "$color_fg" -bg "$color_bg" -x $x -y $y -h $panel_height -w 160 -l 9 -p 5 -e 'button1=exit;button2=exit;onstart=uncollapse;' &
+

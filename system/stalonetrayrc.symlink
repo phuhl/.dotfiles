@@ -1,0 +1,16 @@
+decorations none
+transparent false
+dockapp_mode none
+geometry 1x1+600+0
+max_geometry 10x1+600+0
+background "#222222"
+kludges force_icons_size
+grow_gravity E
+icon_gravity W
+icon_size 14
+sticky true
+#window_strut none
+window_type dock
+window_layer bottom
+#no_shrink false
+skip_taskbar true

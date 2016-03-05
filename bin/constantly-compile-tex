@@ -1,0 +1,12 @@
+#!/bin/bash
+if [ -z $1 ]; then
+    echo "Usage: "
+    echo "./constantly_compile_tex.sh <file to compile>"
+    echo
+    exit
+fi
+
+while [ true ] ; do
+    texi2pdf $1
+    sleep 10
+done ;
