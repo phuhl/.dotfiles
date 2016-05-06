@@ -27,8 +27,9 @@ y=0
 (
 echo
 echo "^ca(1,  kill $(ps aux | grep shutdown-popup-name-for-killing | grep -v grep | awk '{print $2}') & lock shutdown)Herunterfahren                    ^ca()"
+echo "^ca(1,  kill $(ps aux | grep shutdown-popup-name-for-killing | grep -v grep | awk '{print $2}') & lock reboot)Neu starten                       ^ca()"
 echo "^ca(1,  kill $(ps aux | grep shutdown-popup-name-for-killing | grep -v grep | awk '{print $2}') & lock suspend)Schlafen                          ^ca()"
 echo "^ca(1,  kill $(ps aux | grep shutdown-popup-name-for-killing | grep -v grep | awk '{print $2}') & lock logout)Ausloggen                         ^ca()"
 echo "^ca(1,  kill $(ps aux | grep shutdown-popup-name-for-killing | grep -v grep | awk '{print $2}') & lock lock)Sperren                           ^ca()"
 
-) | dzen2 -fn "$font" -fg "$color_fg" -bg "$color_bg" -x $x -y $y -h $panel_height -w 160 -l 4 -p 5 -e 'onstart=hide,uncollapse;enterslave=grabkeys;leaveslave=ungrabkeys;button1=exit' -m v -j shutdown-popup-name-for-killing&
+) | dzen2 -fn "$font" -fg "$color_fg" -bg "$color_bg" -x $x -y $y -h $panel_height -w 160 -l 5 -p 5 -e 'onstart=hide,uncollapse;enterslave=grabkeys;leaveslave=ungrabkeys;button1=exit' -m v -j shutdown-popup-name-for-killing&

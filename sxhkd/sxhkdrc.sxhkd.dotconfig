@@ -4,51 +4,48 @@ super + alt + Escape
 
 #super + w
 super + shift + q
-    bspc window --close
-
-super + t
-    bspc desktop --layout next
+    bspc node --close
 
 super + b
-    bspc desktop --balance
+    bspc node @/ --balance
 
 # Rotate tree
 super + ctrl + {comma,period}
-    bspc desktop -R {270,90}
+    bspc node @/ -R {270,90}
 
 # -t, --toggle floating|fullscreen|pseudo_tiled|locked|sticky|private[=on|off]
-#    Set or toggle the given state for the selected window.
+#    Set or toggle the given state for the selected node.
 super + {s,f}
-    bspc window --toggle {floating,fullscreen}
+      state={floating,fullscreen}; \
+      bspc query -N -n "focused.$\{state\}" && state=tiled; \
+      bspc node -t "$state"
 
 super + {grave,Tab}
-    bspc {window,desktop} --focus last
+    bspc {node,desktop} --focus last
 
 super + apostrophe
-    bspc window --swap last
+    bspc node --swap last
 
 # TODO: remap, ist oben schon verwendet worden
 #super + {o,i}
 #   bspc control --record-history off; \
-#   bspc window {older,newer} -f; \
+#   bspc node {older,newer} -f; \
 #   bspc control --record-history on
 
-super + y
-    bspc window -w last.manual
-
-super + m
-    bspc window -s biggest
+# Keine Funktion?
+#super + y
+#    bspc node -n last.manual
 
 super + {_,shift + }{n,i,e,o}
-    bspc window -{f,s} {left,down,up,right}
+    bspc node -{f,s} {west,south,north,east}
 
 # Circle focus
 super + {_,shift + }c
-    bspc window --focus {next,prev}
+    bspc node --focus {next,prev}
 
 # Fenster im Kreis verschieben
 super + {comma,period}
-    bspc desktop --circulate {backward,forward}
+    bspc node @/ --circulate {backward,forward}
 
 # Desktops circlen
 super + bracket{left,right}
@@ -56,27 +53,27 @@ super + bracket{left,right}
 
 # Preselect
 super + ctrl + {n,i,e,o}
-    bspc window -p {left,down,up,right}
+    bspc node -p {west,south,north,east}
 
-# Preselection aufheben
+0# Preselection aufheben
 super + ctrl + {_,shift + }space
-    bspc {window -p cancel,desktop -c}
+    bspc {node -p cancel,desktop -c}
 
 # Fenster vergrößern
 super + alt + {n,i,e,o}
-    bspc window -e {left -10,down +10,up -10,right +10}
+    bspc node {@west -r -10,@south -r +10,@north -r -10,@east -r +10}
 
 # Fenster verkleinern
 super + alt + shift + {n,i,e,o}
-    bspc window -e {right -10,up +10,down -10,left +10}
+    bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
 
 # Feine Preselection
 super + ctrl + {1-9}
-    bspc window -r 0.{1-9}
+    bspc node -o 0.{1-9}
 
 # Desktop wecheln/Fenster verschieben
 super + {_,shift + }{1-9,0}
-    bspc {desktop -f,window -d} ^{1-9,10}
+    bspc {desktop -f,node -d} ^{1-9,10}
 
 # ~button1
 #   bspc pointer -g focus
@@ -90,7 +87,7 @@ super + {_,shift + }{1-9,0}
 super + button{1-3}
    bspc pointer -g {move,resize_side,resize_corner}
 
-super + !button{1-3}
+super + @button{1-3}
    bspc pointer -t %i %i
 
 super + @button{1-3}
@@ -125,5 +122,21 @@ XF86AudioRaiseVolume
 XF86AudioLowerVolume
         dvol -d 2
 
+# Media buttons
 XF86AudioMute
         dvol -t
+
+XF86AudioPlay
+        playerctl play-pause
+
+XF86AudioPrev
+        playerctl previous
+
+XF86AudioNext
+        playerctl next
+
+XF86AudioStop
+        playerctl stop
+
+super + l
+      lock lock

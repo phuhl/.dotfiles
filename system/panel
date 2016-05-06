@@ -22,7 +22,7 @@ trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 mkfifo "$PANEL_FIFO"
 
 bspc config top_padding $PANEL_HEIGHT
-bspc control --subscribe > "$PANEL_FIFO" &
+bspc subscribe > "$PANEL_FIFO" &
 
 
 # clock
@@ -79,7 +79,7 @@ done > "$PANEL_FIFO" &
 # alsa volume
 while true;
 do
-ALSA_VOLUME=$(amixer get Master | tail -1 | grep -o '...%' | sed 's/\[//' | sed 's/%//' | sed 's/ //')
+ALSA_VOLUME=$(amixer -M get Master | tail -1 | grep -o '...%' | sed 's/\[//' | sed 's/%//' | sed 's/ //')
 ALSA_STATE=$(amixer get Master | tail -1 | grep -o '\[on]')
 
 if [ $ALSA_STATE ]

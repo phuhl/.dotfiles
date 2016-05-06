@@ -1,14 +1,3 @@
-#! /bin/sh
-
-bspc config border_width        10
-bspc config window_gap         16
-
-bspc config split_ratio         0.52
-bspc config borderless_monocle  true
-bspc config gapless_monocle     true
-bspc config focus_by_distance   true
-
-
 declare -A VOUTS
 VOUTS=$(xrandr|awk 'BEGIN {printf("(")} /^\S.*connected/{printf("[%s]=%s ", $1, $2)} END{printf(")")}')
 NUM_OF_DISPLS=$(echo $VOUTS | tr " " "\n" | grep connected | grep -v disconnected | wc -l)
@@ -22,16 +11,6 @@ else
     bspc monitor LVDS-0 -d 1 2 3 4 5 6 7 web ff 10
 fi
 
-bspc rule -a Gimp desktop=^2 follow=on floating=on
-bspc rule -a chromium desktop=^8
-bspc rule -a Firefox desktop=^9
-
-bspc rule -a mplayer2 floating=on
-bspc rule -a Kupfer.py focus=on
-bspc rule -a Screenkey manage=off
-
-bspc config focus_follows_pointer true
-
-exec $HOME/.dotfiles/system/launch_linux_desktop.sh &
-exec $HOME/.dotfiles/system/autostart.sh &
-wait
+nitrogen --restore &
+killall panel
+~/.dotfiles/system/panel &

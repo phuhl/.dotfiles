@@ -71,9 +71,9 @@ esac
 
 #Actual volume changing (readability low)
 if [ "$AMIXARG" = "get" ]; then
-    AMIXOUT="$(amixer get "$IF" | tail -n 1)"
+    AMIXOUT="$(amixer -M get "$IF" | tail -n 1)"
 else
-    AMIXOUT="$(amixer set "$IF" "$AMIXARG" | tail -n 1)"
+    AMIXOUT="$(amixer -M set "$IF" "$AMIXARG" | tail -n 1)"
 fi
 MUTE="$(cut -d '[' -f 4 <<<"$AMIXOUT")"
 if [ "$MUTE" = "off]" ]; then
