@@ -164,8 +164,13 @@ if [ $skip -le 5 ]; then
     if [ ! -d "/usr/lib/urxvt/perl/" ]; then
 	mkdir -p /usr/lib/urxvt/perl/
     fi
+
     overwrite_all=false backup_all=false skip_all=false
-    link_file "$DOTFILES_ROOT/urxvt-perl-add-ins/*" "/usr/lib/urxvt/perl/"
+    for src in $(find -H "$DOTFILES_ROOT/urxvt-perl-add-ins/" -maxdepth 2 -type f -not -path '*.git*')
+    do
+	dst="/usr/lib/urxvt/perl/$(basename "${src%.*}")"
+        link_file "$src" "$dst"
+    done
     success "- 5. - Installing urxvt add-ins"
 fi
 
@@ -199,6 +204,6 @@ fi
 echo ''
 echo '  All installed!'
 echo '  Todo for you:'
-echo '   - Execute: # chsh <username> /usr/bin/zsh'
+echo '   - Execute: # chsh <username> -s /usr/bin/zsh'
 echo ''
 echo 'You probably want to reboot soon'
