@@ -115,7 +115,7 @@ done > $PANEL_FIFO &
 echo P'\uf011' > $PANEL_FIFO &
 
 
-cat "$PANEL_FIFO" | $HOME/.dotfiles/system/panel_bar | lemonbar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -f "$ICON_FONT" -f "$ICON_FONT2" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" -u 2 -a 20 | zsh &
+cat "$PANEL_FIFO" | $HOME/.dotfiles/system/panel_bar | lemonbar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -f "$ICON_FONT" -f "$ICON_FONT2" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" -u 2 -a 30 | zsh &
 
 wait
 

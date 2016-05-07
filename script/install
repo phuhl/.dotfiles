@@ -2,13 +2,203 @@
 #
 # Run all dotfiles installers.
 
+cd "$(dirname "$0")/.."
+DOTFILES_ROOT=$(pwd -P)
+
 set -e
 
-cd "$(dirname $0)"/..
+echo ''
 
-# Run Homebrew through the Brewfile
-echo "› brew bundle"
-brew bundle
+source ./script/.shared
 
-# find the installers and run them iteratively
-find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
+re='^[0-9]+$'
+if ! [[ $1 =~ $re ]]; then
+    skip=0
+else
+    skip=$1
+fi
+
+if [ "$(id -u)" != "0" ]; then
+    fail "Run this script as root"
+    exit 1
+fi
+
+
+os="z"
+while [ "$os" != "a" ] && [ "$os" != "u" ]
+do
+    user '- What is your OS ([a]rch, [u]buntu-Destrib.)?'
+    read -n 1 os
+done
+if [ "$os" == "a" ]
+then
+    info "Arch"
+else
+    info "Ubuntu-Distribution"
+fi
+
+#0. VMWare
+if [ $skip -le 0 ]; then
+    vm="z"
+    while [ "$vm" != "y" ] && [ "$vm" != "n" ] && [ "$vm" != "Y" ] && [ "$vm" != "N" ] && [ "$vm" != "" ]
+    do
+	user '- Is this inside VMWare? [yN]'
+	read -n 1 vm
+    done
+    if [ "$vm" == "y" ] || [ "$vm" == "Y" ]
+    then
+	info "Virtual machine"
+	echo 'true' > $HOME/.isvm
+	success "~/.isvm created"
+    else
+	info "OK - No virtual machine"
+    fi
+fi
+
+# 1. Updates
+if [ $skip -le 1 ]; then
+    updates="z"
+    while [ "$updates" != "y" ] && [ "$updates" != "n" ] && [ "$updates" != "Y" ] && [ "$updates" != "N" ] && [ "$updates" != "" ]
+    do
+	user '- 1. - Do updates? [nY]'
+	read -n 1 updates
+    done
+    if [ "$updates" == "N" ] || [ "$updates" == "n" ]
+    then
+	info "No Updates"
+	updates="n"
+    else
+	info "Updates"
+	updates="y"
+    fi
+else
+    updates="n"
+fi
+
+# 2. Additional software
+if [ $skip -le 2 ]; then
+    info "- 2. - Additional Software"
+    info "Installing dialog"
+    if [ "$os" == "a" ]; then
+	pacman -S dialog --noconfirm
+	addProgsSpec="chromium Browser no \
+google-chrome Browser no \
+jre8-openjdk Java no \
+jdk8-openjdk Java no"
+    else
+	apt-get -qq install dialog
+	addProgsSpec="chromium-browser Browser no \
+openjdk-8-jre Java no \
+openjdk-8-jdk Java no"
+    fi
+    success "Dialog installed"
+
+    addProgs="git Versioning no \
+ emacs Editor yes \
+htop Taskmanager yes \
+screen Util no \
+alsa-utils Sound yes cryptsetup Encryption no \
+firefox Browser no \
+imagemagick Imageenhancement no \
+vlc Videos no \
+wget Download yes \
+$addProgsSpec"
+
+    tmp_file=./script/.tmp
+    eval "dialog --checklist Programms 40 40 100 $addProgs" 2>$tmp_file
+    selectedProgs=$(cat ./script/.tmp)
+    stty sane
+    success "- 2. - Additional Software"
+fi
+
+# 3. Necessary Software
+if [ $skip -le 3 ]; then
+    progs="rxvt-unicode dunst compton htop stalonetray git zsh acpi dzen2 xsel i3lock nitrogen"
+    ubuntuprogs="suckless-tools libnotify-bin libxft-dev libx11-xcb-dev fonts-font-awesome build-essential"
+    archprogs="dmenu libnotify"
+    info "- 3. - Packages"
+    # OS-specific install
+    if [ "$os" == "a" ]; then
+	if [ "$updates" == "y" ]; then
+	    info "updating the system"
+	    pacman -Syu --noconfirm
+	    success "updates installed"
+	fi
+	info "installing packages"
+	pacman --noconfirm -S $progs $archprogs $selectedProgs
+	success "packages installed"
+    else
+	if [ "$updates" == "y" ]; then
+	    info "updating the system"
+	    apt-get -qq update
+	    apt-get -qq upgrade
+	    success "updates installed"
+	fi
+	info "installing packages"
+	apt-get -qq install $progs $ubuntuprogs $selectedProgs
+	success "packages installed"
+	
+	info "installing softlinks"
+	overwrite_all=false backup_all=false skip_all=false
+	link_file "/usr/bin/dzen2-gdbar" "/usr/bin/gdbar"
+	link_file $(which chromium-browser) "/usr/bin/chromium"
+	success "softlinks installed"
+    fi
+    success "- 3. - Packages"
+fi
+
+# 4. Install programms from scrips
+if [ $skip -le 4 ]; then
+    info "- 4. - Install programms from scripts"
+    # find the installers and run them iteratively
+    find . -name install.sh | while read installer ; do sh -c "${installer} ${os}" ; done
+    success "- 4. - Install programms from scripts"
+fi
+
+
+# All OSs, post install:
+
+# 5. URXVT-Plugins
+if [ $skip -le 5 ]; then
+    info "- 5. - Installing urxvt add-ins"
+    if [ ! -d "/usr/lib/urxvt/perl/" ]; then
+	mkdir -p /usr/lib/urxvt/perl/
+    fi
+    overwrite_all=false backup_all=false skip_all=false
+    link_file "$DOTFILES_ROOT/urxvt-perl-add-ins/*" "/usr/lib/urxvt/perl/"
+    success "- 5. - Installing urxvt add-ins"
+fi
+
+# 6. Aliases
+if [ $skip -le 6 ]; then
+    alias="alias sudo='sudo env \"PATH=$PATH:$DOTFILES_ROOT/bin:$DOTFILES_ROOT/system\" '"
+    grepy="$DOTFILES_ROOT/bin:$DOTFILES_ROOT/system"
+    res=$(cat $DOTFILES_ROOT/zsh/aliases.zsh)
+    if [ $(echo $res | /bin/grep -c $grepy) -ge 1 ]; then
+	success "- 6. - PATH in alias - OK"
+    else
+	echo '' >> "$DOTFILES_ROOT/zsh/aliases.zsh"
+	echo $alias >> "$DOTFILES_ROOT/zsh/aliases.zsh"
+	success "- 6. - PATH in alias - UPDATED"
+    fi
+fi
+
+# 7. Path
+if [ $skip -le 7 ]; then
+    mpath="PATH=\"$DOTFILES_ROOT/bin:$DOTFILES_ROOT/system:$PATH\""
+    res=$(cat /etc/environment)
+    if [ $(echo $res | grep -c "$DOTFILES_ROOT/bin:$DOTFILES_ROOT/system") -ge 1 ]; then
+	success "- 7. - PATH in /etc/environment - OK"
+    else
+	echo $mpath > /etc/environment
+	success "- 7. - PATH in /etc/environment - UPDATED"
+    fi
+fi
+
+
+echo ''
+echo '  All installed!'
+echo '  Todo for you:'
+echo '   - Execute: # chsh <username> /usr/bin/zsh'
+echo ''
+echo 'You probably want to reboot soon'

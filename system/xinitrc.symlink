@@ -24,6 +24,9 @@ xset b off
 # Cursor setzen, wenn die Maus über keinem Fenster ist
 xsetroot -cursor_name left_ptr
 
+if [ $(cat ~/.isvm | grep -c true) -ge 1 ]; then
+    vmware-user
+fi
 
 ### i3
 #exec i3

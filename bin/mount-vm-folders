@@ -1,0 +1,2 @@
+mkdir /mnt/shares -p
+mount -t vmhgfs .host:/ /mnt/shares

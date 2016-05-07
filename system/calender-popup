@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ $(pgrep -cx calender-popup) -gt 1 ] ; then
 	printf "%s\n" "The panel is already running." >&2
@@ -6,7 +6,7 @@ if [ $(pgrep -cx calender-popup) -gt 1 ] ; then
 fi
 
 
-screen_width=1366
+screen_width=$(xrandr| grep -oP ' connected \K([0-9]+)(?=x[0-9]+\+0\+0)')
 panel_height=18
 font='Monospace:size=9'
 color_se='#4A90D8'
@@ -21,7 +21,7 @@ color_fg='#eeeeee'
 #color_bg='#263238'
 color_bg='#2b2b2b'
 
-x=$((screen_width - 126))
+x=$((screen_width - 210))
 y=18
 
 TODAY=$(expr `date +'%d'` + 0)
