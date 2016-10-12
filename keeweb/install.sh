@@ -6,12 +6,13 @@ install_keeweb () {
     mkdir /opt/keeweb
     cd /opt/keeweb
     rm /opt/keeweb/* -r
-    wget https://github.com/antelle/keeweb/releases/download/v1.1.4/KeeWeb.linux.x64.zip -O /opt/keeweb/keeweb.zip
+    wget https://github.com/keeweb/keeweb/releases/download/v1.1.4/KeeWeb.linux.x64.zip -O /opt/keeweb/keeweb.zip
     unzip /opt/keeweb/keeweb.zip
     rm /opt/keeweb/keeweb.zip
     
     echo "#!/bin/bash" > /usr/local/bin/keeweb
     echo "/opt/keeweb/KeeWeb" >> /usr/local/bin/keeweb
+    chmod +x /usr/local/bin/keeweb
 }
 
 

@@ -80,7 +80,7 @@ if [ $skip -le 2 ]; then
     info "- 2. - Additional Software"
     info "Installing dialog"
     if [ "$os" == "a" ]; then
-	pacman -S dialog --noconfirm
+	pacman -S dialog --noconfirm --needed
 	addProgsSpec="chromium Browser no \
 google-chrome Browser no \
 jre8-openjdk Java no \
@@ -113,7 +113,7 @@ fi
 
 # 3. Necessary Software
 if [ $skip -le 3 ]; then
-    progs="rxvt-unicode dunst compton htop stalonetray git zsh acpi dzen2 xsel i3lock nitrogen"
+    progs="rxvt-unicode dunst compton htop stalonetray git zsh acpi dzen2 xsel i3lock nitrogen numlockx"
     ubuntuprogs="suckless-tools libnotify-bin libxft-dev libx11-xcb-dev fonts-font-awesome build-essential"
     archprogs="dmenu libnotify"
     info "- 3. - Packages"
@@ -121,11 +121,11 @@ if [ $skip -le 3 ]; then
     if [ "$os" == "a" ]; then
 	if [ "$updates" == "y" ]; then
 	    info "updating the system"
-	    pacman -Syu --noconfirm
+	    pacman -Syu --noconfirm --needed
 	    success "updates installed"
 	fi
 	info "installing packages"
-	pacman --noconfirm -S $progs $archprogs $selectedProgs
+	pacman --noconfirm --needed -S $progs $archprogs $selectedProgs
 	success "packages installed"
     else
 	if [ "$updates" == "y" ]; then

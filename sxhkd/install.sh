@@ -22,7 +22,7 @@ if [ X"$os" = X"a" ]; then
     mkdir .tmp
     git clone https://github.com/baskerville/sxhkd.git .tmp
     cd .tmp
-    sudo pacman -S libxcb xcb-util xcb-util-keysyms xcb-util-wm gcc make
+    sudo pacman -S libxcb xcb-util xcb-util-keysyms xcb-util-wm gcc make --noconfirm --needed
 
     make
     sudo make install

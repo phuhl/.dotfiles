@@ -14,7 +14,7 @@ if [ X"$os" = X"a" ]; then
     echo 'Installing node, npm for Arch systems'
     echo 'npm Plugins to be installed: jslint tern webpack webpack-dev-server tern supervisor'
     echo ''
-    sudo pacman -S node npm
+    sudo pacman -S nodejs npm --noconfirm --needed
     sudo npm install jslint tern webpack webpack-dev-server tern supervisor -g
 fi
 

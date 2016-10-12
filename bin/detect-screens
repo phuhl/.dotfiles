@@ -1,16 +1,62 @@
-declare -A VOUTS
-VOUTS=$(xrandr|awk 'BEGIN {printf("(")} /^\S.*connected/{printf("[%s]=%s ", $1, $2)} END{printf(")")}')
-NUM_OF_DISPLS=$(echo $VOUTS | tr " " "\n" | grep connected | grep -v disconnected | wc -l)
-if [[ $NUM_OF_DISPLS == 2 ]]; then
-    xrandr --output HDMI-0 --off --output LVDS-0 --mode 1440x900 --pos 0x0 --primary --output VGA-0 --mode 1366x768 --pos 1440x0
-    bspc monitor LVDS-0 -d 1 2 3 4 5
-    bspc monitor VGA-0 -d 6 7 web ff 10
-#    bspc monitor VGA-0 --swap LVDS-0
-else
-    xrandr --output HDMI-0 --off --output LVDS-0 --mode 1440x900 --pos 0x0 --output VGA-0 --off
-    bspc monitor LVDS-0 -d 1 2 3 4 5 6 7 web ff 10
+DO_NOT_START_PANEL=$1
+
+CONNECTED=$(xrandr | grep " connected" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/")
+NUM_OF_DISPLS=$(echo $CONNECTED | wc -l)
+CONFIG=$(cat $HOME/.config/screens)
+TO_USE=""
+while read config; do
+    display=$(echo $config | awk '{print $1;}')
+    for con in $CONNECTED; do
+        if [[ $con == $display ]]; then
+            TO_USE=$TO_USE$display$'\n'
+        fi
+    done
+done <<< "$CONFIG"
+
+for display in $TO_USE; do
+    command="xrandr --output $display --auto"
+    if [[ $last ]]; then
+        command="$command --right-of $last"
+    fi
+    last=$display
+    eval $command
+
+
+    while read config; do
+        display1=$(echo $config | awk '{print $1;}')
+        desktops=$(echo $config | awk '{$1 = ""; print $0;}')
+        if [[ $display == $display1 ]]; then
+#            position=$(xrandr | grep "$display connected" | awk '{print $3;}')
+            eval "bspc monitor $display -d $desktops"
+        fi
+    done <<< "$CONFIG"
+
+done
+
+function get_order {
+    order=$(bspc query -M)
+    for display in $TO_USE; do
+        bspwmid=$(bspc query -M -m $display)
+        order=$(echo $order | sed -e "s/$bspwmid/$display/")
+    done
+    order=($order)
+}
+get_order
+pos=0
+for display in $TO_USE; do
+    if [[ ${order[$pos]} != $display ]]; then
+        eval "bspc monitor ${order[$pos]} --swap $display"
+
+        get_order
+    fi
+    pos=$(($pos+1))
+done
+
+if [[ ! $DO_NOT_START_PANEL ]]; then
+    nitrogen --restore &
+    killall panel
+    killall lemonbar
+    ~/.dotfiles/system/panel >& /dev/null &
 fi
 
-nitrogen --restore &
-killall panel
-~/.dotfiles/system/panel &
+exit

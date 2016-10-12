@@ -22,7 +22,7 @@ if [ X"$os" = X"a" ]; then
     mkdir .tmp
     git clone https://github.com/krypt-n/bar .tmp
     cd .tmp
-    sudo pacman -S wireless_tools iw crda gcc make
+    sudo pacman -S wireless_tools iw crda gcc make --noconfirm --needed
 
     make
     sudo make install
