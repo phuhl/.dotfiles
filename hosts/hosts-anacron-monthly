@@ -1,0 +1,11 @@
+#!/bin/bash
+cd /opt/hosts
+python3 updateHostsFile.py --auto -f -r >& /dev/null
+
+DISPLAY=:0
+DBUS_ADDRESS=unix:path=/run/user/1000/bus
+
+sudo -u $(ps aux | grep '[x]init /home' | awk '{print $1}' | head -1) DISPLAY=${DISPLAY} DBUS_SESSION_BUS_ADDRESS=${DBUS_ADDRESS} notify-send 'Hosts updated'
+
+
+
