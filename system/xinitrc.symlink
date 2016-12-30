@@ -11,8 +11,6 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
     unset f
 fi
 
-xset +fp /usr/share/fonts/local
-xset +fp /usr/share/fonts/TTF
 
 # exec gnome-session
 # exec startkde
@@ -20,17 +18,9 @@ xset +fp /usr/share/fonts/TTF
 # ...or the Window Manager of your choice
 #exec dwm
 
-xset b off
-# Cursor setzen, wenn die Maus über keinem Fenster ist
-xsetroot -cursor_name left_ptr
-
-if [ $(cat ~/.isvm | grep -c true) -ge 1 ]; then
-    vmware-user
-fi
 
 ### i3
 #exec i3
 
 ### bspwm
-sxhkd -m 1 &
 exec bspwm

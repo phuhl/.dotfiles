@@ -1,17 +1,37 @@
 #! /bin/sh
 
+### Listener for keyboard entrys
+sxhkd -m 1 &
+
+
+### Some Systemsetupstuff ##########################
+xset +fp /usr/share/fonts/local                    #
+xset +fp /usr/share/fonts/TTF                      #
+# Disable beep                                     #
+xset b off                                         #
+# Set Cursor if mouse                              #
+# is not over window                               #
+xsetroot -cursor_name left_ptr                     #
+# Start vmware-user if this is a vm                #
+if [ $(cat ~/.isvm | grep -c true) -ge 1 ]; then   #
+    vmware-user                                    #
+fi                                                 #
+####################################################
+
+### Bspwm setup
 bspc config border_width        10
 bspc config window_gap         16
-
 bspc config split_ratio         0.52
 bspc config borderless_monocle  true
 bspc config gapless_monocle     true
-bspc config focus_by_distance   true
 
 bspc config pointer_modifier    mod4
+bspc config focus_follows_pointer true
 
-detect-screens
+### Detect screens
+$HOME/.dotfiles/bin/detect-screens
 
+### Bspwm rules for progs
 bspc rule -a Gimp desktop=^2 follow=on floating=on
 bspc rule -a Chromium desktop=^8
 bspc rule -a Spotify desktop=^9
@@ -21,8 +41,13 @@ bspc rule -a '*:Ediff' state=floating
 bspc rule -a :bar layer=below
 
 
-bspc config focus_follows_pointer true
 
+### Desktoprelated stuff
 exec $HOME/.dotfiles/system/launch_linux_desktop.sh &
+
+### Best place to put your autostarts
 exec $HOME/.dotfiles/system/autostart.sh &
+
+
+
 wait
