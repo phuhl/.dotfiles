@@ -1,3 +1,4 @@
+#!/bin/bash
 DO_NOT_START_PANEL=$1
 
 CONNECTED=$(xrandr | grep " connected" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/")
@@ -55,16 +56,16 @@ done
 if [[ ! $DO_NOT_START_PANEL ]]; then
     nitrogen --restore &
     killall polybar
-
+    sleep 1
     first=1
     for display in $TO_USE; do
         if [[ $first == 1 ]]; then
-            echo polybar main_$display
-            polybar main_$display &
+            export POLYMONITOR=$display
+            polybar main &
             first=0
         else
-            echo polybar secondary_$display
-            polybar secondary_$display &
+            export POLYMONITOR=$display
+            polybar secondary &
         fi
     done
 

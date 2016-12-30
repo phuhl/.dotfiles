@@ -20,13 +20,18 @@ alert = #bd2c40
 margin-top = 3
 margin-bottom = 3
 
-[bar/main]
+[bar/secondary]
+wm-restack = bspwm
+
+modules-left = bspwm
+modules-center = 
+modules-right = date
+
 width = 100%
 height = 18
 offset-x = 0
 offset-y = 0
 
-;background = ${xrdb:color9}
 background = ${colors.background}
 foreground = ${colors.foreground}
 
@@ -34,7 +39,6 @@ overline-size = 2
 overline-color = #f00
 underline-size = 2
 ;underline-color = #00f
-
 
 spacing = 1
 padding-left = 2
@@ -45,6 +49,11 @@ module-margin-right = 2
 font-0 = fixed:pixelsize=10;0
 font-1 = unifont:size=6:heavy:fontformat=truetype;-2
 font-2 = siji:pixelsize=10;0
+
+monitor = ${env:POLYMONITOR}
+
+[bar/main]
+inherit = bar/secondary
 
 modules-left = bspwm xwindow
 modules-center = 
@@ -52,69 +61,7 @@ modules-right = wlan eth memory cpu volume backlight battery xkeyboard date powe
 
 tray-position = right
 tray-padding = 2
-
 tray-background = ${colors.background}
-
-wm-restack = bspwm
-
-;override-redirect = true
-
-[bar/secondary]
-inherit = bar/main
-
-width = 100%
-height = 18
-offset-x = 0
-offset-y = 0
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-overline-size = 2
-overline-color = #f00
-underline-size = 2
-;underline-color = #00f
-
-
-spacing = 1
-padding-left = 2
-padding-right = 2
-module-margin-left = 2
-module-margin-right = 2
-
-font-0 = fixed:pixelsize=10;0
-font-1 = unifont:size=6:heavy:fontformat=truetype;-2
-font-2 = siji:pixelsize=10;0
-
-wm-restack = bspwm
-
-modules-left = bspwm
-modules-center = 
-modules-right = date
-
-[bar/main_LVDS1]
-inherit = bar/main
-monitor = LVDS1
-
-[bar/main_LVDS-1]
-inherit = bar/main
-monitor = LVDS-1
-
-[bar/secondary_VGA1]
-inherit = bar/secondary
-monitor = VGA1
-
-[bar/secondary_VGA-1]
-inherit = bar/secondary
-monitor = VGA-1
-
-[bar/secondary_HDMI-1]
-inherit = bar/secondary
-monitor = HDMI-1
-
-[bar/secondary_HDMI1]
-inherit = bar/secondary
-monitor = HDMI1
 
 [module/xwindow]
 type = internal/xwindow
