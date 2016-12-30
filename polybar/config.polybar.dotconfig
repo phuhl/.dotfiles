@@ -57,7 +57,7 @@ inherit = bar/secondary
 
 modules-left = bspwm xwindow
 modules-center = 
-modules-right = wlan eth memory cpu volume backlight battery xkeyboard date powermenu
+modules-right = cpu memory wlan eth volume backlight battery xkeyboard date powermenu
 
 tray-position = right
 tray-padding = 2
