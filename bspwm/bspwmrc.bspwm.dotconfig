@@ -8,6 +8,8 @@ bspc config borderless_monocle  true
 bspc config gapless_monocle     true
 bspc config focus_by_distance   true
 
+bspc config pointer_modifier    shift
+
 detect-screens 1
 
 bspc rule -a Gimp desktop=^2 follow=on floating=on

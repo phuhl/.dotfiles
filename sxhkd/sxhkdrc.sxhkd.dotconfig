@@ -55,7 +55,7 @@ super + bracket{left,right}
 super + ctrl + {n,i,e,o}
     bspc node -p {west,south,north,east}
 
-0# Preselection aufheben
+# Preselection aufheben
 super + ctrl + {_,shift + }space
     bspc {node -p cancel,desktop -c}
 
@@ -73,28 +73,12 @@ super + ctrl + {1-9}
 
 # Desktop wecheln/Fenster verschieben
 super + {_,shift + }{1-9,0}
-    bspc {desktop -f,node -d} ^{1-9,10}
+    bspc {desktop -f,node -d} $($HOME/.dotfiles/system/getDesktopOrder.sh | awk 'NR=={1-9,10}')
 
-# ~button1
-#   bspc pointer -g focus
+# Desktop auf anderen Monitor verschieben
+super + m
+      bspc desktop -m next
 
-# super + button{1-3}
-#   bspc pointer -g {move,resize_side,resize_corner}
-
-# super + @button{1-3}
-#   bspc pointer -u
-
-super + button{1-3}
-   bspc pointer -g {move,resize_side,resize_corner}
-
-super + @button{1-3}
-   bspc pointer -t %i %i
-
-super + @button{1-3}
-   bspc pointer -u
-
-mod5 + ~button1
-     notify-send test1
 
 #
 # wm independent hotkeys
