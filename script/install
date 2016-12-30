@@ -2,6 +2,7 @@
 #
 # Run all dotfiles installers.
 
+echo "$(dirname "$0")/.."
 cd "$(dirname "$0")/.."
 DOTFILES_ROOT=$(pwd -P)
 
@@ -100,6 +101,7 @@ screen Util no \
 alsa-utils Sound yes cryptsetup Encryption no \
 firefox Browser no \
 imagemagick Imageenhancement no \
+darktable Imagemanipulatino no \
 vlc Videos no \
 wget Download yes \
 $addProgsSpec"
@@ -108,6 +110,21 @@ $addProgsSpec"
     eval "dialog --checklist Programms 40 40 100 $addProgs" 2>$tmp_file
     selectedProgs=$(cat ./script/.tmp)
     stty sane
+
+    # Select progs from Scripts
+    addProgs=""
+    installers=$(find . -name install.sh)
+    while read installer ; do
+        desc=$(echo $installer | awk '{split($0,a,"/");print a[2]}')
+        addProgs="$addProgs $installer $desc no"
+    done <<< $installers
+
+    tmp_file=./script/.tmp
+    eval "dialog --checklist Programms 40 40 100 $addProgs" 2>$tmp_file
+    scriptProgs=$(cat ./script/.tmp)
+    stty sane
+
+
     success "- 2. - Additional Software"
 fi
 
@@ -147,11 +164,16 @@ if [ $skip -le 3 ]; then
     success "- 3. - Packages"
 fi
 
-# 4. Install programms from scrips
+# 4. Install programms from scripts
+
 if [ $skip -le 4 ]; then
     info "- 4. - Install programms from scripts"
+
     # find the installers and run them iteratively
-    find . -name install.sh | while read installer ; do sh -c "${installer} ${os}" ; done
+    for installer in $scriptProgs; do
+        sh -c "${installer} ${os}"
+    done
+
     success "- 4. - Install programms from scripts"
 fi
 

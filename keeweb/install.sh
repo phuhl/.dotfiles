@@ -6,7 +6,8 @@ install_keeweb () {
     mkdir /opt/keeweb
     cd /opt/keeweb
     rm /opt/keeweb/* -r
-    wget https://github.com/keeweb/keeweb/releases/download/v1.1.4/KeeWeb.linux.x64.zip -O /opt/keeweb/keeweb.zip
+
+    wget https://github.com/keeweb/keeweb/releases/download/v1.3.3/KeeWeb-1.3.3.linux.x64.zip -O /opt/keeweb/keeweb.zip
     unzip /opt/keeweb/keeweb.zip
     rm /opt/keeweb/keeweb.zip
     
