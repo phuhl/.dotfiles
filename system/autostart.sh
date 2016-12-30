@@ -1,5 +1,5 @@
 sleep 5
 
 dropbox &
-cd /home/adminu/downloads/resilio
+cd /opt/resilio
 ./rslsync &
