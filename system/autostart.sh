@@ -1,4 +1,5 @@
 sleep 5
 
 dropbox &
-syncthing -no-browser &
+cd /home/adminu/downloads/resilio
+./rslsync &
