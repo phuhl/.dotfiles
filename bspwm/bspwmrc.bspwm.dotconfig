@@ -10,7 +10,7 @@ bspc config focus_by_distance   true
 
 bspc config pointer_modifier    mod4
 
-detect-screens 1
+detect-screens
 
 bspc rule -a Gimp desktop=^2 follow=on floating=on
 bspc rule -a Chromium desktop=^8

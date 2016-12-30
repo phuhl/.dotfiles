@@ -5,7 +5,7 @@ nitrogen --restore &
 compton --config $HOME/.config/compton/compton.conf -cGb --opengl --sw-opti --vsync opengl-swc &
 numlockx on &
 dunst &
-$HOME/.dotfiles/system/panel &
+#$HOME/.dotfiles/system/panel &
 sleep 5
-stalonetray &
+#stalonetray &
 wait

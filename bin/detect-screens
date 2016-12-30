@@ -54,9 +54,21 @@ done
 
 if [[ ! $DO_NOT_START_PANEL ]]; then
     nitrogen --restore &
-    killall panel
-    killall lemonbar
-    ~/.dotfiles/system/panel >& /dev/null &
+    killall polybar
+
+    first=1
+    for display in $TO_USE; do
+        if [[ $first == 1 ]]; then
+            echo polybar main_$display
+            polybar main_$display &
+            first=0
+        else
+            echo polybar secondary_$display
+            polybar secondary_$display &
+        fi
+    done
+
+
 fi
 
 exit
