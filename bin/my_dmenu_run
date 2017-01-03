@@ -1,0 +1,3 @@
+#!/bin/bash
+
+dmenu_run -m `expr $(bspc query -M | grep $(bspc query -M -m focused) --line-number | awk '{split($0,a,":");print a[1];}') - 1` -l 10 -p "Run" -nb "#282626" -nf "#FFA3A6" -sf "#f00" -sb "#333333"
