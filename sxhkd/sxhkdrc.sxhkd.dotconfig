@@ -88,7 +88,7 @@ super + Return
     urxvt
 
 super + space
-      my_dmenu_run
+      $HOME/.dotfiles/bin/my_dmenu_run
 
 super + q
       chromium
@@ -101,14 +101,14 @@ super + Escape
 
 # Volume buttons
 XF86AudioRaiseVolume
-        dvol -i 2
+        $HOME/.dotfiles/bin/dvol -i 2
 
 XF86AudioLowerVolume
-        dvol -d 2
+        $HOME/.dotfiles/bin/dvol -d 2
 
 # Media buttons
 XF86AudioMute
-        dvol -t
+        $HOME/.dotfiles/bin/dvol -t
 
 XF86AudioPlay
         playerctl play-pause
@@ -123,4 +123,4 @@ XF86AudioStop
         playerctl stop
 
 super + l
-      lock lock
+      $HOME/.dotfiles/bin/lock lock

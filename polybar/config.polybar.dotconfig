@@ -338,10 +338,10 @@ label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
 
 menu-0-0 = reboot
-menu-0-0-exec = lock reboot
+menu-0-0-exec = $HOME/.dotfiles/bin/lock reboot
 menu-0-1 = power off
-menu-0-1-exec = lock shutdown
+menu-0-1-exec = $HOME/.dotfiles/bin/lock shutdown
 menu-0-2 = sleep
-menu-0-2-exec = lock suspend
+menu-0-2-exec = $HOME/.dotfiles/bin/lock suspend
 menu-0-3 = lock
-menu-0-3-exec = lock lock
+menu-0-3-exec = $HOME/.dotfiles/bin/lock lock
