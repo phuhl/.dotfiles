@@ -130,9 +130,9 @@ fi
 
 # 3. Necessary Software
 if [ $skip -le 3 ]; then
-    progs="rxvt-unicode dunst compton htop stalonetray git zsh acpi dzen2 xsel i3lock nitrogen numlockx"
+    progs="rxvt-unicode dunst compton htop stalonetray git zsh acpi dzen2 xsel i3lock nitrogen numlockx "
     ubuntuprogs="suckless-tools libnotify-bin libxft-dev libx11-xcb-dev fonts-font-awesome build-essential"
-    archprogs="dmenu libnotify"
+    archprogs="dmenu libnotify xorg-server-common xorg-server-devel xorg-server xorg-xfd xorg-xinit xorg-util-macros xorg-setxkbmap xorg-xauth xorg-xdpyinfo xorg-xkbcomp xorg-xmodmap xorg-xprop xorg-xrandr xorg-xrdb xorg-xset xorg-xsetroot base-devel"
     info "- 3. - Packages"
     # OS-specific install
     if [ "$os" == "a" ]; then

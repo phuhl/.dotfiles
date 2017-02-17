@@ -28,6 +28,12 @@ install_polybar () {
 
     sudo make install
     cd -
+    cd .tmp
+    wget -O "dripicons-v2.ttf" "https://github.com/amitjakhu/dripicons/blob/master/webfont/fonts/dripicons-v2.ttf?raw=true"
+    wget -O "fontawesome-webfont.ttf" "https://github.com/FortAwesome/Font-Awesome/blob/master/fonts/fontawesome-webfont.ttf?raw=true"
+    cp "dripicons-v2.ttf" "fontawesome-webfont.ttf" /usr/share/fonts/TTF
+    fc-cache
+    cd -
     sudo rm .tmp -r
 }
 
