@@ -19,14 +19,16 @@ fi                                                 #
 ####################################################
 
 ### Bspwm setup
-bspc config border_width        10
-bspc config window_gap         16
-bspc config split_ratio         0.52
-bspc config borderless_monocle  true
-bspc config gapless_monocle     true
+bspc config border_width            10
+bspc config window_gap              16
+bspc config split_ratio             0.42
+bspc config borderless_monocle      true
+bspc config gapless_monocle         true
 
-bspc config pointer_modifier    mod4
-bspc config focus_follows_pointer true
+bspc config pointer_modifier        mod4
+bspc config pointer_action1         move
+bspc config pointer_action2         resize_side
+bspc config focus_follows_pointer   true
 
 ### Detect screens
 $HOME/.dotfiles/bin/detect-screens

@@ -184,14 +184,13 @@ fi
 if [ $skip -le 5 ]; then
     info "- 5. - Installing urxvt add-ins"
     if [ ! -d "/usr/lib/urxvt/perl/" ]; then
-	mkdir -p /usr/lib/urxvt/perl/
+	      mkdir -p /usr/lib/urxvt/perl/
     fi
 
     overwrite_all=false backup_all=false skip_all=false
     for src in $(find -H "$DOTFILES_ROOT/urxvt-perl-add-ins/" -maxdepth 2 -type f -not -path '*.git*')
     do
-	dst="/usr/lib/urxvt/perl/$(basename "${src%.*}")"
-        link_file "$src" "$dst"
+        cp "$src" "/usr/lib/urxvt/perl/"
     done
     success "- 5. - Installing urxvt add-ins"
 fi

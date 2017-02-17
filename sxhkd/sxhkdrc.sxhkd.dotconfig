@@ -106,6 +106,13 @@ XF86AudioRaiseVolume
 XF86AudioLowerVolume
         $HOME/.dotfiles/bin/dvol -d 2
 
+# Brightness buttons
+XF86MonBrightnessUp
+  xbacklight -inc 10
+
+XF86MonBrightnessDown
+  xbacklight -lower 10
+
 # Media buttons
 XF86AudioMute
         $HOME/.dotfiles/bin/dvol -t

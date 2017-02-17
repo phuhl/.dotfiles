@@ -41,7 +41,7 @@ fi
 if [ X"$os" = X"a" ]; then
     echo 'Installing polybar for Arch systems'
     echo ''
-    sudo pacman -S cmake libXft python2 xcb-proto xcb-util-wm xcb-util-image also-lib wireless_tools --noconfirm --needed
+    sudo pacman -S cmake libxft python python2 xcb-proto xcb-util-wm xcb-util-image alsa-lib wireless_tools pkg-config --noconfirm --needed
 
     install_polybar
 fi
