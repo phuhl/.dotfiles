@@ -33,15 +33,17 @@ bspc config focus_follows_pointer   true
 ### Detect screens
 $HOME/.dotfiles/bin/detect-screens
 
-### Bspwm rules for progs
+### Bspwm rules for progs (use xprop for getting class/window name)
 bspc rule -a Gimp desktop=^2 follow=on floating=on
-bspc rule -a Chromium desktop=^8
+#bspc rule -a Chromium desktop=^8
 bspc rule -a Spotify desktop=^9
-bspc rule -a Firefox desktop=^7
+#bspc rule -a Firefox desktop=^7
 bspc rule -a Emacs state=tiled
 bspc rule -a '*:Ediff' state=floating
 bspc rule -a :bar layer=below
 
+bspc rule -a crx_hnpfjngllnobngcgfapefoaidbinmjnm:Whatsapp desktop=^0
+bspc rule -a :crx_behehkmaacfijackbkoidojkfhoecefo desktop=^0
 
 
 ### Desktoprelated stuff
