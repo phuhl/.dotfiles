@@ -1,5 +1,5 @@
 [global]
-    font = Monospace 8
+    font = Monospace 20
 
     # allow a small subset of html markup:
     # <b>bold</b>
@@ -59,7 +59,7 @@
     # right side of the screen.  Y is measured from the top and down respectevly.
     # The width can be negative. In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "300x5-30+40"
+    geometry = "0x5-80+120"
 
     # The transparency of the window. range: [0; 100]
     # This option will only work if a compositing windowmanager is present (e.g. xcompmgr, compiz, etc..)
@@ -99,10 +99,10 @@
     separator_height = 2
 
     # padding between text and separator
-    padding = 8
+    padding = 20
 
     # horizontal padding
-    horizontal_padding = 8
+    horizontal_padding = 40
 
     # Define a color for the separator.
     # possible values are:
@@ -216,3 +216,9 @@
 #    summary = *twitter.com*
 #    urgency = normal
 #
+
+[Spotify]
+	appname = Spotify
+	format = "\n%s\n%b"
+	new_icon = Spotify
+	timeout = 10

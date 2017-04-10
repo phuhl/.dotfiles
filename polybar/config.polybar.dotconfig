@@ -17,8 +17,8 @@ secondary = #e60053
 alert = #bd2c40
 
 [global/wm]
-margin-top = 3
-margin-bottom = 3
+margin-top = 8
+margin-bottom = 8
 
 [bar/secondary]
 wm-restack = bspwm
@@ -28,7 +28,7 @@ modules-center =
 modules-right = date
 
 width = 100%
-height = 18
+height = 50
 offset-x = 0
 offset-y = 0
 
@@ -37,14 +37,14 @@ foreground = ${colors.foreground}
 
 overline-size = 2
 overline-color = #f00
-underline-size = 2
+underline-size = 4
 ;underline-color = #00f
 
-spacing = 1
+spacing = 3
 padding-left = 2
-padding-right = 2
-module-margin-left = 2
-module-margin-right = 2
+padding-right = 3
+module-margin-left = 3
+module-margin-right = 3
 
 font-0 = fixed:size=9;0
 font-1 = FontAwesome:size=8;-3
@@ -55,30 +55,34 @@ monitor = ${env:POLYMONITOR}
 
 [bar/main]
 inherit = bar/secondary
+dpi = ${xrdb:Xft.dpi:-1}
 
 modules-left = bspwm xwindow
 modules-center = 
 modules-right = cpu memory wlan eth volume backlight battery xkeyboard date powermenu
 
 tray-position = right
-tray-padding = 2
+tray-padding = 0
 tray-background = ${colors.background}
+tray-scale = 1.0
+
 
 [module/xwindow]
 type = internal/xwindow
-label =   %title:0:30:...%
+label =  %title:0:50:...%
+label-underline = ${colors.foreground}
 
 [module/xkeyboard]
 type = internal/xkeyboard
 blacklist-0 = num lock
 
 ;format-underline = ${colors.secondary}
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 
 label-layout = %layout%
 
-label-indicator-padding = 2
+label-indicator-padding = 6
 label-indicator-background = ${colors.secondary}
 label-indicator-underline = ${colors.secondary}
 
@@ -98,17 +102,19 @@ label-unmounted-foreground = ${colors.foreground-alt}
 type = internal/bspwm
 ;ws-icon-default = x
 
+label-padding = 3
+
 label-focused = %name%
 label-focused-background = ${colors.background-alt}
 label-focused-underline= ${colors.primary}
-label-focused-padding = 2
+label-focused-padding = 3
 
 label-occupied = %name%
-label-occupied-padding = 2
+label-occupied-padding = 3
 
 label-urgent = %name%
 label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
+label-urgent-padding = 3
 
 label-empty =
 ;label-empty-foreground = ${colors.foreground-alt}
@@ -121,7 +127,7 @@ index-sort = true
 wrapping-scroll = false
 
 label-mode = %mode%
-label-mode-padding = 2
+label-mode-padding = 6
 label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
@@ -164,10 +170,12 @@ toggle-on-foreground = ${colors.primary}
 toggle-off-foreground = #66
 
 [module/backlight]
-type = internal/xbacklight
+;type = internal/xbacklight
+type = internal/backlight
+card = intel_backlight
 
 format = <label> <bar>
-label = ""
+label = ""
 
 label-foreground = ${colors.foreground-alt}
 
@@ -185,7 +193,7 @@ bar-empty-foreground = ${colors.foreground-alt}
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 ;format-underline = #f90000
 label = %percentage%
@@ -193,14 +201,14 @@ label = %percentage%
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 ;format-underline = #4bffdc
 label = %percentage_used%
 
 [module/wlan]
 type = internal/network
-interface = wlan0
+interface = wlp58s0 
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
@@ -211,20 +219,20 @@ label-connected = %essid%
 label-disconnected = %ifname% disconnected
 label-disconnected-foreground = ${colors.foreground-alt}
 
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
 ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
-interface = enp7s0
+interface = ether
 interval = 3.0
 
 ;format-connected-underline = #55aa55
-format-connected-prefix = " "
+format-connected-prefix = " "
 format-connected-foreground-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
 
@@ -242,7 +250,7 @@ date-alt = " %d.%m.%Y"
 time = %H:%M
 time-alt = %H:%M
 
-format-prefix = 
+format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
 
 label = %date% %time%
@@ -250,18 +258,18 @@ label = %date% %time%
 [module/volume]
 type = internal/volume
 
-format-volume = <label-volume> <bar-volume>
-label-volume = ""
+format-volume = <ramp-volume> <bar-volume>
+label-volume = ""
 label-volume-foreground = ${colors.foreground-alt}
 
-format-muted-prefix = " "
+format-muted-prefix = " "
 format-muted-foreground = ${colors.foreground-alt}
 label-muted = sound muted
 
 ramp-volume-foreground = ${colors.foreground-alt}
-ramp-volume-0 = ""
-ramp-volume-1 = ""
-ramp-volume-2 = ""
+ramp-volume-0 = ""
+ramp-volume-1 = ""
+ramp-volume-2 = ""
 
 
 bar-volume-width = 10
@@ -284,8 +292,8 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/battery]
 type = internal/battery
-battery = BAT1
-adapter = ACAD
+battery = BAT0
+adapter = AC
 full-at = 98
 
 format-charging = <animation-charging> <label-charging>
@@ -294,18 +302,20 @@ format-charging = <animation-charging> <label-charging>
 format-discharging = <ramp-capacity> <label-discharging>
 ;format-discharging-underline = ${self.format-charging-underline}
 
-format-full-prefix = " "
+format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground-alt}
 ;format-full-underline = ${self.format-charging-underline}
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
 ramp-capacity-foreground = ${colors.foreground-alt}
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
 animation-charging-foreground = ${colors.foreground-alt}
 animation-charging-framerate = 750
 
@@ -331,9 +341,9 @@ ramp-foreground = ${colors.foreground-alt}
 [module/powermenu]
 type = custom/menu
 
-label-open =  power
+label-open =  power
 label-open-foreground = ${colors.secondary}
-label-close =  cancel
+label-close =  cancel
 label-close-foreground = ${colors.secondary}
 label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
