@@ -1,8 +1,14 @@
 #!/bin/sh
 lock1 (){
-    i3lock -i "$HOME/.dotfiles/misc/arch.png" -c "000000" -I 5
+    dolock &
     sleep 1
     xset dpms force suspend
+}
+
+dolock (){
+    xset dpms 10 10
+    i3lock -i "$HOME/.dotfiles/misc/arch.png" -c "000000" -I 5 -n
+    xset dpms 0 0
 }
 
 quitBspc () {
