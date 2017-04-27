@@ -1,5 +1,8 @@
 sleep 5
 
-dropbox &
+
 cd /opt/resilio
 ./rslsync &
+dropbox &
+pulseaudio --start &
+redshift-gtk &
