@@ -1,6 +1,6 @@
 sleep 5
 
-
+export GDK_SCALE=2
 
 cd /opt/resilio
 ./rslsync &
