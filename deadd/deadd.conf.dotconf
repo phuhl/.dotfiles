@@ -1,0 +1,36 @@
+[notification-center]
+marginTop = 0
+width = 500
+
+[notification-center-notification-popup]
+notiDefaultTimeout = 10000
+distanceTop = 50
+distanceRight = 50
+distanceBetween = 20
+width = 300
+
+[colors]
+background = rgba(29, 27, 20, 0.6)
+notiBackground = rgba(9, 0, 0, 0.5)
+notiColor = #fef3f6
+critical = rgba(255, 0, 50, 0.5)
+criticalColor = #FFF
+criticalInCenter = rgba(155, 0, 20, 0.5)
+criticalInCenterColor = #FFF
+buttonColor = #eef
+buttonHover = #cdd
+buttonBackground = transparent
+labelColor = #fef3f6
+
+[buttons]
+buttonsPerRow = 5
+buttonHeight = 60
+buttonMargin = 2
+labels = "VPN":"Bluetooth":"Wifi":"Screensaver"
+commands = "sudo vpnToggle":"bluetoothToggle":"wifiToggle":"screensaverToggle"
+buttonBackground = rgba(255, 255, 255, 0.15)
+buttonHover = rgba(0, 20, 20, 0.2)
+buttonColor = #fee
+buttonTextSize = 12px;
+buttonStatus1 = rgba(165, 219, 17, 0.6)
+buttonStatus1Color = #fff

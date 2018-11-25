@@ -8,13 +8,23 @@
 ;=====================================================
 
 [colors]
-background = #AA343200
-background-alt = #66333300
-foreground = #FFA3A6
-foreground-alt = #55
+;            #AARRGGBB
+background = #661d1b14
+background-alt = #001d1b14
+foreground = #fef3f6
+foreground-alt = #770a0800
 primary = #FF3432
 secondary = #e60053
 alert = #bd2c40
+
+; Backup
+;background = #99343200
+;background-alt = #66333300
+;foreground = #FFA3A6
+;foreground-alt = #55FFA3A6
+;primary = #FF3432
+;secondary = #e60053
+;alert = #bd2c40
 
 [global/wm]
 margin-top = 8

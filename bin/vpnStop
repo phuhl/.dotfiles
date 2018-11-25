@@ -1,0 +1,12 @@
+#!/bin/bash
+
+get_service() {
+    systemctl --type=service --plain | grep openvpn-client@nordvpn | awk '{print $1}'
+}
+
+service=$(get_service)
+test -z "$service" || systemctl stop $service
+
+allUserNotifySend "a" --hint boolean:linux-notification-center:true int:id:0 boolean:state:false
+sleep 0.1
+allUserNotifySend "VPN disconnected" --app-name="nordVPN" --replaces-process="vpnNotifications"

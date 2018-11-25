@@ -1,0 +1,49 @@
+#!/bin/bash
+
+conn_type='udp'
+case "$1" in
+    -t|--tcp)
+        conn_type='tcp'
+        shift
+        ;;
+esac
+
+server=$1
+
+if [ ! -f /etc/openvpn/client/nordvpn_${server}_${conn_type}.conf ]; then
+    echo "'${1}' is not a valid nordvpn server. Exiting."
+    exit 1
+fi
+
+systemctl start openvpn-client@nordvpn_${server}_${conn_type}
+
+ip_should=$(cat /etc/openvpn/client/nordvpn_${server}_${conn_type}.conf | head -4 | tail -1 | awk '{print $2}')
+
+# requires pacman -S bind-tools
+test -z $(whereis dig | awk '{print $2}') && echo "dig not installed, run 'pacman -S bind-tools'" 
+
+
+sleep 0.3
+
+for i in {1..100}
+do
+    if [ "$ip_is" = "$ip_should" ]; then
+        echo -e "\nok"
+        allUserNotifySend "a" --hint boolean:linux-notification-center:true int:id:0 boolean:state:true
+        sleep 0.1
+        allUserNotifySend "VPN connected" "Connected to ${server} via ${conn_type}" --app-name="nordVPN" --replaces-process="vpnNotifications"
+
+        exit
+    else
+        echo -n "."
+        sleep 0.1
+        ip_is=$(dig +short myip.opendns.com @resolver1.opendns.com)
+    fi
+done
+
+echo "not ok, $ip_is != $ip_should"
+allUserNotifySend "VPN not connected" "IP check failed: $ip_is != $ip_should" --app-name="nordVPN" -u critical --replaces-process="vpnNotifications"
+sleep 0.1
+allUserNotifySend "a" --hint boolean:linux-notification-center:true int:id:0 boolean:state:false
+exit 1
+

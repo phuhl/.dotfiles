@@ -19,39 +19,63 @@ fi                                                 #
 ####################################################
 
 ### Bspwm setup
-bspc config border_width            10
+# appearance
+bspc config border_width            0
+bspc config border_radius           10 # border_radius: feature of fork, maybe soon to be upstream?
 bspc config window_gap              16
 bspc config split_ratio             0.42
 bspc config borderless_monocle      true
 bspc config gapless_monocle         true
+bspc config single_monocle          true
+bspc config normal_border_color     "#343200"
+bspc config focused_border_color    "#EEFFEE"
 
+# behaviour
 bspc config pointer_modifier        mod4
 bspc config pointer_action1         move
 bspc config pointer_action2         resize_side
 bspc config focus_follows_pointer   true
+bspc config click_to_focus          true
 
 ### Detect screens
 $HOME/.dotfiles/bin/detect-screens
 
 ### Bspwm rules for progs (use xprop for getting class/window name)
-bspc rule -a Gimp desktop=^2 follow=on floating=on
-#bspc rule -a Chromium desktop=^8
-bspc rule -a Spotify desktop=^9
-#bspc rule -a Firefox desktop=^7
-bspc rule -a Emacs state=tiled
-bspc rule -a '*:Ediff' state=floating
-bspc rule -a :bar layer=below
 
+# unused
+#bspc rule -a Gimp desktop=^2 follow=on floating=on
+#bspc rule -a Chromium desktop=^8
+#bspc rule -a Firefox desktop=^7
+
+# emacs needs special treatment
+bspc rule -a "Emacs" state=tiled
+
+# floating
+bspc rule -a '*:Ediff' state=floating
+bspc rule -a "Viewnior" state=floating
+bspc rule -a "Io.elementary.files" state=floating 
+bspc rule -a "URxvt" state=floating
+bspc rule -a "Thunderbird:Msgcompose" state=floating
+bspc rule -a "Anki" state=floating
+bspc rule -a "vlc" state=floating
+bspc rule -a "KeeWeb" state=floating
+
+# above or below
+bspc rule -a ":bar" layer=below
+bspc rule -a "Plank" layer=above manage=off border=off
+
+# x on desktop y
+bspc rule -a Spotify desktop=^9
 bspc rule -a crx_hnpfjngllnobngcgfapefoaidbinmjnm:Whatsapp desktop=^0
 bspc rule -a :crx_behehkmaacfijackbkoidojkfhoecefo desktop=^0
 
+# optional external rules
+bspc config external_rules_command $HOME/.dotfiles/bspwm/external-rules.sh
 
 ### Desktoprelated stuff
 exec $HOME/.dotfiles/system/launch_linux_desktop.sh &
 
 ### Best place to put your autostarts
 exec $HOME/.dotfiles/system/autostart.sh &
-
-
 
 wait

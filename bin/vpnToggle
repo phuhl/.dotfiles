@@ -1,0 +1,14 @@
+#!/bin/bash
+
+get_service() {
+    systemctl --type=service --plain | grep openvpn-client@nordvpn | awk '{print $1}'
+}
+
+service=$(get_service)
+if [ -z "$service" ]; then
+    # not running
+    sudo vpnStart de258
+else
+    # running
+    sudo vpnStop
+fi

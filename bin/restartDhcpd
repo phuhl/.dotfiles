@@ -1,0 +1,5 @@
+#!/bin/bash
+systemctl restart dhcpcd
+echo "restarted dhcpcd"
+vpnRestart &
+echo "restarted nordvpn connection if running"

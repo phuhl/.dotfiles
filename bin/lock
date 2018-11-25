@@ -1,19 +1,23 @@
-#!/bin/sh
+#!/bin/bash
 lock1 (){
-    dolock &
-    sleep 1
-    xset dpms force suspend
+    running=$(pidof i3lock)
+    if [ ! $running ]; then
+        dolock &
+        sleep 1
+        xset dpms force suspend
+    fi
 }
 
 dolock (){
     xset dpms 10 10
-    i3lock -i "$HOME/.dotfiles/misc/arch.png" -c "000000" -I 5 -n
+    i3lock -i "$HOME/.dotfiles/misc/lock.png" -c "000000"  -n
     xset dpms 0 0
+    notify-send.py "" --hint boolean:linux-notification-center:true int:id:3 boolean:state:false
 }
 
 quitBspc () {
     for window_id in $(bspc query -W); do
-	bspc window $window_id -c
+	      bspc window $window_id -c
     done
     bspc quit
 }

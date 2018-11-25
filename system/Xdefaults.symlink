@@ -8,13 +8,15 @@ Xcursor.theme:    Vanilla-DMZ-AA
 
 URxvt*depth: 32
 
+URxvt.internalBorder:  10
+
 URxvt*colorUL: #86a2b0
 
 !fore/background
-URxvt.foreground: #696969
+URxvt.foreground: #aaa
 !#282626
 ! Echte Transparanz, benötigt compositing
-URxvt.background: rgba:0000/0000/0000/c800
+URxvt.background: rgba:0000/0000/0000/a800
 !black
 URxvt.color0:  #333333
 URxvt.color8:  #666666

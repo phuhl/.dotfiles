@@ -36,8 +36,14 @@ super + apostrophe
 #super + y
 #    bspc node -n last.manual
 
-super + {_,shift + }{n,i,e,o}
-    bspc node -{f,s} {west,south,north,east}
+super + {n,i,e,o}
+    bspc node -f {west,south,north,east}
+
+super + shift + {n,i,e,o}
+    dir={west,south,north,east}; \
+    bspc query -N -n "focused.tiled" && bspc node -s $dir; \
+    bspc query -N -n "focused.floating" && floatingWindowPos.sh $dir
+
 
 # Circle focus
 super + {_,shift + }c
@@ -91,31 +97,38 @@ super + space
       $HOME/.dotfiles/bin/my_dmenu_run
 
 super + q
-      chromium
+      firefox
+#      chromium --force-device-scale-factor=2
 
 super + shift + Return
       emacs
-      # make sxhkd reload its configuration files:
+
+# make sxhkd reload its configuration files:
 super + Escape
       pkill -USR1 -x sxhkd
 
 # Volume buttons
 XF86AudioRaiseVolume
-        $HOME/.dotfiles/bin/dvol -i 2
+  deadd-volume-inc
+#        $HOME/.dotfiles/bin/dvol -i 2
 
 XF86AudioLowerVolume
-        $HOME/.dotfiles/bin/dvol -d 2
+  deadd-volume-dec
+#        $HOME/.dotfiles/bin/dvol -d 2
 
 # Brightness buttons
 XF86MonBrightnessUp
-  xbacklight -inc 10
+  deadd-brightness-inc
+#  xbacklight -inc 10
 
 XF86MonBrightnessDown
-  xbacklight -lower 10
+  deadd-brightness-dec
+#  xbacklight -lower 10
 
 # Media buttons
 XF86AudioMute
-        $HOME/.dotfiles/bin/dvol -t
+  deadd-volume-mute
+#        $HOME/.dotfiles/bin/dvol -t
 
 XF86AudioPlay
         playerctl play-pause
@@ -131,3 +144,7 @@ XF86AudioStop
 
 super + l
       $HOME/.dotfiles/bin/lock lock
+
+super + z
+      kill -s USR1 $(pidof linux-notification-center)
+

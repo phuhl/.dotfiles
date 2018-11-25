@@ -1,0 +1,33 @@
+#!/bin/bash
+
+get_service() {
+    systemctl --type=service --plain | grep openvpn-client@nordvpn | awk '{print $1}'
+}
+
+service=$(get_service)
+if [ -z "$service" ]; then
+    allUserNotifySend "a" --hint boolean:linux-notification-center:true int:id:0 boolean:state:false
+    sleep 0.1
+    echo "none"
+    allUserNotifySend "VPN status" "Not connected" --app-name="nordVPN"
+    exit 1
+fi
+echo "$service"
+
+config=$(echo "$service" | tr @. " " | awk '{print $ 2}')
+ip_should=$(cat /etc/openvpn/client/${config}.conf | head -4 | tail -1 | awk '{print $2}')
+ip_is=$(dig +short myip.opendns.com @resolver1.opendns.com)
+
+
+if [ "$ip_is" = "$ip_should" ]; then
+    echo -e "\nok"
+    allUserNotifySend "a" --hint boolean:linux-notification-center:true int:id:0 boolean:state:true
+    sleep 0.1
+    allUserNotifySend "VPN status" "Connected to ${config}" --app-name="nordVPN" --replaces-process="vpnNotifications"
+    exit
+else
+    allUserNotifySend "a" --hint boolean:linux-notification-center:true int:id:0 boolean:state:false
+    sleep 0.1
+    allUserNotifySend "VPN status" "Running ${config} but NOT connected" --app-name="nordVPN" -u critical -t 0
+fi
+

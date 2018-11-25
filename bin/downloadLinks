@@ -1,0 +1,12 @@
+#!/bin/bash
+
+links=""
+
+while read -r LINE || [[ -n $LINE ]]; do
+    links="$links"$'\n'"$LINE"
+done
+
+while read NAME
+do
+    wget "$NAME"
+done <<< $links

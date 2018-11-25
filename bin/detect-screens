@@ -69,7 +69,8 @@ if [[ ! $DO_NOT_START_PANEL ]]; then
         fi
     done
 
-
+    sleep 0.1
+    bspc config top_padding 50
 fi
 
 exit

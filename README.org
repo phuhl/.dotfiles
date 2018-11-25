@@ -7,15 +7,33 @@
 
 ** Topical
 
-Everything's built around topic areas. If you're adding a new area to your
-forked dotfiles — say, "Java" — you can simply add a `java` directory and put
-files in there. Anything with an extension of `.zsh` will get automatically
-included into your shell. Anything with an extension of `.symlink` will get
-symlinked without extension into `$HOME` when you run `script/bootstrap`.
+Everything's built around topic areas. If you're adding a new area to
+your forked dotfiles — say, "Java" — you can simply add a `java`
+directory and put files in there. 
+
+When you run =script/bootstrap=
+- anything with an extension of =.zsh= will get automatically included
+  into your shell.
+- anything with an extension of =.symlink= will get symlinked without
+  file extension into =$HOME=
+- a file =<folder>/<name>.dotconf= will get symlinked to
+  =$HOME/.config/<folder>/<name>=
+- the folders =bin= and =system= will be added to the =path= variable
+
+When you run =script/install=
+- you will be asked which =install.sh= files should be executed. The
+  selected ones will be executed with an argument =a= or =u=  which
+  classifies if the script should be run for an Arch-Linux or
+  Ubuntu/Debian environment.
 
 ** What's inside
 
-
+- Windowmanager: [[https://github.com/baskerville/bspwm][bspwm]]
+- Compositer: [[https://github.com/tryone144/compton][Compton]] (Tyron-git with rounded corners)
+- Notification daemon: [[https://github.com/phuhl/linux_notification_center][linux-notification-center]]
+- Statusbar: [[https://github.com/jaagr/polybar][Polybar]]
+- Dock: [[https://launchpad.net/plank][Plank]]
+- Lots of stuff
 
 ** Components
 
@@ -53,4 +71,5 @@ Everything is configured and tweaked within `~/.dotfiles`.
 
 ** Thanks
 
-I forked [[https://github.com/holman][Zach Holman]]s [[https://github.com/holman/dotfiles][dotfiles]] who forked [[http://github.com/ryanb][Ryan Bates]]' [[http://github.com/ryanb/dotfiles][dotfiles]]. Because i restructured my fork to an extend it made sens to put it all into its own repository.
+I based my dotfiles on [[https://github.com/holman][Zach Holman]]s [[https://github.com/holman/dotfiles][dotfiles]] who forked [[http://github.com/ryanb][Ryan Bates]]'
+[[http://github.com/ryanb/dotfiles][dotfiles]].
