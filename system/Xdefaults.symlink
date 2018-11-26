@@ -66,8 +66,8 @@ URxvt.color15: #CCCCCC
 
 !urxvt fonts:
 
-URxvt*font: xft:Monospace:size=12
-URxvt*boldFont: xft:Monospace:bold:size=12
+URxvt*font: xft:Monospace:size=8
+URxvt*boldFont: xft:Monospace:bold:size=8
 !URxvt.letterSpace: -10
 
 !urxvt extensions:
