@@ -9,7 +9,7 @@ if [ -z "$service" ]; then
     allUserNotifySend "a" --hint boolean:linux-notification-center:true int:id:0 boolean:state:false
     sleep 0.1
     echo "none"
-    allUserNotifySend "VPN status" "Not connected" --app-name="nordVPN"
+    allUserNotifySend "VPN status" "Not connected" --app-name="nordVPN" --replaces-process="vpnNotifications"
     exit 1
 fi
 echo "$service"
@@ -28,6 +28,6 @@ if [ "$ip_is" = "$ip_should" ]; then
 else
     allUserNotifySend "a" --hint boolean:linux-notification-center:true int:id:0 boolean:state:false
     sleep 0.1
-    allUserNotifySend "VPN status" "Running ${config} but NOT connected" --app-name="nordVPN" -u critical -t 0
+    allUserNotifySend "VPN status" "Running ${config} but NOT connected" --app-name="nordVPN" -u critical -t 0 --replaces-process="vpnNotifications"
 fi
 

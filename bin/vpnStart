@@ -29,10 +29,7 @@ for i in {1..100}
 do
     if [ "$ip_is" = "$ip_should" ]; then
         echo -e "\nok"
-        allUserNotifySend "a" --hint boolean:linux-notification-center:true int:id:0 boolean:state:true
-        sleep 0.1
-        allUserNotifySend "VPN connected" "Connected to ${server} via ${conn_type}" --app-name="nordVPN" --replaces-process="vpnNotifications"
-
+        vpnStatus
         exit
     else
         echo -n "."
@@ -42,8 +39,10 @@ do
 done
 
 echo "not ok, $ip_is != $ip_should"
-allUserNotifySend "VPN not connected" "IP check failed: $ip_is != $ip_should" --app-name="nordVPN" -u critical --replaces-process="vpnNotifications"
+vpnStatus
 sleep 0.1
-allUserNotifySend "a" --hint boolean:linux-notification-center:true int:id:0 boolean:state:false
+allUserNotifySend "VPN not connected" "IP check failed: $ip_is != $ip_should" --app-name="nordVPN" -u critical --replaces-process="vpnNotifications"
+
+
 exit 1
 
