@@ -1,0 +1,7 @@
+#!/bin/bash
+dpmsOn=$(xset q | grep "Standby: 0    Suspend: 0" | wc -l)
+if [ "$dpmsOn" = "1" ]; then
+    notify-send.py "a" --hint boolean:linux-notification-center:true int:id:3 boolean:state:false
+else
+    notify-send.py "a" --hint boolean:linux-notification-center:true int:id:3 boolean:state:true
+fi

@@ -10,6 +10,8 @@ lock1 (){
 
 dolock (){
     xset dpms 10 10
+    keyboardSetMine
+    keyboardStatus
     i3lock -i "$HOME/.dotfiles/misc/lock.png" -c "000000"  -n
     xset dpms 0 0
     notify-send.py "" --hint boolean:linux-notification-center:true int:id:3 boolean:state:false

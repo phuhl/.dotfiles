@@ -1,0 +1,8 @@
+#!/bin/bash
+btOn=$(setxkbmap -query | grep colemak | wc -l)
+if [ "$btOn" = "1" ]; then
+    setxkbmap us
+else
+    setxkbmap us -variant colemak
+fi
+keyboardStatus

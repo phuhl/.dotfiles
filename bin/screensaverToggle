@@ -2,8 +2,7 @@
 dpmsOn=$(xset q | grep "Standby: 0    Suspend: 0" | wc -l)
 if [ "$dpmsOn" = "1" ]; then
     xset dpms 10 10
-    notify-send.py "a" --hint boolean:linux-notification-center:true int:id:3 boolean:state:true
 else
     xset dpms 0 0
-    notify-send.py "a" --hint boolean:linux-notification-center:true int:id:3 boolean:state:false
 fi
+screensaverStatus
