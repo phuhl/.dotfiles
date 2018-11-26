@@ -11,7 +11,7 @@
 ;            #AARRGGBB
 background = #661d1b14
 background-alt = #001d1b14
-foreground = #fef3f6
+foreground = #eae2e0
 foreground-alt = #770a0800
 primary = #FF3432
 secondary = #e60053
