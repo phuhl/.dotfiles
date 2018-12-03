@@ -3,8 +3,6 @@
 
 * dotfiles
 
-
-
 ** Topical
 
 Everything's built around topic areas. If you're adding a new area to
@@ -34,6 +32,17 @@ When you run =script/install=
 - Statusbar: [[https://github.com/jaagr/polybar][Polybar]]
 - Dock: [[https://launchpad.net/plank][Plank]]
 - Lots of stuff
+
+*** Screenshots
+
+Some applications, notification:
+[[file:README.org.img/org_20181125_131724_ZI9o09.jpg]]
+
+Notification Center opened:
+[[file:README.org.img/org_20181203_164608_WqFdmO.jpg]]
+
+Emacs as an only window on a desktop in monocle view:
+[[file:README.org.img/org_20181203_164817_XTvKHh.jpg]]
 
 ** Components
 
@@ -73,3 +82,4 @@ Everything is configured and tweaked within `~/.dotfiles`.
 
 I based my dotfiles on [[https://github.com/holman][Zach Holman]]s [[https://github.com/holman/dotfiles][dotfiles]] who forked [[http://github.com/ryanb][Ryan Bates]]'
 [[http://github.com/ryanb/dotfiles][dotfiles]].
+
