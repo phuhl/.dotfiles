@@ -59,6 +59,7 @@ bspc rule -a "Thunderbird:Msgcompose" state=floating
 bspc rule -a "Anki" state=floating
 bspc rule -a "vlc" state=floating
 bspc rule -a "KeeWeb" state=floating
+bspc rule -a "Evince" state=floating
 
 # above or below
 bspc rule -a ":bar" layer=below
