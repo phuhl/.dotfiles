@@ -13,13 +13,17 @@ URxvt.internalBorder:  10
 URxvt*colorUL: #86a2b0
 
 !fore/background
-URxvt.foreground: #aaa
+URxvt.foreground: #333
+!URxvt.foreground: #aaa
 !#282626
 ! Echte Transparanz, benötigt compositing
-URxvt.background: rgba:0000/0000/0000/a800
+!URxvt.background: rgba:0000/0000/0000/a800
+URxvt.background: rgba:ffff/ffff/ffff/9000
 !black
 URxvt.color0:  #333333
+!URxvt.color0:  #333333
 URxvt.color8:  #666666
+!URxvt.color8:  #666666
 !red
 URxvt.color1:  #A94952
 URxvt.color9:  #ED6975

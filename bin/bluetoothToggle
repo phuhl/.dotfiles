@@ -1,8 +1,8 @@
 #!/bin/bash
-btOn=$(rfkill | grep bluetooth | grep "unblocked unblocked" | wc -l)
+btOn=$(sudo rfkill | grep bluetooth | grep "unblocked unblocked" | wc -l)
 if [ "$btOn" = "1" ]; then
-    rfkill block bluetooth
+    sudo rfkill block bluetooth
 else
-    rfkill unblock bluetooth
+    sudo rfkill unblock bluetooth
 fi
 bluetoothStatus

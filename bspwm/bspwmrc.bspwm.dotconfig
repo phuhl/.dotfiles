@@ -39,6 +39,7 @@ bspc config click_to_focus          true
 
 ### Detect screens
 $HOME/.dotfiles/bin/detect-screens
+bspc config border_radius           10 # again here, maybe it solves the problem of not working after reboot
 
 ### Bspwm rules for progs (use xprop for getting class/window name)
 
@@ -60,6 +61,7 @@ bspc rule -a "Anki" state=floating
 bspc rule -a "vlc" state=floating
 bspc rule -a "KeeWeb" state=floating
 bspc rule -a "Evince" state=floating
+bspc rule -a "VirtualBox Manager" state=floating
 
 # above or below
 bspc rule -a ":bar" layer=below

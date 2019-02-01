@@ -4,5 +4,4 @@ sudo vpnStatus
 bluetoothStatus
 keyboardStatus
 screensaverStatus
-
-# wifiStatus
+wifiStatus

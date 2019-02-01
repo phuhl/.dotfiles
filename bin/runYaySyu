@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Install updates with yay -Syu"
+yay -Syu
+zsh

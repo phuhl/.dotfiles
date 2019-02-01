@@ -146,5 +146,5 @@ super + l
       $HOME/.dotfiles/bin/lock lock
 
 super + z
-      kill -s USR1 $(pidof linux-notification-center)
+      kill -s USR1 $(pidof deadd-notification-center)
 

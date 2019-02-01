@@ -1,0 +1,9 @@
+#!/bin/bash
+wifiOn=$(sudo rfkill | grep wlan | grep "unblocked unblocked" | wc -l)
+if [ "$wifiOn" = "1" ]; then
+    sudo rfkill block wlan
+else
+    sudo rfkill unblock wlan
+    rewifi
+fi
+wifiStatus

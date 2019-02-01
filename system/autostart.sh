@@ -7,4 +7,4 @@ cd /opt/resilio
 dropbox &
 pulseaudio --start &
 redshift-local &
-linux-notification-center &
+deadd-notification-center &

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo -u philipp python /home/philipp/tor/updateTor.py

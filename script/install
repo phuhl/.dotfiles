@@ -221,6 +221,19 @@ if [ $skip -le 7 ]; then
     fi
 fi
 
+# 8. Path
+if [ $skip -le 8 ]; then
+    info "- 8. - Installing root scripts"
+
+    overwrite_all=false backup_all=false skip_all=false
+    for src in $(find -H "$DOTFILES_ROOT/rootscripts/" -maxdepth 2 -type f -not -path '*.git*')
+    do
+        echo $src
+        cp "$src" "/usr/bin"
+    done
+    success "- 8. - Installing root scripts"
+fi
+
 
 echo ''
 echo '  All installed!'

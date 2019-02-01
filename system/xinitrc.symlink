@@ -23,7 +23,8 @@ xset +fp /home/philipp/.fonts
 # ...or the Window Manager of your choice
 #exec dwm
 
-
+# ssh-agent
+eval `ssh-agent -t 2h`
 
 ### i3
 #exec i3

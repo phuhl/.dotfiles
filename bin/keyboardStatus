@@ -1,7 +1,7 @@
 #!/bin/bash
 btOn=$(setxkbmap -query | grep colemak | wc -l)
 if [ "$btOn" = "1" ]; then
-    notify-send.py "a" --hint boolean:linux-notification-center:true int:id:4 boolean:state:false
+    notify-send.py "a" --hint boolean:deadd-notification-center:true int:id:4 boolean:state:false
 else
-    notify-send.py "a" --hint boolean:linux-notification-center:true int:id:4 boolean:state:true
+    notify-send.py "a" --hint boolean:deadd-notification-center:true int:id:4 boolean:state:true
 fi

@@ -1,7 +1,7 @@
 #!/bin/bash
-btOn=$(rfkill | grep bluetooth | grep "unblocked unblocked" | wc -l)
+btOn=$(sudo rfkill | grep bluetooth | grep "unblocked unblocked" | wc -l)
 if [ "$btOn" = "1" ]; then
-    notify-send.py "a" --hint boolean:linux-notification-center:true int:id:1 boolean:state:true
+    notify-send.py "a" --hint boolean:deadd-notification-center:true int:id:1 boolean:state:true
 else
-    notify-send.py "a" --hint boolean:linux-notification-center:true int:id:1 boolean:state:false
+    notify-send.py "a" --hint boolean:deadd-notification-center:true int:id:1 boolean:state:false
 fi

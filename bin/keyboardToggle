@@ -5,4 +5,5 @@ if [ "$btOn" = "1" ]; then
 else
     setxkbmap us -variant colemak
 fi
+sleep 0.1
 keyboardStatus
