@@ -1,5 +1,8 @@
 #! /bin/sh
 
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+
 ### Listener for keyboard entrys
 sxhkd -m 1 &
 
@@ -22,6 +25,7 @@ fi                                                 #
 # appearance
 bspc config border_width            0
 bspc config border_radius           10 # border_radius: feature of fork, maybe soon to be upstream?
+bspc config top_padding 50
 bspc config window_gap              16
 bspc config split_ratio             0.42
 bspc config borderless_monocle      true
