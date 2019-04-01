@@ -17,6 +17,8 @@ fi
 xset fp rehash
 xset +fp /home/philipp/.fonts
 
+XDG_SESSION_TYPE=x11
+
 # exec gnome-session
 # exec startkde
 # exec startxfce4
