@@ -4,7 +4,8 @@ export GDK_SCALE=2
 
 cd /opt/resilio
 ./rslsync &
-dropbox &
+# dropbox &
 pulseaudio --start &
 redshift-local &
-deadd-notification-center &
+date >> /home/philipp/.local/tmp/deadd-noti.log
+deadd-notification-center >> /home/philipp/.local/tmp/deadd-noti.log 2>&1 &

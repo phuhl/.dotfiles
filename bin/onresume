@@ -1,4 +1,5 @@
 #!/bin/bash
+# This should all be running as user, not as root
 xset dpms force on
-sudo restartDhcpd
+echo $(sudo restartDhcpd) >> /home/philipp/.local/tmp/onresume.log
 

@@ -19,7 +19,7 @@ test -z $(whereis dig | awk '{print $2}') && echo "dig not installed, run 'pacma
 
 sleep 0.3
 
-for i in {1..100}
+for i in {1..500}
 do
     if [ "$ip_is" = "$ip_should" ]; then
         echo -e "\nok"
@@ -34,7 +34,5 @@ done
 
 echo "not ok, $ip_is != $ip_should"
 vpnStatus
-sleep 0.1
-allUserNotifySend "VPN not connected" "IP check failed: $ip_is != $ip_should" --app-name="nordVPN" -u critical --replaces-process="vpnNotifications"
 exit 1
 

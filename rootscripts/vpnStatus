@@ -21,13 +21,13 @@ ip_is=$(dig +short myip.opendns.com @resolver1.opendns.com)
 
 if [ "$ip_is" = "$ip_should" ]; then
     echo -e "\nok"
-    allUserNotifySend "a" --hint boolean:deadd-notification-center:true int:id:0 boolean:state:true
+    allUserNotifySend "a" --hint boolean:deadd-notification-center:true int:id:0 boolean:state:true > /dev/null
     sleep 0.1
-    allUserNotifySend "VPN status" "Connected to ${config}" --app-name="nordVPN" --replaces-process="vpnNotifications"
+    allUserNotifySend "VPN status" "Connected to ${config}" --app-name="nordVPN" --replaces-process="vpnNotifications" > /dev/null
     exit
 else
-    allUserNotifySend "a" --hint boolean:deadd-notification-center:true int:id:0 boolean:state:false
+    allUserNotifySend "a" --hint boolean:deadd-notification-center:true int:id:0 boolean:state:false  > /dev/null
     sleep 0.1
-    allUserNotifySend "VPN status" "Running ${config} but NOT connected" --app-name="nordVPN" -u critical -t 0 --replaces-process="vpnNotifications"
+    allUserNotifySend "VPN status" "Running ${config} but NOT connected" --app-name="nordVPN" -u critical -t 0 --replaces-process="vpnNotifications" > /dev/null
 fi
 
