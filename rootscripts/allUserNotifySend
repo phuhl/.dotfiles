@@ -1,10 +1,10 @@
 #!/bin/bash
 
-if [ "$(id -u)" != "1000" ] ; then
-    sudo -u philipp DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus notify-send.py "$@"
+export XAUTHORITY=/home/philipp/.Xauthority
+if [ "$(/usr/bin/id -u)" != "1000" ] ; then
+    /usr/bin/sudo -u philipp XAUTHORITY=/home/philipp/.Xauthority DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus /usr/bin/notify-send.py "$@"
 else
     export DISPLAY=:0
     export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
-    notify-send.py "$@"
+    /usr/bin/notify-send.py "$@"
 fi
-
