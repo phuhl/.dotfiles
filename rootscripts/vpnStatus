@@ -15,11 +15,14 @@ fi
 echo "$service"
 
 config=$(echo "$service" | tr @. " " | awk '{print $ 2}')
-ip_should=$(cat /etc/openvpn/client/${config}.conf | head -4 | tail -1 | awk '{print $2}')
-ip_is=$(dig +short myip.opendns.com @resolver1.opendns.com)
+#ip_should=$(cat /etc/openvpn/client/${config}.conf | head -4 | tail -1 | awk '{print $2}')
+#ip_is=$(dig +short myip.opendns.com @resolver1.opendns.com)
+
+nordvpn_prot=$(wget -q -O- "https://nordvpn.com/wp-admin/admin-ajax.php?action=get_user_info_data" | grep -o \"status\":true | wc -l)
 
 
-if [ "$ip_is" = "$ip_should" ]; then
+#if [ "$ip_is" = "$ip_should" ]; then
+if [ "$nordvpn_prot" = "1" ]; then
     echo -e "\nok"
     allUserNotifySend "a" --hint boolean:deadd-notification-center:true int:id:0 boolean:state:true > /dev/null
     sleep 0.1

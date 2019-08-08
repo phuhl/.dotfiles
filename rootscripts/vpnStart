@@ -27,14 +27,16 @@ sleep 0.3
 
 for i in {1..100}
 do
-    if [ "$ip_is" = "$ip_should" ]; then
+    #    if [ "$ip_is" = "$ip_should" ]; then
+    if [ "$nordvpn_prot" = "1" ]; then
         echo -e "\nok"
         vpnStatus
         exit
     else
         echo -n "."
         sleep 0.1
-        ip_is=$(dig +short myip.opendns.com @resolver1.opendns.com)
+        nordvpn_prot=$(wget -q -O- "https://nordvpn.com/wp-admin/admin-ajax.php?action=get_user_info_data" | grep -o \"status\":true | wc -l)
+        #ip_is=$(dig +short myip.opendns.com @resolver1.opendns.com)
     fi
 done
 
