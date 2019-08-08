@@ -1,5 +1,7 @@
 #!/bin/bash
-wifiOn=$(sudo rfkill | grep wlan | grep "unblocked unblocked" | wc -l)
+#wifiOn=$(sudo rfkill | grep wlan | grep "unblocked unblocked" | wc -l)
+wifiOn=$(sudo rfkill | grep wlan | grep "entsperrt entsperrt" | wc -l)
+
 if [ "$wifiOn" = "1" ]; then
     notify-send.py "a" --hint boolean:deadd-notification-center:true int:id:2 boolean:state:true
 else
