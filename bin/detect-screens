@@ -2,8 +2,13 @@
 DO_NOT_START_PANEL=$1
 
 CONNECTED=$(xrandr | grep " connected" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/")
-NUM_OF_DISPLS=$(echo $CONNECTED | wc -l)
-CONFIG=$(cat $HOME/.config/screens)
+NUM_OF_DISPLS=$(echo $CONNECTED | wc -w)
+CONFIG=$(cat $HOME/.config/screen)
+
+if [[ $NUM_OF_DISPLS > 1 ]]; then
+    CONFIG=$(cat $HOME/.config/screens)
+fi
+
 TO_USE=""
 while read config; do
     display=$(echo $config | awk '{print $1;}')
@@ -17,7 +22,7 @@ done <<< "$CONFIG"
 for display in $TO_USE; do
     command="xrandr --output $display --auto"
     if [[ $last ]]; then
-        command="$command --right-of $last"
+        command="$command --above $last"
     fi
     last=$display
     eval $command
