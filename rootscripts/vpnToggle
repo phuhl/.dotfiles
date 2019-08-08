@@ -7,7 +7,7 @@ get_service() {
 service=$(get_service)
 if [ -z "$service" ]; then
     # not running
-    sudo vpnStart de258
+    sudo vpnStart de570
 else
     # running
     sudo vpnStop
