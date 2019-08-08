@@ -1,3 +1,4 @@
+#!/bin/python3
 import subprocess
 import requests
 import re
@@ -28,7 +29,7 @@ def notify(message):
 
 def findHighest(versions):
     maxversion = max(map(lambda v: int(v[0]), versions))
-    if len(versions[0]) > 1:
+    if min(map(len, versions)) > 1:
         highest = findHighest(
             list(map(lambda v: v[1:],
                      filter(lambda v: int(v[0]) >= maxversion, versions))))
