@@ -10,7 +10,7 @@ sleep 1 && xdotool search --class Plank windowraise
 
 # polybar ist in:
 #$HOME/.dotfiles/bin/detect-screens
-
+unclutter &
 #dunst &
 #$HOME/.dotfiles/system/panel &
 sleep 5
