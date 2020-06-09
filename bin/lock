@@ -1,4 +1,7 @@
 #!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
 lock1 (){
     running=$(pidof i3lock)
     if [ ! $running ]; then
@@ -12,7 +15,8 @@ dolock (){
     xset dpms 10 10
     keyboardSetMine
     keyboardStatus
-    i3lock -i "$HOME/.dotfiles/misc/lock.png" -c "000000"  -n
+    # i3lock -i "$HOME/.dotfiles/misc/lock.png" -c "000000"  -n
+    $DIR/betterlockscreen -l
     xset dpms 0 0
     screensaverStatus
 }
