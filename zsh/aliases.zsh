@@ -5,3 +5,6 @@ alias sudo='sudo env "PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/home/adminu/
 alias sudo='sudo env "PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/philipp/.dotfiles/bin:/home/philipp/.dotfiles/system" '
 
 alias rewifi="bash -c \"sudo restartDhcpd\""
+
+alias add-key="ssh-add ~/.ssh/philipp@admin_LT3"
+alias dashboard="~/git/dashboard/dashboard.sh"
