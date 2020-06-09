@@ -1,4 +1,16 @@
 #!/bin/bash
+
+export GDK_SCALE=2
+export DISPLAY=:0
+export XAUTHORITY=/home/philipp/.Xauthority
+export XDG_SESSION_CLASS=user
+export XDG_SESSION_TYPE=x11
+export HOME=/home/philipp
+export PATH="$PATH:/usr/bin:/usr/local/bin"
+export DISPLAY=:0
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+
+
 DO_NOT_START_PANEL=$1
 
 CONNECTED=$(xrandr | grep " connected" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/")
@@ -7,6 +19,14 @@ CONFIG=$(cat $HOME/.config/screen)
 
 if [[ $NUM_OF_DISPLS > 1 ]]; then
     CONFIG=$(cat $HOME/.config/screens)
+    # https://blog.summercat.com/configuring-mixed-dpi-monitors-with-xrandr.html
+    xrandr --dpi 276 --fb 3840x3960 \
+           --output eDP1 --mode 3200x1800 --pos 0x0   \
+           --output DP1 --mode 1920x1080 --scale 2x2 --pos 0x-2160  #  --panning 3200x3960+0+0
+else
+    xrandr --dpi 276 --fb 3200x1800 \
+           --output eDP1 --panning 3200x1800 \
+           --output DP1  --off
 fi
 
 TO_USE=""
@@ -19,20 +39,21 @@ while read config; do
     done
 done <<< "$CONFIG"
 
+
 for display in $TO_USE; do
-    command="xrandr --output $display --auto"
+    # command="xrandr --output $display --auto"
     if [[ $last ]]; then
         command="$command --above $last"
     fi
     last=$display
-    eval $command
+#    eval $command
 
 
     while read config; do
         display1=$(echo $config | awk '{print $1;}')
         desktops=$(echo $config | awk '{$1 = ""; print $0;}')
         if [[ $display == $display1 ]]; then
-#            position=$(xrandr | grep "$display connected" | awk '{print $3;}')
+            position=$(xrandr | grep "$display connected" | awk '{print $3;}')
             eval "bspc monitor $display -d $desktops"
         fi
     done <<< "$CONFIG"
@@ -61,6 +82,7 @@ done
 if [[ ! $DO_NOT_START_PANEL ]]; then
     nitrogen --restore &
     killall polybar
+    killall plank
     sleep 1
     first=1
     for display in $TO_USE; do
@@ -74,8 +96,11 @@ if [[ ! $DO_NOT_START_PANEL ]]; then
         fi
     done
 
+    plank &
+
     sleep 0.1
     bspc config top_padding 50
+    bspc config border_radius 10
 fi
 
 exit
