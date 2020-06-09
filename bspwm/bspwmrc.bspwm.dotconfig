@@ -68,6 +68,8 @@ bspc rule -a "Evince" state=floating
 bspc rule -a "VirtualBox Manager" state=floating
 bspc rule -a "Libreoffice" state=floating
 bspc rule -a "Io.elementary.music" state=floating
+bspc rule -a '*:Calendar' state=floating
+bspc rule -a :crx_pbgeoohjglglehkbdgdakjejlleecibe state=floating
 
 # above or below
 bspc rule -a ":bar" layer=below
