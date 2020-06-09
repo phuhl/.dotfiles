@@ -50,10 +50,18 @@ directory_name() {
   echo "%{$fg_bold[red]%}%~%{$reset_color%}"
 }
 
+has_pw() {
+    if [[ $HASKEY ]]
+    then
+        echo "%{$fg_bold[yellow]%}%{$bg[red]%}o¬ $HASKEY%{$reset_color%}"
+    else
+        echo ""
+    fi
+}
 
 set_prompt () {
 #  export RPROMPT='%{$fg_bold[cyan]%}%{$reset_color%} '
-  export PROMPT=$'\n $(directory_name) $(git_dirty)$(need_push)\n$ '
+  export PROMPT=$'\n $(directory_name) $(git_dirty)$(need_push) $(has_pw)\n$ '
 }
 
 precmd() {

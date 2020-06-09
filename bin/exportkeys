@@ -1,0 +1,36 @@
+#!/bin/bash
+
+case "$1" in
+    "logs.ph-uhl.com")
+        PWPATH="'MyPws/TaskX/AWS/AWS logs.ph-uhl.com download user'"
+        PWNAME="logs.ph-uhl.com"
+        ;;
+    "www.ph-uhl.com")
+        PWPATH="'MyPws/AWS-role www.ph-uhl.com-uploader'"
+        PWNAME="www.ph-uhl.com"
+        ;;
+    "saym.io")
+        PWPATH="'MyPws/Saym/AWS Saym'"
+        PWNAME="saym.io"
+        ;;
+    "tisch.im")
+        PWPATH="'MyPws/AWS Tisch.im deploy-user'"
+        PWNAME="tisch.im"
+        ;;
+esac
+
+
+COMMAND="\"show -f $PWPATH\""
+echo "Enter PW (hidden):"
+#kpcli --readonly --kdb="/home/philipp/documents/MyPws.kdbx" --command "$COMMAND"
+pwoutput=$(kpcli --readonly --kdb="/home/philipp/documents/MyPws.kdbx" --command "show -f $PWPATH")
+
+re="export ([^ ]*).*export ([^ ]*)"
+if [[ $pwoutput =~ $re ]]; then
+    export ${BASH_REMATCH[1]};
+    export ${BASH_REMATCH[2]};
+    export HASKEY="$PWNAME"
+    zsh
+fi
+
+
