@@ -230,6 +230,8 @@ if [ $skip -le 8 ]; then
     do
         echo $src
         cp "$src" "/usr/bin"
+        filename=$(basename $src)
+        chmod 755 "/usr/bin/$filename"
     done
     success "- 8. - Installing root scripts"
 fi
