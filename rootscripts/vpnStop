@@ -7,5 +7,7 @@ get_service() {
 service=$(get_service)
 test -z "$service" || systemctl stop $service
 
+systemctl restart iptables.service
+
 vpnStatus
 

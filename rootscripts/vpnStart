@@ -15,9 +15,23 @@ if [ ! -f /etc/openvpn/client/nordvpn_${server}_${conn_type}.conf ]; then
     exit 1
 fi
 
+
 systemctl start openvpn-client@nordvpn_${server}_${conn_type}
 
 ip_should=$(cat /etc/openvpn/client/nordvpn_${server}_${conn_type}.conf | head -4 | tail -1 | awk '{print $2}')
+
+
+# block all traffic except for vpn traffic
+iptables-restore < /etc/iptables/iptables-vpn-only.rules
+ip6tables-restore < /etc/iptables/ip6tables-vpn-only.rules
+if [ "$conn_type" = "udp" ]; then
+    iptables -A OUTPUT -p udp -m udp -d $ip_should --dport 1194 -j ACCEPT
+else
+    iptables -A OUTPUT -p tcp -m udp -d $ip_should --dport 443 -j ACCEPT
+fi
+iptables -A OUTPUT -j REJECT --reject-with icmp-port-unreachable  
+
+
 
 # requires pacman -S bind-tools
 test -z $(whereis dig | awk '{print $2}') && echo "dig not installed, run 'pacman -S bind-tools'" 

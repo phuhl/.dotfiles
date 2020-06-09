@@ -1,0 +1,23 @@
+#!/bin/bash
+
+
+#export DISPLAY=:0
+#export XAUTHORITY=/home/philipp/.Xauthority
+#export XDG_SESSION_CLASS=user
+#export XDG_SESSION_TYPE=x11
+#export HOME=/home/philipp
+#export PATH="$PATH:/usr/bin:/usr/local/bin"
+#if [ "$(/usr/bin/id -u)" != "1000" ] ; then
+#    /usr/bin/sudo -u philipp XAUTHORITY=/home/philipp/.Xauthority \
+#                  HOME=/home/philipp PATH="$PATH:/usr/bin:/usr/local/bin" \
+#                  DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus \
+#                  XDG_SESSION_CLASS=user XDG_SESSION_TYPE=x11 \
+#                  /home/philipp/.dotfiles/bin/detect-screens1 "$@" > /home/philipp/temmmmmmmmp 2> /home/philipp/temmmmmmmmpe &
+#
+##                  /usr/bin/bspc config border_width 20  > /home/philipp/temmmmmmmmp 2> /home/philipp/temmmmmmmmpe &
+#
+#else
+#    export DISPLAY=:0
+#    export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+#    /home/philipp/.dotfiles/bin/detect-screens "$@" &
+#fi
