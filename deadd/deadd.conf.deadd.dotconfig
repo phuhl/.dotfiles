@@ -1,0 +1,57 @@
+[notification-center]
+marginTop = 0
+marginBottom = 0
+marginRight = 0
+width = 500
+startupCommand = "linux-notification-center-startup"
+monitor = 0
+followMouse = true
+newFirst = true
+match = "app=Spotify"
+modify = "noClosedMsg=true"
+run = "myCommand"
+configSendNotiClosedDbusMessage = true
+
+[notification-center-notification-popup]
+notiDefaultTimeout = 10000
+distanceTop = 50
+distanceRight = 50
+distanceBetween = 20
+width = 500
+monitor = 0
+followMouse = true
+
+[colors]
+background = rgba(255, 255, 255, 0.6)
+notiBackground = rgba(255, 255, 255, 0.4)
+notiColor = #322
+critical = rgba(255, 0, 50, 0.5)
+criticalColor = #000
+criticalInCenter = rgba(155, 0, 20, 0.5)
+criticalInCenterColor = #000
+buttonColor = #322
+buttonHover = rgba(0, 20, 20, 0.2)
+buttonHoverColor = #fee
+buttonBackground = transparent
+labelColor = #322
+
+[buttons]
+buttonsPerRow = 5
+buttonHeight = 60
+buttonMargin = 2
+labels = "VPN":"Bluetooth":"Wifi":"Screensaver":"Keyboard"
+commands = "sudo vpnToggle":"bluetoothToggle":"wifiToggle":"screensaverToggle":"keyboardToggle"
+buttonColor = #222
+buttonBackground = rgba(20,0,0, 0.15)
+buttonHover = rgba(20, 0, 0, 0.2)
+buttonHoverColor = #111
+buttonTextSize = 12px;
+
+buttonState1 = rgba(20,0,0,0.5)
+buttonState1Color = #fff
+buttonState1Hover = rgba(20,0,0, 0.4)
+buttonState1HoverColor = #000
+buttonState2 = rgba(20,0,0,0.3)
+buttonState2Color = #111
+buttonState2Hover = rgba(20,0,0, 0.3)
+buttonState2HoverColor = #000
