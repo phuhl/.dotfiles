@@ -9,9 +9,9 @@
 
 [colors]
 ;            #AARRGGBB
-background = #661d1b14
-background-alt = #001d1b14
-foreground = #eae2e0
+background = #99ffffff
+background-alt = #ffffffff
+foreground = #ff332222
 foreground-alt = #770a0800
 primary = #FF3432
 secondary = #e60053
