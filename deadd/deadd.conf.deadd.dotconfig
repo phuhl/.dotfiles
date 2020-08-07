@@ -22,7 +22,7 @@ monitor = 0
 followMouse = true
 
 [colors]
-background = rgba(255, 255, 255, 0.6)
+background = rgba(255, 255, 255, 0.5)
 notiBackground = rgba(255, 255, 255, 0.4)
 notiColor = #322
 critical = rgba(255, 0, 50, 0.5)

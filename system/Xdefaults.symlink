@@ -18,7 +18,7 @@ URxvt.foreground: #333
 !#282626
 ! Echte Transparanz, benötigt compositing
 !URxvt.background: rgba:0000/0000/0000/a800
-URxvt.background: rgba:ffff/ffff/ffff/9000
+URxvt.background: rgba:ffff/ffff/ffff/a800
 !black
 URxvt.color0:  #333333
 !URxvt.color0:  #333333

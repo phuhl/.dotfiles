@@ -2,7 +2,8 @@
 #/home/adminu/documents/bin/bash/detect-displays.sh
 # ist jetzt in bspwmrc drin
 nitrogen --restore &
-compton --config $HOME/.config/compton/compton.conf -cGb --opengl --sw-opti --vsync opengl-swc --backend glx  --detect-rounded-corners &
+# compton --config $HOME/.config/compton/compton.conf -cGb --opengl --sw-opti --vsync opengl-swc --backend glx  --detect-rounded-corners &
+sh $HOME/.dotfiles/picom/picom.sh &
 numlockx on &
 plank &
 libinput-gestures &
