@@ -23,8 +23,12 @@ super + {s,f}
       bspc query -N -n "focused.$\{state\}" && state=tiled; \
       bspc node -t "$state"
 
-super + {grave,Tab}
-    bspc {node,desktop} --focus last
+# Circle focus on active desktop
+super + {_,shift + }Tab
+    bspc node --focus {next,prev}.local.leaf
+
+#super + {grave,Tab}
+#    bspc {node,desktop} --focus last
 
 super + apostrophe
     bspc node --swap last
@@ -46,11 +50,6 @@ super + shift + {n,i,e,o}
     dir={west,south,north,east}; \
     bspc query -N -n "focused.tiled" && bspc node -s $dir; \
     bspc query -N -n "focused.floating" && floatingWindowPos.sh $dir
-
-
-# Circle focus
-#super + {_,shift + }c
-#    bspc node --focus {next,prev}
 
 # Fenster im Kreis verschieben
 super + {comma,period}

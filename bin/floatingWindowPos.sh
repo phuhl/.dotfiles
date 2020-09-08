@@ -15,9 +15,20 @@
 # Requirements: xdotool.
 
 # get the current screen presets
-SCREEN=`xrandr | grep '*' | awk '{print $1}'`
-SCREEN_X=${SCREEN%x*}
-SCREEN_Y=${SCREEN#*x}
+ 
+
+# SCREEN=`xrandr | grep '*' | awk '{print $1}' | awk '{split($0,a,"_"); print a[1]}'`
+#SCREEN_X=${SCREEN%x*}
+#SCREEN_Y=${SCREEN#*x}
+MONITOR=`bspc query -M -m focused --names`
+SCREEN=`xrandr | grep $MONITOR | grep -o "[0-9]*x[0-9]*+[0-9]*+[0-9]*"`
+OFFSET_X=`echo $SCREEN | awk '{split($0,a,"x|+"); print a[3]}'`
+OFFSET_Y=`echo $SCREEN | awk '{split($0,a,"x|+"); print a[4]}'`
+SCREEN_X=`echo $SCREEN | awk '{split($0,a,"x"); print a[1]}'`
+SCREEN_Y=`echo $SCREEN | awk '{split($0,a,"x|+"); print a[2]}'`
+
+#SCREEN_X=`xrandr | grep 'current' | awk '{print $8}'`
+#SCREEN_Y=`xrandr | grep 'current' | awk '{gsub(",","",$10); print $10}'`
 BORDER=`bspc config border_width`
 
 # get the current window geometry
@@ -26,14 +37,14 @@ eval `xdotool getactivewindow getwindowgeometry --shell`
 DISTANCE_TO_BORDER=5
 
 # calculate new coordinates
-X0=$((0-WIDTH-BORDER*2 + 50))
-X1=$DISTANCE_TO_BORDER
-X2=$((SCREEN_X/2-WIDTH/2-BORDER*2))
-X3=$((SCREEN_X-WIDTH-BORDER*2 - $DISTANCE_TO_BORDER))
-X4=$((SCREEN_X-50))
-Y1=$((SCREEN_Y-HEIGHT-BORDER*2 - $DISTANCE_TO_BORDER))
-Y2=$((SCREEN_Y/2-HEIGHT/2-BORDER*2))
-Y3=$DISTANCE_TO_BORDER
+X0=$((0-WIDTH-BORDER*2 + 50 + OFFSET_X))
+X1=$((DISTANCE_TO_BORDER + OFFSET_X))
+X2=$((SCREEN_X/2-WIDTH/2-BORDER*2 + OFFSET_X))
+X3=$((SCREEN_X-WIDTH-BORDER*2 - $DISTANCE_TO_BORDER + OFFSET_X))
+X4=$((SCREEN_X-50 + OFFSET_X))
+Y1=$((SCREEN_Y-HEIGHT-BORDER*2 - $DISTANCE_TO_BORDER + OFFSET_Y))
+Y2=$((SCREEN_Y/2-HEIGHT/2-BORDER*2 + OFFSET_Y))
+Y3=$((DISTANCE_TO_BORDER + OFFSET_Y))
 
 # utility function to move the window
 m() {
