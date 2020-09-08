@@ -151,6 +151,6 @@ super + c
   notify-send.py a --hint boolean:deadd-notification-center:true string:type:clearPopups &&   notify-send.py a --hint boolean:deadd-notification-center:true string:type:clearInCenter
 
 
-F2
-  adb shell input text "RR"
+#F2
+#  adb shell input text "RR"
 

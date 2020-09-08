@@ -3,14 +3,11 @@
 
 # Shadow
 
-shadow = false;
-shadow-radius = 15;
-offset-x = -25;
-offset-y = -25;
-shadow-opacity = 1;
-corner_radius = 4;
-no-dnd-shadow = true;
-no-dock-shadow = true;
+shadow = true;
+shadow-radius = 25;
+shadow-offset-x = -20;
+shadow-offset-y = -20;
+shadow-opacity = 0.1;
 clear-shadow = false;
 
 # shadow-red = 0.0;
@@ -21,7 +18,9 @@ clear-shadow = false;
 # xinerama-shadow-crop = true;
 
 shadow-exclude = [
-	"name = 'Notification'",
+#	"name = 'Notification'",
+  "window_type = 'dnd'",
+  "window_type = 'dock'",
 	"class_g = 'Conky'",
 	"class_g ?= 'Notify-osd'",
 	"class_g = 'Cairo-clock'",
@@ -141,19 +140,19 @@ use-damage = true;
 
 wintypes:
 {
-	tooltip = { fade = true; shadow = false; focus = false;	};
-	normal = { shadow = false; };
+	tooltip = { fade = true; shadow = true; focus = false;	};
+	normal = { shadow = true; };
 	dock = { shadow = false; };
 	dnd = { shadow = false; };
-	popup_menu = { shadow = false; focus = true; opacity = 0.90; };
-	dropdown_menu = { shadow = false; focus = false; };
-	above = { shadow = false; };
+	popup_menu = { shadow = true; focus = true; opacity = 0.90; };
+	dropdown_menu = { shadow = true; focus = false; };
+	above = { shadow = true; };
 	splash = { shadow = false; };
 	utility = { focus = false; shadow = false; };
 	notification = { shadow = false; };
 	desktop = { shadow = false};
-	menu = { shadow = false; focus = false };
-	dialog = { shadow = false; };
+	menu = { shadow = true; focus = false };
+	dialog = { shadow = true; };
 };
 
 corner-radius = 20;
@@ -161,7 +160,9 @@ rounded-corners-exclude = [
   #"window_type = 'normal'",
   #"class_g = 'URxvt'",
   "class_g = 'Polybar'",
-  "class_g = 'rofi'",
+  #"class_g = 'rofi'",
   #"class_g = 'firefox'",
   #"class_g = 'Thunderbird'",
+  "name = 'Notification area'",
 ];
+

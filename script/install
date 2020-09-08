@@ -130,19 +130,19 @@ fi
 
 # 3. Necessary Software
 if [ $skip -le 3 ]; then
-    progs="rxvt-unicode dunst compton htop stalonetray git zsh acpi dzen2 xsel i3lock nitrogen numlockx "
+    progs="rxvt-unicode dunst htop stalonetray git zsh acpi dzen2 xsel i3lock nitrogen numlockx "
     ubuntuprogs="suckless-tools libnotify-bin libxft-dev libx11-xcb-dev fonts-font-awesome build-essential"
-    archprogs="dmenu libnotify xorg-server-common xorg-server-devel xorg-server xorg-xfd xorg-xinit xorg-util-macros xorg-setxkbmap xorg-xauth xorg-xdpyinfo xorg-xkbcomp xorg-xmodmap xorg-xprop xorg-xrandr xorg-xrdb xorg-xset xorg-xsetroot base-devel ttf-freefont adobe-source-han-sans-cn-fonts adobe-source-han-sans-jp-fonts adobe-source-han-sans-kr-fonts adobe-source-han-sans-otc-fonts adobe-source-han-sans-tw-fonts ttf-dejavu"
+    archprogs="dmenu libnotify xorg-server-common xorg-server-devel xorg-server xorg-xfd xorg-xinit xorg-util-macros xorg-setxkbmap xorg-xauth xorg-xdpyinfo xorg-xkbcomp xorg-xmodmap xorg-xprop xorg-xrandr xorg-xrdb xorg-xset xorg-xsetroot base-devel ttf-freefont adobe-source-han-sans-cn-fonts adobe-source-han-sans-jp-fonts adobe-source-han-sans-kr-fonts adobe-source-han-sans-otc-fonts adobe-source-han-sans-tw-fonts ttf-dejavu sxhkd bspwm-rounded-corners-git picom"
     info "- 3. - Packages"
     # OS-specific install
     if [ "$os" == "a" ]; then
 	if [ "$updates" == "y" ]; then
 	    info "updating the system"
-	    pacman -Syu --noconfirm --needed
+	    yay -Syu --noconfirm --needed
 	    success "updates installed"
 	fi
 	info "installing packages"
-	pacman --noconfirm --needed -S $progs $archprogs $selectedProgs
+	yay --noconfirm --needed -S $progs $archprogs $selectedProgs
 	success "packages installed"
     else
 	if [ "$updates" == "y" ]; then
