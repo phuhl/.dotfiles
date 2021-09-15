@@ -52,15 +52,22 @@ else
 fi
 
 TO_USE=""
+TO_NOT_USE=""
 while read config; do
     display=$(echo $config | awk '{print $1;}')
     for con in $CONNECTED; do
+        echo "con $con"
         if [[ $con == $display ]]; then
             TO_USE=$TO_USE$display$'\n'
         fi
     done
 done <<< "$CONFIG"
 
+for display in $CONNECTED; do
+    if [[ "$(echo $TO_USE | grep "$display" )" == "" ]]; then
+        TO_NOT_USE=$TO_NOT_USE$display$'\n'
+    fi
+done
 
 for display in $TO_USE; do
     # command="xrandr --output $display --auto"
@@ -82,6 +89,10 @@ for display in $TO_USE; do
 
 done
 
+for display in $TO_NOT_USE; do
+    eval "bspc monitor $display -r"
+done
+
 function get_order {
     order=$(bspc query -M)
     for display in $TO_USE; do
@@ -100,6 +111,12 @@ for display in $TO_USE; do
     fi
     pos=$(($pos+1))
 done
+
+if [[ DPI -gt 200 ]]; then
+    echo "--force-device-scale-factor=2" > $HOME/.config/chromium-flags.conf
+else
+    echo "--force-device-scale-factor=1" > $HOME/.config/chromium-flags.conf
+fi
 
 if [[ ! $DO_NOT_START_PANEL ]]; then
     nitrogen --restore &
