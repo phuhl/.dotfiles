@@ -32,7 +32,7 @@ bspc config window_gap              16
 bspc config split_ratio             0.42
 bspc config borderless_monocle      true
 bspc config gapless_monocle         true
-bspc config top_monocle_padding     10
+bspc config top_monocle_padding     2
 bspc config right_monocle_padding   0
 bspc config bottom_monocle_padding  0
 bspc config left_monocle_padding    0
@@ -78,6 +78,7 @@ bspc rule -a "Libreoffice" state=floating
 bspc rule -a "Io.elementary.music" state=floating
 bspc rule -a '*:Calendar' state=floating
 bspc rule -a "*:crx_pbgeoohjglglehkbdgdakjejlleecibe" state=floating
+bspc rule -a 'zoom' state=floating
 
 # above or below
 bspc rule -a ":bar" layer=below
