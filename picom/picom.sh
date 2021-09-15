@@ -20,7 +20,7 @@
 #}"
 
 
-picom --config $HOME/.config/picom/picom.conf --detect-rounded-corners --experimental-backends
+picom --config $HOME/.config/picom/picom.conf --experimental-backends --detect-rounded-corners  --corner-radius 10
 
 # --corner-radius $(expr $GDK_SCALE \* 10)
 
