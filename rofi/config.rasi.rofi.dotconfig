@@ -69,7 +69,7 @@ inputbar {
 
 
 entry {
-    background-color:               @background;
+    background-color:               transparent;
     text-color:                     @foreground;
     placeholder-color:              @foreground;
     expand:                         true;
@@ -103,7 +103,7 @@ mainbox {
 }
 
 element {
-    background-color:               @background;
+    background-color:               transparent;
     text-color:                     @foreground;
     orientation:                    vertical;
     border-radius:                  6px;
@@ -111,11 +111,15 @@ element {
 }
 
 element-icon {
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    background-color:               transparent;
     size:                           100px;
     border:                         0px;
 }
 
 element-text {
+    background-color:               transparent;
     expand:                         true;
     horizontal-align:               0.5;
     vertical-align:                 0.5;
