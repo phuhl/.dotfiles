@@ -9,7 +9,7 @@
 
 [colors]
 ;            #AARRGGBB
-background = #99ffffff
+background = #a8ffffff
 background-alt = #ffffffff
 foreground = #ff332222
 foreground-alt = #770a0800
