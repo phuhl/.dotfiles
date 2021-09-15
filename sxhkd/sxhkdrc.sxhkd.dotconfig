@@ -27,8 +27,9 @@ super + {s,f}
 super + {_,shift + }Tab
     bspc node --focus {next,prev}.local.leaf
 
-#super + {grave,Tab}
-#    bspc {node,desktop} --focus last
+# Circle desktops
+super + BackSpace
+    bspc desktop --focus last
 
 super + apostrophe
     bspc node --swap last
