@@ -11,7 +11,7 @@ cp /usr/lib/firefox/browser/omni.ja .
 unzip omni.ja
 mv omni.ja ../omni.ja_old
 
-sed -i -- 's/reserved="true"/reserved="false"/g' chrome/browser/content/browser/browser.xhtml
+sed -i -- 's/reserved="true"//g' chrome/browser/content/browser/browser.xhtml
 
 zip -r ../omni.ja ./*
 cd ../
