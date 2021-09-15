@@ -18,33 +18,24 @@ URxvt.foreground: #333
 !#282626
 ! Echte Transparanz, benötigt compositing
 !URxvt.background: rgba:0000/0000/0000/a800
-URxvt.background: rgba:ffff/ffff/ffff/a800
+URxvt.background: rgba:ffff/ffff/ffff/8a00
 !black
-URxvt.color0:  #333333
-!URxvt.color0:  #333333
-URxvt.color8:  #666666
-!URxvt.color8:  #666666
-!red
+URxvt.color0:   #3A3636
+URxvt.color8:  #424242
 URxvt.color1:  #A94952
 URxvt.color9:  #ED6975
-!green
 URxvt.color2:  #83A949
-URxvt.color10: #B8ED69
-!yellow
-URxvt.color3:  #A99F49
-URxvt.color11: #EDE169
-!blue
+URxvt.color10: #A8CD59
+URxvt.color3:  #B98
+URxvt.color11: #E97
 URxvt.color4:  #4983A9
 URxvt.color12: #69B8ED
-!magenta
-URxvt.color5:  #A94983
-URxvt.color13: #ED69B8
-!cyan
+URxvt.color5:  #894953
+URxvt.color13: #ED6998
 URxvt.color6:  #49A99F
-URxvt.color14: #69EDE1
-!white
-URxvt.color7:  #AAAAAA
-URxvt.color15: #CCCCCC
+URxvt.color14: #59CDE1
+URxvt.color7:  #999999
+URxvt.color15: #BB99AA
 
 !colors:
 !scheme: pnevma
