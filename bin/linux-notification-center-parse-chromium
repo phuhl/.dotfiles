@@ -1,0 +1,24 @@
+#!/bin/bash
+noti=""
+while read line
+do
+    noti=${noti}${line}
+done < "${1:-/dev/stdin}"
+
+body=$(echo $noti | jq '.body')
+if [[ "$body" == "\"<a href=\\\"https://web.whatsapp.com/\\\">web.whatsapp.com</a>"* ]]; then
+    isWhatsapp=1
+    body=$(echo $body | cut -c 64-)
+    img=$(echo $noti | jq '.image')
+    if [[ "$img" == "\"NamedIcon \\\""* ]]; then
+        filepath=$(echo $img | cut -c 14- | head -c -4)
+        cp $filepath /tmp/whatsappimg.png
+    fi
+fi
+
+
+if [[ "$isWhatsapp" == "1" ]]; then
+    echo "{\"modify\": {\"app-icon\": \"whatsapp-desktop\", \"app-name\": \"WhatsApp\", \"image-size\": 50, \"image\": \"file:///tmp/whatsappimg.png\", \"remove-actions\": true, \"class-name\": \"WhatsApp\", \"body\":\"${body}}, \"match\": {}}"
+else
+    echo '{"modify": {}, "match": {}}'
+fi
