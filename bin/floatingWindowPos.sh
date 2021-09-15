@@ -48,7 +48,10 @@ Y3=$((DISTANCE_TO_BORDER + OFFSET_Y))
 
 # utility function to move the window
 m() {
+    # move
     xdotool windowmove $WINDOW $1 $2;
+    # focus on window (nessecary, when moved onto different monitor)
+    bspc node -f $WINDOW
 }
 
 get_next_max() {
