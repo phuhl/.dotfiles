@@ -66,21 +66,39 @@ lock() {
 	i3lock \
 		-i "$1" \
     --screen "$display_on" \
-		--timepos="x${timex}:h${timey}" \
-		--datepos="x${datex}:h${datey}" \
-		--clock --date-align 1 --datestr "$locktext" \
-		--insidecolor=$insidecolor --ringcolor=$ringcolor --line-uses-inside \
-		--keyhlcolor=$keyhlcolor --bshlcolor=$bshlcolor --separatorcolor=$separatorcolor \
-		--insidevercolor=$insidevercolor --insidewrongcolor=$insidewrongcolor \
-		--ringvercolor=$ringvercolor --ringwrongcolor=$ringwrongcolor \
-    --indpos="x${ringx}:h${ringy}" \
-		--radius="${radius}" --ring-width="${ringwidth}" --veriftext='' --wrongtext='' \
-		--verifcolor="$verifcolor" --timecolor="$timecolor" --datecolor="$datecolor" \
-		--time-font="$font" --date-font="$font" --layout-font="$font" --verif-font="$font" \
+		--time-pos="x${timex}:h${timey}" \
+		--date-pos="x${datex}:h${datey}" \
+		--clock --date-align 1 \
+    --date-str "$locktext" \
+		--inside-color=$insidecolor \
+    --ring-color=$ringcolor --line-uses-inside \
+    --keyhl-color=$keyhlcolor \
+    --bshl-color=$bshlcolor \
+    --separator-color=$separatorcolor \
+    --insidever-color=$insidevercolor \
+    --insidewrong-color=$insidewrongcolor \
+		--ringver-color=$ringvercolor \
+    --ringwrong-color=$ringwrongcolor \
+    --ind-pos="x${ringx}:h${ringy}" \
+		--radius="${radius}" \
+    --ring-width="${ringwidth}" \
+    --verif-text='' \
+    --wrong-text='' \
+		--verif-color="$verifcolor" \
+    --time-color="$timecolor" \
+    --date-color="$datecolor" \
+		--time-font="$font" \
+    --date-font="$font" \
+    --layout-font="$font" \
+    --verif-font="$font" \
     --wrong-font="$font" \
-    --timesize=$timesize --datesize=$datesize --layoutsize=$layoutsize \
-    --verifsize=$verifsize --wrongsize=$wrongsize \
-		--noinputtext='' --force-clock $lockargs \
+    --time-size=$timesize \
+    --date-size=$datesize \
+    --layout-size=$layoutsize \
+    --verif-size=$verifsize \
+    --wrong-size=$wrongsize \
+		--noinput-text='' \
+    --force-clock $lockargs \
     --pass-media-keys
 }
 
