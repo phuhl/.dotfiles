@@ -61,7 +61,7 @@ URxvt.color15: #BB99AA
 
 !urxvt fonts:
 
-URxvt*font: xft:Monospace:size=8
+URxvt*font: xft:Monospace:size=8, xft:Segoe UI Emoji:size=10
 URxvt*boldFont: xft:Monospace:bold:size=8
 !URxvt.letterSpace: -10
 

@@ -83,7 +83,6 @@ if [ $skip -le 2 ]; then
     if [ "$os" == "a" ]; then
 	pacman -S dialog --noconfirm --needed
 	addProgsSpec="chromium Browser no \
-google-chrome Browser no \
 jre8-openjdk Java no \
 jdk8-openjdk Java no"
     else
