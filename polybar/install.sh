@@ -30,8 +30,11 @@ install_polybar () {
     cd -
     cd .tmp
     wget -O "dripicons-v2.ttf" "https://github.com/amitjakhu/dripicons/blob/master/webfont/fonts/dripicons-v2.ttf?raw=true"
-    wget -O "fontawesome-webfont.ttf" "https://github.com/FortAwesome/Font-Awesome/blob/master/fonts/fontawesome-webfont.ttf?raw=true"
-    cp "dripicons-v2.ttf" "fontawesome-webfont.ttf" /usr/share/fonts/TTF
+    echo "WARNING: Mannually install font awesome. Look into this setup script to find out how it could work"
+    # URL changed, of course
+    # wget -O "fontawesome-webfont.ttf" "https://github.com/FortAwesome/Font-Awesome/blob/master/fonts/fontawesome-webfont.ttf?raw=true"
+    # cp "fontawesome-webfont.ttf" /usr/share/fonts/TTF
+    cp "dripicons-v2.ttf" /usr/share/fonts/TTF
     fc-cache
     cd -
     sudo rm .tmp -r

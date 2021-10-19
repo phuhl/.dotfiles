@@ -9,7 +9,7 @@ init_config () {
     get_display_combination_name "$DLIST" # Returns COMB_NAME
 
     # user configuration file
-    USER_CONF="$HOME/.config/betterlockscreenrc"
+    USER_CONF="$HOME/.config/betterlockscreen/betterlockscreenrc"
     if [ -e $USER_CONF ]; then
         source "$USER_CONF"
     # default configuration options

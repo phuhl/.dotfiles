@@ -8,7 +8,8 @@ export HOME=/home/philipp
 export PATH="$PATH:/usr/bin:/usr/local/bin"
 export DISPLAY=:0
 export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
-
+export GDK_SCALE=$(sh hdpi.sh)
+export DPI=$(($GDK_SCALE * 138))
 
 DO_NOT_START_PANEL=$1
 
@@ -27,17 +28,16 @@ if [[ $NUM_OF_DISPLS > 1 ]]; then
         xrandr --addmode DP1-1-1 "2048x1152_60.00"
         xrandr --addmode DP1-1-8 "2048x1152_60.00"
 
-        xrandr --dpi 90 \
+        xrandr --dpi $DPI \
                --output DP1-1-8 --primary --mode 2048x1152_60.00  \
                --output DP1-1-1 --mode 2048x1152_60.00 --left-of DP1-1-8 \
                --output eDP1 --off 
-        export DPI=90
     else
         CONFIG=$(cat $HOME/.config/screens)
-        xrandr --dpi 276 --fb 3840x3960 \
+        xrandr --dpi $DPI --fb 3840x3960 \
                --output eDP1 --mode 3200x1800 --pos 0x0   \
                --output DP1 --mode 1920x1080 --scale 2x2 --pos 0x-2160  #  --panning 3200x3960+0+0
-        export DPI=276
+        export DPI=$(($GDK_SCALE * 138))
     fi
 else
     xrandr --output eDP1 --off
@@ -47,8 +47,8 @@ else
     xrandr --output VIRTUAL1 --off
     xrandr --output DP1-1-1 --off
     xrandr --output DP1-1-8 --off
-    xrandr --dpi 276 --fb 3200x1800 --output eDP1 --mode 3200x1800 --panning 3200x1800 
-    export DPI=276
+    xrandr --dpi $DPI --output eDP-1 --mode 1920x1080
+
 fi
 
 TO_USE=""
