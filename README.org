@@ -83,3 +83,23 @@ Everything is configured and tweaked within `~/.dotfiles`.
 I based my dotfiles on [[https://github.com/holman][Zach Holman]]s [[https://github.com/holman/dotfiles][dotfiles]] who forked [[http://github.com/ryanb][Ryan Bates]]'
 [[http://github.com/ryanb/dotfiles][dotfiles]].
 
+** Currently broken/missing:
+
+Missing installs:
+- yay -S
+  - ttf-roboto-mono ttf-roboto ttf-dejavu picom-git
+  - fontawesome somehow
+  - picom-git
+  - plank
+  - rofi
+  - xorg-xsetroot
+  - xf86-input-synaptics
+  - keeweb-desktop-bin
+  - p7zip
+  - zip
+  - python-pip
+  - notify-send.py
+  - i3lock-color
+
+
+Lot's of manual stuff, atm.
