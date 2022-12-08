@@ -1,4 +1,4 @@
 #!/bin/bash
 echo "Install updates with yay -Syu"
+#urxvt -e "yay -Syu && zsh"
 yay -Syu
-zsh

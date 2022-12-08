@@ -66,7 +66,7 @@ bspc rule -a "Emacs" state=tiled
 # Rule usage: -a, --add (<class_name>|*)[:(<instance_name>|*)[:(<name>|*)]]
 bspc rule -a "*:*:Ediff" state=floating
 bspc rule -a "Viewnior" state=floating
-bspc rule -a "Io.elementary.files" state=floating 
+bspc rule -a "Io.elementary.files" state=floating
 bspc rule -a "URxvt" state=floating
 bspc rule -a "Thunderbird:Msgcompose" state=floating
 bspc rule -a "Anki" state=floating
@@ -79,6 +79,10 @@ bspc rule -a "Io.elementary.music" state=floating
 bspc rule -a '*:Calendar' state=floating
 bspc rule -a "*:crx_pbgeoohjglglehkbdgdakjejlleecibe" state=floating
 bspc rule -a 'zoom' state=floating
+bspc rule -a 'flameshot' state=floating
+
+bspc rule -a 'Pavucontrol' state=floating
+
 
 # above or below
 bspc rule -a ":bar" layer=below

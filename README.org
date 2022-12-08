@@ -87,19 +87,53 @@ I based my dotfiles on [[https://github.com/holman][Zach Holman]]s [[https://git
 
 Missing installs:
 - yay -S
-  - ttf-roboto-mono ttf-roboto ttf-dejavu picom-git
-  - fontawesome somehow
+  - ttf-roboto-mono
+  - ttf-roboto
+  - ttf-dejavu
+  - fontawesome *somehow* (Problem)
   - picom-git
   - plank
   - rofi
   - xorg-xsetroot
-  - xf86-input-synaptics
+  - libinput
   - keeweb-desktop-bin
   - p7zip
   - zip
   - python-pip
   - notify-send.py
   - i3lock-color
-
-
+  - kpcli
+  - jq
+  - man-db
+  - pantheon-files
+  - viewnior
+  - evince
+  - tumbler (thumpnail imgs)
+  - volta-bin
+  - redshift
+  - xdotool
+  - bluez
+  - bluez-utils
+  - playerctl
+  - nerd-fonts-complete
 Lot's of manual stuff, atm.
+
+* Ansible change
+
+- URXVT-Plugins
+- Aliases
+- Path
+- Installing root scripts
+- Symlink dotfiles
+- Gitconfig
+
+
+
+- fontawesome *somehow* (Problem)
+- notify-send.py
+- bspwm-rounded-corners-git
+
+*
+*Maybe:*
+imagemagick
+darktable

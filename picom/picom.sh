@@ -20,9 +20,12 @@
 #}"
 
 
-picom --config $HOME/.config/picom/picom.conf --experimental-backends --detect-rounded-corners  --corner-radius 10
-
+picom --config $HOME/.config/picom/picom.conf
 # --corner-radius $(expr $GDK_SCALE \* 10)
 
 
 # More shaders: https://github.com/yshui/picom/wiki/Shader-Shop
+
+
+
+

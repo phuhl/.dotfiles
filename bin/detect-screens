@@ -9,46 +9,25 @@ export PATH="$PATH:/usr/bin:/usr/local/bin"
 export DISPLAY=:0
 export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 export GDK_SCALE=$(sh hdpi.sh)
-export DPI=$(($GDK_SCALE * 138))
+
+export DPI=$(bc -l <<< "$GDK_SCALE * 90" | cut -d. -f1)
+
 
 DO_NOT_START_PANEL=$1
 
 CONNECTED=$(xrandr | grep " connected" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/")
 NUM_OF_DISPLS=$(echo $CONNECTED | wc -w)
-CONFIG=$(cat $HOME/.config/screen)
+# https://blog.summercat.com/configuring-mixed-dpi-monitors-with-xrandr.html
+
 
 if [[ $NUM_OF_DISPLS > 1 ]]; then
     if [[ $NUM_OF_DISPLS > 2 ]]; then
         CONFIG=$(cat $HOME/.config/screens3)
-        # https://blog.summercat.com/configuring-mixed-dpi-monitors-with-xrandr.html
-
-        ### Add true 16:9 mode:
-        # cvt 2048 1152 60
-        xrandr --newmode "2048x1152_60.00"  197.00  2048 2184 2400 2752  1152 1155 1160 1195
-        xrandr --addmode DP1-1-1 "2048x1152_60.00"
-        xrandr --addmode DP1-1-8 "2048x1152_60.00"
-
-        xrandr --dpi $DPI \
-               --output DP1-1-8 --primary --mode 2048x1152_60.00  \
-               --output DP1-1-1 --mode 2048x1152_60.00 --left-of DP1-1-8 \
-               --output eDP1 --off 
     else
         CONFIG=$(cat $HOME/.config/screens)
-        xrandr --dpi $DPI --fb 3840x3960 \
-               --output eDP1 --mode 3200x1800 --pos 0x0   \
-               --output DP1 --mode 1920x1080 --scale 2x2 --pos 0x-2160  #  --panning 3200x3960+0+0
-        export DPI=$(($GDK_SCALE * 138))
     fi
 else
-    xrandr --output eDP1 --off
-    xrandr --output DP1 --off
-    xrandr --output DP1-1 --off
-    xrandr --output DP2 --off
-    xrandr --output VIRTUAL1 --off
-    xrandr --output DP1-1-1 --off
-    xrandr --output DP1-1-8 --off
-    xrandr --dpi $DPI --output eDP-1 --mode 1920x1080
-
+    CONFIG=$(cat $HOME/.config/screen)
 fi
 
 TO_USE=""
@@ -62,6 +41,41 @@ while read config; do
         fi
     done
 done <<< "$CONFIG"
+
+
+
+FIRST_DISP=$(echo "$TO_USE" | head -1)
+if [[ $NUM_OF_DISPLS > 1 ]]; then
+    SECOND_DISP=$(echo "$TO_USE" | head -2 | tail -1)
+    if [[ $NUM_OF_DISPLS > 2 ]]; then
+        # https://blog.summercat.com/configuring-mixed-dpi-monitors-with-xrandr.html
+        xrandr --dpi $DPI \
+               --output $SECOND_DISP --primary --mode  2560x1440  \
+               --output $FIRST_DISP --mode  2560x1440 --left-of $SECOND_DISP \
+               --output eDP-1 --off
+    else
+#        xrandr --dpi $DPI \
+#               --output eDP-1 --mode 1920x1080 \
+#               --output DP-2 --mode 3840x2160 --above eDP-1
+        echo "$FIRST_DISP $SECOND_DISP $DPI"
+        xrandr --dpi $DPI \
+               --output $FIRST_DISP --mode 1920x1080 \
+               --output $SECOND_DISP --mode 3840x2160 --left-of $FIRST_DISP
+#               --output DP-1 --mode 3840x2160 --left-of eDP-1
+
+
+        # xrandr --dpi $DPI --fb 3840x3960 \
+            # --output eDP-1 --mode 3200x1800 --pos 0x0 \
+            # --output DP2-8 --mode 1920x1080 --scale 2x2 --pos 0x-2160  #  --panning 3200x3960+0+0
+    fi
+else
+    xrandr --output DP-1 --off
+    xrandr --output DP-2-1-1 --off
+    xrandr --output DP-2-1-8 --off
+    xrandr --output DP-1-1-1 --off
+    xrandr --output DP-1-1-8 --off
+    xrandr --dpi $DPI --output eDP-1 --mode 1920x1080
+fi
 
 for display in $CONNECTED; do
     if [[ "$(echo $TO_USE | grep "$display" )" == "" ]]; then
@@ -112,7 +126,7 @@ for display in $TO_USE; do
     pos=$(($pos+1))
 done
 
-if [[ DPI -gt 200 ]]; then
+if [[ "$DPI" -gt 200 ]]; then
     echo "--force-device-scale-factor=2" > $HOME/.config/chromium-flags.conf
 else
     echo "--force-device-scale-factor=1" > $HOME/.config/chromium-flags.conf
@@ -125,7 +139,7 @@ if [[ ! $DO_NOT_START_PANEL ]]; then
     sleep 1
     first=1
 
-    export POLY_HEIGHT=$(bc -l <<< "18 / 90 * $DPI")
+    export POLY_HEIGHT=$(bc -l <<< "19 / 90 * $DPI")
     export POLY_LINE_SIZE=$(bc -l <<< "1 / 90 * $DPI")
 
     for display in $TO_USE; do
@@ -142,9 +156,10 @@ if [[ ! $DO_NOT_START_PANEL ]]; then
     plank &
 
     sleep 0.1
-    bspc config top_padding $(bc -l <<< "17 / 90 * $DPI")
+#    bspc config top_padding $(bc -l <<< "17 / 90 * $DPI")
     bspc config window_gap $(bc -l <<< "8 / 90 * $DPI")
     bspc config border_radius $(bc -l <<< "10 / 90 * $DPI")
 fi
 
 exit
+ 

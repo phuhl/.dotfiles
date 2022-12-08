@@ -88,6 +88,9 @@ super + {_,shift + }{1-9,0}
 super + m
       bspc desktop -m next
 
+# Bildschirme der aktuellen Desktops wechseln
+super + shift + m
+       bspc desktop -s last:focused
 
 #
 # wm independent hotkeys
@@ -154,3 +157,5 @@ super + c
 #F2
 #  adb shell input text "RR"
 
+Print
+  flameshot gui

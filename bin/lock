@@ -12,12 +12,14 @@ lock1 (){
 }
 
 dolock (){
+    xinput --set-prop "USB Optical Mouse" "Device Enabled" "0"
     xset dpms 10 10
     keyboardSetMine
     keyboardStatus
     # i3lock -i "$HOME/.dotfiles/misc/lock.png" -c "000000"  -n
     $DIR/betterlockscreen -l
     xset dpms 0 0
+    xinput --set-prop "USB Optical Mouse" "Device Enabled" "1"
     screensaverStatus
 }
 

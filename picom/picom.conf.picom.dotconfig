@@ -52,11 +52,11 @@ opacity-rule = [
   "80:class_g = 'Electron' && !focused",
   "100:class_g = 'Rofi'",
   "80:class_g = 'dunst'",
-  "98:window_type = 'normal' && focused",		
-  "85:window_type = 'normal' && !focused",
+  "100:window_type = 'normal' && focused",		
+  "98:window_type = 'normal' && !focused",
   "95:window_type = 'dialog'",		
   "95:window_type = 'popup_menu'",	
-	"95:window_type = 'notification'"	
+ 	"80:window_type = 'notification'"
 ];
 
 # inactive-dim = 0.2;
@@ -67,7 +67,7 @@ opacity-rule = [
 
 blur: {
     method = "dual_kawase";
-    strength = 16;
+    strength = 8;
     background = false;
     background-frame = false;
     background-fixed = true;
@@ -77,6 +77,8 @@ blur: {
 blur-background-exclude = [
   "class_g = 'Plank'",     
 	"window_type = 'desktop'",
+    "class_g = 'Polybar'",     
+
 	#"window_type = 'utility'",
 	#"window_type = 'notification'",
 	#"class_g = 'slop'",
@@ -90,7 +92,7 @@ blur-background-exclude = [
 # Fading
 
 fading = true;
-fade-delta = 6;
+fade-delta = 3;
 fade-in-step = 0.03;
 fade-out-step = 0.1;
 # no-fading-openclose = true;
@@ -142,7 +144,7 @@ wintypes:
 	dnd = { shadow = false; };
 	popup_menu = { shadow = true; focus = true; opacity = 0.90; };
 	dropdown_menu = { shadow = true; focus = false; };
-	above = { shadow = true; };
+ 	above = { shadow = true; };
 	splash = { shadow = false; };
 	utility = { focus = false; shadow = false; };
 	notification = { shadow = false; };
@@ -151,7 +153,7 @@ wintypes:
 	dialog = { shadow = true; };
 };
 
-corner-radius = 5;
+corner-radius = 10;
 rounded-corners-exclude = [
   #"window_type = 'normal'",
   #"class_g = 'URxvt'",

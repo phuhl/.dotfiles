@@ -8,7 +8,7 @@
  */
 
 configuration {
-    font:                           "Consolas 20";
+    font:                           "DejaVu 20";
     show-icons:                     true;
     icon-theme:         "Flat-Remix-Blue-Light";
     display-drun: 					"";
@@ -20,8 +20,6 @@ configuration {
 	hide-scrollbar: 				true;
 	sidebar-mode: 					false;
 	terminal: "urxvt";
-
-
 }
 
 * {
@@ -37,24 +35,25 @@ configuration {
 
 window {
     transparency:                   "real";
-    fullscreen: true;
+    fullscreen: false;
     background-color:               @background;
     text-color:                     @foreground;
     border-radius:                  10px;
-    height:                         20%;
-    width:                          20%;
+    height:                         50%;
+    width:                          50%;
     x-offset:                       0;
-    y-offset:                       0;
+    y-offset:                       25%;
     location:                       north;
     anchor:                         north;
 }
 
 prompt {
-    enabled: 						true;
+  enabled: 						true;
 	padding: 						0px 8px 0px 4px;
 	background-color: 				@background;
 	text-color: 					@foreground;
 	font:							"Consolas 16";
+  border-radius:                  10px;
 }
 
 inputbar {
@@ -96,10 +95,11 @@ listview {
 
 mainbox {
     background-color:               @background-color;
-    margin:                         20% 25% 25% 25%;
+    /*    margin:                         20% 25% 25% 25%; */
     children:                       [ inputbar, listview ];
     spacing:                        15px;
     padding:                        30px 25px 15px 25px;
+    border-radius:                  10px;
 }
 
 element {
