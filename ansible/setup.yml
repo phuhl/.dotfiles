@@ -1,0 +1,8 @@
+---
+- name: "Set up your system"
+  hosts: all
+  roles:
+    # - packages
+    # - zsh
+    # - git
+    - dotfiles

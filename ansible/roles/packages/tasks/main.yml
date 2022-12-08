@@ -1,0 +1,107 @@
+- name: Update Repo packages
+  become: yes
+  pacman:
+    update_cache: yes
+    upgrade: yes
+- name: Install Repo packages
+  become: yes
+  pacman:
+    state: present
+    name:
+      - ttf-roboto-mono
+      - ttf-roboto
+      - ttf-dejavu
+      - plank
+      - rofi
+      - xorg-xsetroot
+      - xf86-input-synaptics
+      - p7zip
+      - zip
+      - python-pip
+      - jq
+      - man-db
+      - file-roller
+      - pantheon-files
+      - viewnior
+      - evince
+      - tumbler
+      - redshift
+      - xdotool
+      - bluez
+      - bluez-utils
+      - playerctl
+      - git
+      - emacs
+      - htop
+      - screen
+      - alsa-utils
+      - firefox
+      - vlc
+      - wget
+      - rxvt-unicode
+      - htop
+      - stalonetray
+      - git
+      - zsh
+      - acpi
+      - xsel
+      - nitrogen
+      - numlockx
+      - dmenu
+      - libnotify
+      - xorg-server-common
+      - xorg-server-devel
+      - xorg-server
+      - xorg-xfd
+      - xorg-xinit
+      - xorg-util-macros
+      - xorg-setxkbmap
+      - xorg-xauth
+      - xorg-xdpyinfo
+      - xorg-xkbcomp
+      - xorg-xmodmap
+      - xorg-xprop
+      - xorg-xrandr
+      - xorg-xrdb
+      - xorg-xset
+      - xorg-xsetroot
+      - base-devel
+      - ttf-freefont
+      - adobe-source-han-sans-cn-fonts
+      - adobe-source-han-sans-jp-fonts
+      - adobe-source-han-sans-kr-fonts
+      - adobe-source-han-sans-otc-fonts
+      - adobe-source-han-sans-tw-fonts
+      - ttf-dejavu
+      - sxhkd
+- name: Setup Yay
+  block:
+    - name: Create `aur_builder` user
+      become: yes
+      ansible.builtin.user:
+        name: aur_builder
+        create_home: yes
+        group: wheel
+    - name: Allow `aur_builder` user to run `sudo pacman` without a password
+      become: yes
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers.d/11-install-aur_builder
+        line: "aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman"
+        create: yes
+        validate: "visudo -cf %s"
+    - name: Install yay
+      aur:
+        state: present
+        name: yay
+- name: Install AUR packages
+  become: yes
+  aur:
+    use: yay
+    state: present
+    name:
+      - picom-ibhagwan-git
+      - keeweb-desktop-bin
+      - i3lock-color
+      - kpcli
+      - volta-bin
+      - nerd-fonts-complete

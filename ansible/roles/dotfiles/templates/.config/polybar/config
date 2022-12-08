@@ -1,0 +1,460 @@
+;=====================================================
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;=====================================================
+
+[settings]
+pseudo-transparency = false
+
+[glyph]
+right = 
+left = 
+
+[colors]
+;            #AARRGGBB
+background = #00000000
+;background = #a8ffffff
+background-alt = #22ffffff
+
+;foreground = #ff332222
+;foreground-alt = #770a0800
+
+foreground = #aaffffff
+foreground-alt = #eeffffff
+
+primary = #FF3432
+secondary = #e60053
+alert = #bd2c40
+
+; Backup
+;background = #99343200
+;background-alt = #66333300
+;foreground = #FFA3A6
+;foreground-alt = #55FFA3A6
+;primary = #FF3432
+;secondary = #e60053
+;alert = #bd2c40
+
+[global/wm]
+;margin-top = 8
+;margin-bottom = 8
+
+[bar/secondary]
+wm-restack = bspwm
+dpi = ${env:DPI:-1}
+
+modules-left = left sep2 bspwm sep2 right
+modules-center =
+modules-right = left date right
+
+width = 100%
+height = ${env:POLY_HEIGHT:17}
+offset-x = 0
+offset-y = 0
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+overline-size = 0
+overline-color = #f00
+underline-size = ${env:POLY_LINE_SIZE:1}
+;underline-color = #00f
+
+spacing = 3
+padding-left = 2
+padding-right = 1
+module-margin-left = 0
+module-margin-right = 0
+
+border-top-size = 4
+border-top-color = ${colors.background}
+border-bottom-size = 4
+border-bottom-color = ${colors.background}
+border-left-size = 4
+border-left-color = ${colors.background}
+border-right-size = 4
+border-right-color = ${colors.background}
+
+font-0 = fixed:size=8;3
+; https://github.com/amitjakhu/dripicons
+font-1 = RobotoMono Nerd Font:size=8;2
+font-2 = RobotoMono Nerd Font:size=12;4
+
+monitor = ${env:POLYMONITOR}
+
+fixed-center = true
+
+[bar/main]
+inherit = bar/secondary
+
+modules-left = left sep2 bspwm sep2 right
+modules-center = left xwindow right
+modules-right = left cpu sep2 sep2 memory right sep left wlan eth right sep left date right sep3 powermenu sep3 battery sep3 volume sep3 notifications
+
+tray-position = right
+tray-padding = 0
+tray-background = ${colors.background}
+tray-scale = 1.0
+
+[module/xwindow]
+type = internal/xwindow
+label =  %title:0:50:...%
+;label-underline = ${colors.foreground}
+label-background = ${colors.background-alt}
+label-empty = " - "
+label-empty-background = ${colors.background-alt}
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+;format-underline = ${colors.secondary}
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+
+label-layout = %layout%
+
+label-indicator-padding = 6
+label-indicator-background = ${colors.secondary}
+label-indicator-underline = ${colors.secondary}
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+mount-1 = /home
+
+label-mounted = %mountpoint%: %percentage_free%
+
+label-unmounted = %mountpoint%: not mounted
+label-unmounted-foreground = ${colors.foreground-alt}
+
+[module/bspwm]
+type = internal/bspwm
+;ws-icon-default = x
+
+label-padding = 2
+
+label-focused = %name%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 3
+
+label-occupied = %name%
+label-occupied-padding = 3
+label-occupied-background = ${colors.background-alt}
+
+
+label-urgent = %name%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 3
+
+label-empty =
+;label-empty-foreground = ${colors.foreground-alt}
+;label-empty-padding = 2
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+label-mode = %mode%
+label-mode-padding = 6
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+label-focused = %index%
+label-focused-background = ${module/bspwm.label-focused-background}
+label-focused-underline = ${module/bspwm.label-focused-underline}
+label-focused-padding = ${module/bspwm.label-focused-padding}
+
+label-unfocused = %index%
+label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+
+label-urgent = %index%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = ${module/bspwm.label-urgent-padding}
+
+label-visible = %index%
+label-visible-foreground = ${module/bspwm.label-empty-padding}
+label-visible-padding = ${module/bspwm.label-empty-padding}
+
+[module/mpd]
+type = internal/mpd
+
+format-online = <label-song>  <icon-prev> <icon-seekb> <icon-stop> <toggle> <icon-seekf> <icon-next>  <icon-repeat> <icon-random>
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+icon-prev = 
+icon-seekb = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+icon-seekf = 
+
+icon-random = 
+icon-repeat = 
+
+toggle-on-foreground = ${colors.primary}
+toggle-off-foreground = #66
+
+[module/backlight]
+;type = internal/xbacklight
+type = internal/backlight
+card = intel_backlight
+
+format = <label> <bar>
+label = ""
+
+label-foreground = ${colors.foreground-alt}
+
+bar-width = 10
+bar-indicator = │
+bar-indicator-foreground = #ff
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = "龍 "
+format-prefix-foreground = ${colors.foreground}
+;format-underline = #f90000
+label = %percentage%%
+;format-margin = 2
+label-background = ${colors.background-alt}
+format-prefix-background = ${colors.background-alt}
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground}
+;format-underline = #4bffdc
+label = %percentage_used%%
+;format-margin = 2
+label-background = ${colors.background-alt}
+format-prefix-background = ${colors.background-alt}
+
+[module/wlan]
+type = internal/network
+interface = wlp2s0
+interval = 3.0
+
+;format-connected-margin = 2
+format-connected = <ramp-signal><label-connected>
+;format-connected-underline = #9f78e1
+;format-disconnected-underline = ${self.format-connected-underline}
+format-connected-background = ${colors.background-alt}
+format-disconnected-background = ${colors.background-alt}
+
+
+;format-disconnected-margin = 2
+label-connected = %essid%
+label-disconnected = %ifname% disconnected
+label-disconnected-foreground = ${colors.foreground}
+
+ramp-signal-0 = "直"
+ramp-signal-foreground = ${colors.foreground}
+
+
+[module/eth]
+type = internal/network
+interface = ether
+interval = 3.0
+
+;format-connected-underline = #55aa55
+format-connected-prefix = " "
+format-connected-foreground-foreground = ${colors.foreground}
+label-connected = %local_ip%
+label-background = ${colors.background-alt}
+
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground}
+
+[module/date]
+type = internal/date
+interval = 5
+
+date =
+date-alt = "%d.%m.%Y "
+
+time = %H:%M
+time-alt = %H:%M
+
+label = %date%%time%
+label-background = ${colors.background-alt}
+
+;format-margin = 2
+
+[module/volume]
+type = internal/volume
+
+format-volume = "<ramp-volume>"
+label-volume-foreground = ${colors.foreground-alt}
+
+format-muted = "婢"
+format-muted-foreground = ${colors.foreground-alt}
+
+ramp-volume-foreground = ${colors.foreground-alt}
+ramp-volume-0 = "奄"
+ramp-volume-1 = "奔"
+ramp-volume-2 = "墳"
+
+
+bar-volume-width = 10
+bar-volume-foreground-0 = #FFA3A6
+bar-volume-foreground-1 = #FFA3A6
+bar-volume-foreground-2 = #FFA3A6
+bar-volume-foreground-3 = #FFA3A6
+bar-volume-foreground-4 = #FFA3A6
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = │
+bar-volume-indicator-font = 2
+bar-volume-indicator-foreground = #ff
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 98
+
+format-charging = <ramp-capacity>⚡
+;format-charging-underline = #ffb52a
+
+format-discharging = <ramp-capacity>
+;format-discharging-underline = ${self.format-charging-underline}
+
+format-full = ""
+format-full-foreground = ${colors.foreground-alt}
+;format-full-underline = ${self.format-charging-underline}
+
+
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-5 = 
+ramp-capacity-6 = 
+ramp-capacity-7 = 
+ramp-capacity-8 = 
+
+; if ever supported
+ramp-charging-0 = 
+ramp-charging-1 = 
+ramp-charging-2 = 
+ramp-charging-3 = 
+ramp-charging-4 = 
+ramp-charging-5 = 
+
+ramp-capacity-foreground = ${colors.foreground-alt}
+ramp-charging-foreground = ${colors.foreground-alt}
+
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <ramp> <label>
+format-underline = #f50a4d
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature%
+label-warn = %temperature%
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.foreground-alt}
+
+[module/powermenu]
+type = custom/menu
+
+label-open = "襤"
+label-open-foreground = ${colors.foreground-alt}
+label-close =  cancel
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = reboot
+menu-0-0-exec = $HOME/.dotfiles/bin/lock reboot
+menu-0-1 = power off
+menu-0-1-exec = $HOME/.dotfiles/bin/lock shutdown
+menu-0-2 = sleep
+menu-0-2-exec = $HOME/.dotfiles/bin/lock suspend
+menu-0-3 = lock
+menu-0-3-exec = $HOME/.dotfiles/bin/lock lock
+
+
+[module/notifications]
+type = custom/text
+content = 
+click-left = kill -s USR1 $(pidof deadd-notification-center)
+click-right = notify-send.py a --hint boolean:deadd-notification-center:true string:type:clearPopups &&   notify-send.py a --hint boolean:deadd-notification-center:true string:type:clearInCenter
+content-foreground = ${colors.foreground-alt}
+
+[module/sep]
+type = custom/text
+content = " "
+
+content-foreground = ${colors.background}
+content-background = ${colors.background}
+format-background = ${colors.background}
+
+[module/sep2]
+type = custom/text
+content = "  "
+
+content-foreground = ${colors.background-alt}
+content-background = ${colors.background-alt}
+format-background = ${colors.background-alt}
+
+[module/sep3]
+type = custom/text
+content = "  "
+
+content-foreground = ${colors.background}
+content-background = ${colors.background}
+format-background = ${colors.background}
+
+
+[module/right]
+type = custom/text
+content-background = ${colors.background}
+content-foreground = ${colors.background-alt}
+content = ${glyph.right}
+content-font = 3
+
+[module/left]
+type = custom/text
+content-background = ${colors.background}
+content-foreground = ${colors.background-alt}
+content = ${glyph.left}
+content-font = 3

@@ -1,0 +1,79 @@
+---
+- name: Install Repo Packages
+  hosts: all
+  tasks:
+    - name: Update
+      become: yes
+      pacman:
+        update_cache: yes
+        upgrade: yes
+    - name: Install
+      become: yes
+      pacman:
+        state: present
+        name:
+          - ttf-roboto-mono
+          - ttf-roboto
+          - ttf-dejavu
+          - plank
+          - rofi
+          - xorg-xsetroot
+          - xf86-input-synaptics
+          - p7zip
+          - zip
+          - python-pip
+          - jq
+          - man-db
+          - pantheon-files
+          - viewnior
+          - evince
+          - tumbler
+          - redshift
+          - xdotool
+          - bluez
+          - bluez-utils
+          - playerctl
+          - git
+          - emacs
+          - htop
+          - screen
+          - alsa-utils
+          - firefox
+          - vlc
+          - wget
+          - rxvt-unicode
+          - htop
+          - stalonetray
+          - git
+          - zsh
+          - acpi
+          - xsel
+          - nitrogen
+          - numlockx
+          - dmenu
+          - libnotify
+          - xorg-server-common
+          - xorg-server-devel
+          - xorg-server
+          - xorg-xfd
+          - xorg-xinit
+          - xorg-util-macros
+          - xorg-setxkbmap
+          - xorg-xauth
+          - xorg-xdpyinfo
+          - xorg-xkbcomp
+          - xorg-xmodmap
+          - xorg-xprop
+          - xorg-xrandr
+          - xorg-xrdb
+          - xorg-xset
+          - xorg-xsetroot
+          - base-devel
+          - ttf-freefont
+          - adobe-source-han-sans-cn-fonts
+          - adobe-source-han-sans-jp-fonts
+          - adobe-source-han-sans-kr-fonts
+          - adobe-source-han-sans-otc-fonts
+          - adobe-source-han-sans-tw-fonts
+          - ttf-dejavu
+          - sxhkd

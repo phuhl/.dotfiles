@@ -1,0 +1,12 @@
+---
+- name: Set up zsh for user
+  hosts: all
+  become: no
+  vars:
+    the_user: "{{ ansible_user_id }}"
+  tasks:
+    - name: change user shell to zsh
+      become: yes
+      user:
+        name: "{{ the_user }}"
+        shell: /usr/bin/zsh

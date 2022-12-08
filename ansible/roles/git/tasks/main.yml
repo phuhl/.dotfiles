@@ -1,0 +1,12 @@
+- name: Setup git user
+  block:
+    - name: Check if 'git' variables are defined
+      assert:
+        that:
+          - git_authorname is defined
+          - git_authoremail is defined
+    - name: Create gitconfig.local
+      template:
+        src: "{{ role_path }}/templates/gitconfig.local"
+        dest: "{{ ansible_env.HOME }}/.gitconfig.local"
+        mode: 0644

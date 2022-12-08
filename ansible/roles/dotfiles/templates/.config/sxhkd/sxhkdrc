@@ -1,0 +1,161 @@
+# make sxhkd reload its configuration files:
+super + Escape
+      pkill -USR1 -x sxhkd
+
+super + alt + Escape
+    bspc quit
+
+#super + w
+super + shift + q
+    bspc node --close
+
+super + b
+    bspc node @/ --balance
+
+# Rotate tree
+super + ctrl + {comma,period}
+    bspc node @/ -R {270,90}
+
+# -t, --toggle floating|fullscreen|pseudo_tiled|locked|sticky|private[=on|off]
+#    Set or toggle the given state for the selected node.
+super + {s,f}
+      state={floating,fullscreen}; \
+      bspc query -N -n "focused.$\{state\}" && state=tiled; \
+      bspc node -t "$state"
+
+# Circle focus on active desktop
+super + {_,shift + }Tab
+    bspc node --focus {next,prev}.local.leaf
+
+# Circle desktops
+super + BackSpace
+    bspc desktop --focus last
+
+super + apostrophe
+    bspc node --swap last
+
+# TODO: remap, ist oben schon verwendet worden
+#super + {o,i}
+#   bspc control --record-history off; \
+#   bspc node {older,newer} -f; \
+#   bspc control --record-history on
+
+# Keine Funktion?
+#super + y
+#    bspc node -n last.manual
+
+super + {n,i,e,o}
+    bspc node -f {west,south,north,east}
+
+super + shift + {n,i,e,o}
+    dir={west,south,north,east}; \
+    bspc query -N -n "focused.tiled" && bspc node -s $dir; \
+    bspc query -N -n "focused.floating" && floatingWindowPos.sh $dir
+
+# Fenster im Kreis verschieben
+super + {comma,period}
+    bspc node @/ --circulate {backward,forward}
+
+# Desktops circlen
+super + bracket{left,right}
+    bspc desktop -f {prev,next}
+
+# Preselect
+super + ctrl + {n,i,e,o}
+    bspc node -p {west,south,north,east}
+
+# Preselection aufheben
+super + ctrl + {_,shift + }space
+    bspc {node -p cancel,desktop -c}
+
+# Fenster vergrößern
+super + alt + {n,i,e,o}
+    bspc node {@west -r -10,@south -r +10,@north -r -10,@east -r +10}
+
+# Fenster verkleinern
+super + alt + shift + {n,i,e,o}
+    bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
+
+# Feine Preselection
+super + ctrl + {1-9}
+    bspc node -o 0.{1-9}
+
+# Desktop wecheln/Fenster verschieben
+super + {_,shift + }{1-9,0}
+    bspc {desktop -f,node -d} $($HOME/.dotfiles/system/getDesktopOrder.sh | awk 'NR=={1-9,10}')
+
+# Desktop auf anderen Monitor verschieben
+super + m
+      bspc desktop -m next
+
+# Bildschirme der aktuellen Desktops wechseln
+super + shift + m
+       bspc desktop -s last:focused
+
+#
+# wm independent hotkeys
+#
+
+super + Return
+    urxvt
+
+super + space
+      rofi -no-lazy-grab -show drun -modi window,run,drun -theme $HOME/.config/rofi/config.rasi
+
+super + q
+      firefox
+#      chromium --force-device-scale-factor=2
+
+super + shift + Return
+      emacs
+
+super + ctrl + Tab
+      rofi -no-lazy-grab -show window -modi window,run,drun -theme $HOME/.config/rofi/config.rasi
+
+
+# Brightness buttons
+XF86MonBrightnessUp
+  brightness inc
+
+XF86MonBrightnessDown
+  brightness dec
+
+# Media buttons
+XF86AudioMute
+  volume mute
+
+# Volume buttons
+XF86AudioRaiseVolume
+  volume inc
+
+XF86AudioLowerVolume
+  volume dec
+
+
+XF86AudioPlay
+        playerctl play-pause
+
+XF86AudioPrev
+        playerctl previous
+
+XF86AudioNext
+        playerctl next
+
+XF86AudioStop
+        playerctl stop
+
+super + l
+      $HOME/.dotfiles/bin/lock lock
+
+super + z
+      kill -s USR1 $(pidof deadd-notification-center)
+
+super + c
+  notify-send.py a --hint boolean:deadd-notification-center:true string:type:clearPopups &&   notify-send.py a --hint boolean:deadd-notification-center:true string:type:clearInCenter
+
+
+#F2
+#  adb shell input text "RR"
+
+Print
+  flameshot gui

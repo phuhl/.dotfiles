@@ -1,0 +1,105 @@
+#! /bin/sh
+
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+export GDK_SCALE=$(sh hdpi.sh)
+### Listener for keyboard entrys
+sxhkd -m 1 &
+
+### Some Systemsetupstuff ##########################
+xset +fp /usr/share/fonts/local                    #
+xset +fp /usr/share/fonts/TTF                      #
+# Disable beep                                     #
+xset b off                                         #
+# Set Cursor if mouse                              #
+# is not over window                               #
+xsetroot -cursor_name left_ptr                     #
+# Start vmware-user if this is a vm                #
+if [ $(cat ~/.isvm | grep -c true) -ge 1 ]; then   #
+    vmware-user                                    #
+fi                                                 #
+####################################################
+
+### Bspwm setup
+# appearance
+bspc config border_width            0
+# bspc config border_radius           20
+# border_radius: feature of fork, won't come upstream
+# alternative: picom with border radius
+
+bspc config top_padding             38
+bspc config window_gap              16
+bspc config split_ratio             0.42
+bspc config borderless_monocle      true
+bspc config gapless_monocle         true
+bspc config top_monocle_padding     2
+bspc config right_monocle_padding   0
+bspc config bottom_monocle_padding  0
+bspc config left_monocle_padding    0
+bspc config single_monocle          true
+bspc config normal_border_color     "#343200"
+bspc config focused_border_color    "#EEFFEE"
+
+# behaviour
+bspc config pointer_modifier        mod4
+bspc config pointer_action1         move
+bspc config pointer_action2         resize_side
+bspc config focus_follows_pointer   true
+bspc config pointer_follows_focus   true
+bspc config click_to_focus          true
+
+### Detect screens
+$HOME/.dotfiles/bin/detect-screens
+bspc config border_radius           10 # again here, maybe it solves the problem of not working after reboot
+
+### Bspwm rules for progs (use xprop for getting class/window name)
+
+# unused
+#bspc rule -a Gimp desktop=^2 follow=on floating=on
+#bspc rule -a Chromium desktop=^8
+#bspc rule -a Firefox desktop=^7
+
+# emacs needs special treatment
+bspc rule -a "Emacs" state=tiled
+
+# floating
+# Rule usage: -a, --add (<class_name>|*)[:(<instance_name>|*)[:(<name>|*)]]
+bspc rule -a "*:*:Ediff" state=floating
+bspc rule -a "Viewnior" state=floating
+bspc rule -a "Io.elementary.files" state=floating
+bspc rule -a "File-roller" state=floating
+bspc rule -a "URxvt" state=floating
+bspc rule -a "Thunderbird:Msgcompose" state=floating
+bspc rule -a "Anki" state=floating
+bspc rule -a "vlc" state=floating
+bspc rule -a "KeeWeb" state=floating
+bspc rule -a "Evince" state=floating
+bspc rule -a "VirtualBox Manager" state=floating
+bspc rule -a "Libreoffice" state=floating
+bspc rule -a "Io.elementary.music" state=floating
+bspc rule -a '*:Calendar' state=floating
+bspc rule -a "*:crx_pbgeoohjglglehkbdgdakjejlleecibe" state=floating
+bspc rule -a 'zoom' state=floating
+
+bspc rule -a 'Pavucontrol' state=floating
+
+
+# above or below
+bspc rule -a ":bar" layer=below
+bspc rule -a "Plank" layer=above manage=off border=off
+
+# x on desktop y
+bspc rule -a Spotify desktop=^9
+bspc rule -a crx_hnpfjngllnobngcgfapefoaidbinmjnm:Whatsapp desktop=^0
+bspc rule -a :crx_behehkmaacfijackbkoidojkfhoecefo desktop=^0
+
+# optional external rules
+bspc config external_rules_command $HOME/.dotfiles/bspwm/external-rules.sh
+
+### Desktoprelated stuff
+exec $HOME/.dotfiles/system/launch_linux_desktop.sh &
+
+### Best place to put your autostarts
+exec $HOME/.dotfiles/system/autostart.sh &
+
+wait

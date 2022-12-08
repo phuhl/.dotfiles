@@ -1,0 +1,5 @@
+[user]
+        name = {{ git_authorname }}
+        email = {{ git_authoremail }}
+[credential]
+        helper = cache
