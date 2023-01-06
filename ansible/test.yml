@@ -1,6 +1,0 @@
----
-- name: Setup Test
-  hosts: all
-  tasks:
-    - name: Display Host Variables
-      debug: var=test_var

@@ -1,3 +1,0 @@
----
-- name: Display Host Variables
-  debug: var=test_var

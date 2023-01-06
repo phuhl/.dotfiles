@@ -1,0 +1,136 @@
+base-packages:
+  - state: present
+    names:
+    # Build basics
+    - base-devel
+
+    # Services
+    - xf86-input-synaptics
+    - bluez     # Bluetooth deamon
+    - bluez-utils
+    - libnotify
+
+    # Fonts
+    - ttf-freefont
+    - ttf-dejavu
+    - ttf-roboto-mono
+    - ttf-roboto
+    - adobe-source-han-sans-cn-fonts
+    - adobe-source-han-sans-jp-fonts
+    - adobe-source-han-sans-kr-fonts
+    - adobe-source-han-sans-otc-fonts
+    - adobe-source-han-sans-tw-fonts
+
+    # CLI Tools
+    - p7zip
+    - zip
+    - python-pip
+    - jq
+    - man-db
+    - git
+    - htop
+    - screen
+    - alsa-utils
+    - zsh
+    - acpi
+    - playerctl # Multi media controls
+    - hunspell
+    - hunspell-de
+    - hunspell-en_us
+
+    # Desktop tools
+    - flameshot
+    - evince
+    - tumbler   # Thumbnail service via D-Bus
+    - firefox
+    - viewnior
+    - torbrowser-launcher
+
+    # Configuration tools
+    - v4l-utils      # Webcam setup tool
+
+  - state: present
+    aur: true
+    names:
+    - keeweb-desktop-bin
+    - kpcli
+    - volta-bin
+    - nerd-fonts-complete
+
+
+wayland-packages:
+  - state: absent
+    names:
+      - emacs
+      - vlc
+  - state: present
+    aur: true
+    names:
+      # Wayland version of tools
+      - emacs-gcc-wayland-devel-bin
+      - vlc-git
+
+      # Wayland specific
+      - alacritty
+
+xserver-packages:
+  - state: present
+    names:
+      # X version of tools
+      - emacs
+      - vlc
+
+      # X specific
+      - plank
+      - pantheon-files # Elementary file manager
+      - file-roller    # Gnome archive manager
+      - redshift
+      - rxvt-unicode
+      - stalonetray
+      - numlockx
+      - dmenu
+      - nitrogen       # Background images
+      - xsel
+      - xorg-server-common
+      - xorg-server-devel
+      - xorg-server
+      - xorg-xfd
+      - xorg-xinit
+      - xorg-util-macros
+      - xorg-setxkbmap
+      - xorg-xauth
+      - xorg-xdpyinfo
+      - xorg-xkbcomp
+      - xorg-xmodmap
+      - xorg-xprop
+      - xorg-xrandr
+      - xorg-xrdb
+      - xorg-xset
+      - xorg-xsetroot
+  - state: present
+    aur: true
+    names:
+      - picom-ibhagwan-git
+      - i3lock-color
+
+
+# For bspwm, etc:
+# on wayland
+#  - aur: true
+#    state: present
+#    names:
+#      - rofi-lbonn-wayland-git
+#      - nerd-fonts-complete
+#
+# on x server
+#  - state: present
+#    names:
+#      - rofi
+#  - aur: true
+#    state: present
+#    names:
+#      - picom-ibhagwan-git
+#      - i3lock-color
+#      - nerd-fonts-complete
+
+packages: "{{base-packages}}"

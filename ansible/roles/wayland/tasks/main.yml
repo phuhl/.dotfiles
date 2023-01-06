@@ -1,0 +1,19 @@
+
+
+- name: Create config directories
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME}}/{{ item.path }}"
+    state: directory
+    mode: "{{ item.mode }}"
+  with_community.general.filetree: "{{ role_path }}/templates/"
+  when: item.state == 'directory'
+
+- name: Create config symlinks
+  ansible.builtin.file:
+    src: "{{ item.src }}"
+    path: "{{ ansible_env.HOME}}/{{ item.path }}"
+    state: link
+    follow: false # avoid corrupting target files if the link already exists
+    mode: "{{ item.mode }}"
+  with_community.general.filetree: "{{ role_path }}/templates/"
+  when: item.state == 'file'

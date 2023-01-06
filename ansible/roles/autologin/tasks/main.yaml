@@ -1,0 +1,12 @@
+---
+- name: Create directory
+  become: yes
+  ansible.builtin.file:
+    path: /etc/systemd/system/getty@tty1.service.d
+    state: directory
+
+- name: Add override config
+  become: yes
+  template:
+    src: "{{ role_path }}/templates/override.conf.j2"
+    dest: /etc/systemd/system/getty@tty1.service.d/override.conf

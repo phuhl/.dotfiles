@@ -1,5 +1,6 @@
 # shortcut to this dotfiles path is $ZSH
-export ZSH=$HOME/.dotfiles
+export ZSH=$HOME/.config/zsh
+export DOTFILES_BIN=$HOME/.dotfiles/bin
 
 # your project folder that we can `c [tab]` to
 export PROJECTS=~/git
@@ -22,8 +23,8 @@ do
   source $file
 done
 
-# load everything but the path and completion files
-for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}
+# load everything but the path, completion, and autostart files
+for file in ${${${config_files:#*/path.zsh}:#*/completion.zsh}:#*/autostart.zsh}
 do
   source $file
 done
@@ -38,8 +39,11 @@ do
   source $file
 done
 
-unset config_files
+# load the autostart file
+for file in ${(M)config_files:#*/autostart.zsh}
+do
+  source $file
+done
 
-if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
-    exec startx
-fi
+
+unset config_files

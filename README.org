@@ -3,37 +3,65 @@
 
 * dotfiles
 
-** Topical
+** Method
 
-Everything's built around topic areas. If you're adding a new area to
-your forked dotfiles — say, "Java" — you can simply add a `java`
-directory and put files in there. 
+These dotfiles are organized as [[https://www.ansible.com/][ansible]] roles. Each role is
+responsible for one aspect of the setup. This could be:
+- a program to install and configure (i.e. KDE)
+- a system setting to change (i.e. autologin)
 
-When you run =script/bootstrap=
-- anything with an extension of =.zsh= will get automatically included
-  into your shell.
-- anything with an extension of =.symlink= will get symlinked without
-  file extension into =$HOME=
-- a file =<folder>/<name>.dotconf= will get symlinked to
-  =$HOME/.config/<folder>/<name>=
-- the folders =bin= and =system= will be added to the =path= variable
+There are two special roles, that deserve to be pointed out:
+- packages :: Installs an AUR-helper (yay) and a lot of
+  packages. 
+  - These packages can be defined via the file in the
+    packages' roles =defaults=-folder.
+  - This role can be reused in other roles to install needed
+    packages. (i.e. see role KDE).
+- dotfiles :: Installs all dotfiles that are not installed by a
+  dedicated role. Many programs are just installed and then configured
+  by a dotfile. To spare me of creating a role for each program, the
+  dotfiles role installs all these dotfiles in one go. The dotfiles in
+  question are installed by sym-linking them from the ansible template
+  into their desired folders. All dotfiles for this are found in the
+  dotfiles' roles =templates=-folder.
 
-When you run =script/install=
-- you will be asked which =install.sh= files should be executed. The
-  selected ones will be executed with an argument =a= or =u=  which
-  classifies if the script should be run for an Arch-Linux or
-  Ubuntu/Debian environment.
+
+There's a few special folders/files in the hierarchy.
+
+- =bin/= :: Anything in `bin/` will get added to your `$PATH` and be made
+  available everywhere.
+
+
+When installing a program, you can symlink files into the =.config/zsh=
+folder to update the path, environment variables, etc. For this,
+ideally, you create a subdirectory for the application, the config is
+for. The following behavior is honored by the zsh config:
+
+- =.config/zsh/**/*.zsh= :: Any files ending in `.zsh` get loaded into your
+  environment.
+- =.config/zsh/**/path.zsh= :: Any file named `path.zsh` is loaded first and is
+  expected to setup `$PATH` or similar.
+- =.config/zsh/**/completion.zsh= :: Any file named `completion.zsh` is loaded
+  late and is expected to setup autocomplete.
+- =.config/zsh/autostart.zsh= :: This file will be loaded last (if
+  present) and can be used to start software on terminal
+  start. I.e. the following snippet starts KDE if the user is on TTY1
+  and no display session is running:
+  #+BEGIN_SRC sh
+  if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
+    exec startplasma-wayland
+  fi
+  #+END_SRC
+  Make sure to keep the if, if you don't want the auto-start-command
+  to run on every zsh session 😉.
 
 ** What's inside
 
-- Windowmanager: [[https://github.com/baskerville/bspwm][bspwm]]
-- Compositer: [[https://github.com/tryone144/compton][Compton]] (Tyron-git with rounded corners)
-- Notification daemon: [[https://github.com/phuhl/linux_notification_center][linux-notification-center]]
-- Statusbar: [[https://github.com/jaagr/polybar][Polybar]]
-- Dock: [[https://launchpad.net/plank][Plank]]
-- Lots of stuff
+Currently, Wayland with KDE and a lot of software. I just made the
+switch to Wayland and am not in the mood to build up a complete system
+basically from scratch 🙈
 
-*** Screenshots
+*** Screenshots of former setup
 
 Some applications, notification:
 [[file:README.org.img/org_20181125_131724_ZI9o09.jpg]]
@@ -44,96 +72,79 @@ Notification Center opened:
 Emacs as an only window on a desktop in monocle view:
 [[file:README.org.img/org_20181203_164817_XTvKHh.jpg]]
 
-** Components
-
-There's a few special files in the hierarchy.
-
-- =bin/= :: Anything in `bin/` will get added to your `$PATH` and be made
-  available everywhere.
-- =topic/*.zsh= :: Any files ending in `.zsh` get loaded into your
-  environment.
-- =topic/path.zsh= :: Any file named `path.zsh` is loaded first and is
-  expected to setup `$PATH` or similar.
-- =topic/completion.zsh= :: Any file named `completion.zsh` is loaded
-  last and is expected to setup autocomplete.
-- =topic/*.symlink= :: Any files ending in `*.symlink` get symlinked into
-  your `$HOME`. This is so you can keep all of those versioned in your dotfiles
-  but still keep those autoloaded files in your home directory. These get
-  symlinked in when you run `script/bootstrap`.
-- =topic/(*).(*).dotconfig= :: Any file with name \1 is symlinked to .config/\2
-
 ** Install
+
+These dotfiles are installed using ansible. To install them, first
+install ansible (=pacman -S ansible=).
+
 
 Run this:
 
 #+BEGIN_SRC sh
 git clone https://github.com/phuhl/.dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
-./script/bootstrap
-sudo ./script/install
-sudo chsh <username> /bin/zsh
+pacman -S ansible
+ansible-playbook setup.yml -i inventory -K
 #reboot
 #+END_SRC
 
-This will symlink the appropriate files in `.dotfiles` to your home directory.
-Everything is configured and tweaked within `~/.dotfiles`.
 
-** Thanks
+** Currently missing:
 
-I based my dotfiles on [[https://github.com/holman][Zach Holman]]s [[https://github.com/holman/dotfiles][dotfiles]] who forked [[http://github.com/ryanb][Ryan Bates]]'
-[[http://github.com/ryanb/dotfiles][dotfiles]].
-
-** Currently broken/missing:
-
-Missing installs:
-- yay -S
-  - ttf-roboto-mono
-  - ttf-roboto
-  - ttf-dejavu
-  - fontawesome *somehow* (Problem)
-  - picom-git
-  - plank
-  - rofi
-  - xorg-xsetroot
-  - libinput
-  - keeweb-desktop-bin
-  - p7zip
-  - zip
-  - python-pip
+- Missing installs:
   - notify-send.py
-  - i3lock-color
-  - kpcli
-  - jq
-  - man-db
-  - pantheon-files
-  - viewnior
-  - evince
-  - tumbler (thumpnail imgs)
-  - volta-bin
-  - redshift
-  - xdotool
-  - bluez
-  - bluez-utils
-  - playerctl
-  - nerd-fonts-complete
-Lot's of manual stuff, atm.
+- Installing root scripts (still needed?)
+    
+*** TODO Wayland: Non Gtk/Gnome compositors
 
-* Ansible change
+Add a rofi role:
 
-- URXVT-Plugins
-- Aliases
-- Path
-- Installing root scripts
-- Symlink dotfiles
-- Gitconfig
+#+BEGIN_SRC yaml
+- name: Update Repo packages
+  become: yes
+  pacman:
+    update_cache: yes
+    upgrade: yes
+
+- name: Remove AUR packages
+  become: yes
+  pacman:
+    state: removed
+    name:
+      - rofi
+
+- name: Install AUR packages
+  become: yes
+  aur:
+    use: yay
+    state: present
+    name:
+      #      - rofi-lbonn-wayland
+      - rofi-lbonn-wayland-git
+      # rofi-lbonn-wayland-git while the other one does not work
+#+END_SRC
 
 
+Create a role for the compositor in question. Let it also execute the
+rofi role.
 
-- fontawesome *somehow* (Problem)
-- notify-send.py
+*** X Desktop
+
 - bspwm-rounded-corners-git
+  - For java on bspwm: =export _JAVA_AWT_WM_NONREPARENTING=1=
+- URXVT-Plugins
+- betterlockscreen
+- compton
+- deadd-notification-system
+- picom launch script
+- polybar
 
-*
-*Maybe:*
-imagemagick
-darktable
+*** All systems
+
+- crontab
+- hosts
+- ssh-key
+- ssh
+- ssh-agent
+- node, npm, volta?
+- Firefox post install scripts via [[https://wiki.archlinux.org/title/Pacman#Hooks][Pacman hooks]]?

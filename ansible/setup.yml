@@ -2,7 +2,10 @@
 - name: "Set up your system"
   hosts: all
   roles:
-    # - packages
-    # - zsh
-    # - git
+    - zsh
+    - autologin
+    - packages
+    - git
     - dotfiles
+    - kde
+    - rslsync

@@ -1,2 +1,7 @@
+# Display Server
+# either "wayland", "xserver", "none"
+display_server: wayland
+
+# Git
 git_authorname: phuhl
 git_authoremail: git@ph-uhl.com
