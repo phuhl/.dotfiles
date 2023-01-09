@@ -144,7 +144,5 @@ rofi role.
 - crontab
 - hosts
 - ssh-key
-- ssh
-- ssh-agent
 - node, npm, volta?
 - Firefox post install scripts via [[https://wiki.archlinux.org/title/Pacman#Hooks][Pacman hooks]]?
