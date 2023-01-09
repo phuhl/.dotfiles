@@ -49,6 +49,10 @@ base-packages:
     # Configuration tools
     - v4l-utils      # Webcam setup tool
 
+    # File systems
+    - exfat-utils
+    - ntfs-3g
+
   - state: present
     aur: true
     names:
