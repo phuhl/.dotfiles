@@ -2,6 +2,10 @@
 # GTK environment
 #
 
+# Keyboard layout
+export XKB_DEFAULT_LAYOUT=us
+export XKB_DEFAULT_VARIANT=colemak
+
 #export GDK_BACKEND=wayland # May cause problems with some xorg applications
 export TDESKTOP_DISABLE_GTK_INTEGRATION=1
 export CLUTTER_BACKEND=wayland
