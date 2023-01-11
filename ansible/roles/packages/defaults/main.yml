@@ -1,66 +1,71 @@
 base-packages:
   - state: present
     names:
-    # Build basics
-    - base-devel
+      # Build basics
+      - base-devel
 
-    # Services
-    - xf86-input-synaptics
-    - bluez     # Bluetooth deamon
-    - bluez-utils
-    - libnotify
+      # Services
+      - xf86-input-synaptics
+      - bluez # Bluetooth deamon
+      - bluez-utils
+      - libnotify
 
-    # Fonts
-    - ttf-freefont
-    - ttf-dejavu
-    - ttf-roboto-mono
-    - ttf-roboto
-    - adobe-source-han-sans-cn-fonts
-    - adobe-source-han-sans-jp-fonts
-    - adobe-source-han-sans-kr-fonts
-    - adobe-source-han-sans-otc-fonts
-    - adobe-source-han-sans-tw-fonts
+      # Audio drivers
+      - pipewire
+      - pipewire-alsa
+      - wireplumber
+      - pipewire-pulse
 
-    # CLI Tools
-    - p7zip
-    - zip
-    - python-pip
-    - jq
-    - man-db
-    - git
-    - htop
-    - screen
-    - alsa-utils
-    - zsh
-    - acpi
-    - playerctl # Multi media controls
-    - hunspell
-    - hunspell-de
-    - hunspell-en_us
+      # Fonts
+      - ttf-freefont
+      - ttf-dejavu
+      - ttf-roboto-mono
+      - ttf-roboto
+      - adobe-source-han-sans-cn-fonts
+      - adobe-source-han-sans-jp-fonts
+      - adobe-source-han-sans-kr-fonts
+      - adobe-source-han-sans-otc-fonts
+      - adobe-source-han-sans-tw-fonts
 
-    # Desktop tools
-    - flameshot
-    - evince
-    - tumbler   # Thumbnail service via D-Bus
-    - firefox
-    - viewnior
-    - torbrowser-launcher
+      # CLI Tools
+      - p7zip
+      - zip
+      - python-pip
+      - jq
+      - man-db
+      - git
+      - htop
+      - screen
+      - alsa-utils
+      - zsh
+      - acpi
+      - playerctl # Multi media controls
+      - hunspell
+      - hunspell-de
+      - hunspell-en_us
 
-    # Configuration tools
-    - v4l-utils      # Webcam setup tool
+      # Desktop tools
+      - flameshot
+      - evince
+      - tumbler # Thumbnail service via D-Bus
+      - firefox
+      - viewnior
+      - torbrowser-launcher
 
-    # File systems
-    - exfat-utils
-    - ntfs-3g
+      # Configuration tools
+      - v4l-utils # Webcam setup tool
+
+      # File systems
+      - exfat-utils
+      - ntfs-3g
 
   - state: present
     aur: true
     names:
-    - keeweb-desktop-bin
-    - kpcli
-    - volta-bin
-    - nerd-fonts-complete
-
+      - keeweb-desktop-bin
+      - kpcli
+      - volta-bin
+      - nerd-fonts-complete
 
 wayland-packages:
   - state: absent
@@ -87,13 +92,13 @@ xserver-packages:
       # X specific
       - plank
       - pantheon-files # Elementary file manager
-      - file-roller    # Gnome archive manager
+      - file-roller # Gnome archive manager
       - redshift
       - rxvt-unicode
       - stalonetray
       - numlockx
       - dmenu
-      - nitrogen       # Background images
+      - nitrogen # Background images
       - xsel
       - xorg-server-common
       - xorg-server-devel
@@ -116,7 +121,6 @@ xserver-packages:
     names:
       - picom-ibhagwan-git
       - i3lock-color
-
 
 # For bspwm, etc:
 # on wayland
