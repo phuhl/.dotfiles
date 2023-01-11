@@ -94,40 +94,9 @@ ansible-playbook setup.yml -i inventory -K
 - Missing installs:
   - notify-send.py
 - Installing root scripts (still needed?)
+- Improvement: If rofi is used by multiple setups, create own role
+  (currently it is part of river)
     
-*** TODO Wayland: Non Gtk/Gnome compositors
-
-Add a rofi role:
-
-#+BEGIN_SRC yaml
-- name: Update Repo packages
-  become: yes
-  pacman:
-    update_cache: yes
-    upgrade: yes
-
-- name: Remove AUR packages
-  become: yes
-  pacman:
-    state: removed
-    name:
-      - rofi
-
-- name: Install AUR packages
-  become: yes
-  aur:
-    use: yay
-    state: present
-    name:
-      #      - rofi-lbonn-wayland
-      - rofi-lbonn-wayland-git
-      # rofi-lbonn-wayland-git while the other one does not work
-#+END_SRC
-
-
-Create a role for the compositor in question. Let it also execute the
-rofi role.
-
 *** X Desktop
 
 - bspwm-rounded-corners-git
@@ -138,6 +107,7 @@ rofi role.
 - deadd-notification-system
 - picom launch script
 - polybar
+- rofi
 
 *** All systems
 
@@ -145,4 +115,7 @@ rofi role.
 - hosts
 - ssh-key
 - node, npm, volta?
+  - npm: .npmrc has /home/philipp in it
+  - volta: =yay -S volta-bin= (aur), needs to run =volta setup=
 - Firefox post install scripts via [[https://wiki.archlinux.org/title/Pacman#Hooks][Pacman hooks]]?
+- Firefox add-ons?

@@ -2,11 +2,19 @@
 - name: "Set up your system"
   hosts: all
   roles:
+    # Base setup:
     - zsh
     - autologin
     - packages
     - git
     - dotfiles
-    - kde
     - rslsync
     - ssh
+
+    # Window managers. Choose one:
+    # - kde
+    - river
+
+    # Implicitly called, should not be needed explicitly, just here
+    # for completion or when I want to run this role manually.
+    # - wayland

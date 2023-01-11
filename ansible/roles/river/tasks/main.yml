@@ -1,0 +1,41 @@
+- name: Create directories
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME}}/{{ item.path }}"
+    state: directory
+  with_community.general.filetree: "{{ role_path }}/templates/"
+  when: item.state == 'directory'
+
+- name: Create symlinks
+  ansible.builtin.file:
+    src: "{{ item.src }}"
+    path: "{{ ansible_env.HOME}}/{{ item.path }}"
+    state: link
+    follow: false #         avoid corrupting target files if the link already exists
+  with_community.general.filetree: "{{ role_path }}/templates/"
+  when: item.state == 'file'
+
+- name: Install wayland
+  ansible.builtin.include_role:
+    name: wayland
+- name: Install River packages
+  ansible.builtin.include_role:
+    name: packages
+  vars:
+    packages:
+      - state: present
+        names:
+          - brightnessctl # Control brightness from CLI
+          - swaylock #      Lock screen
+          - swayidle #      Deamon to handle screen timeout
+      - state: removed
+        names:
+          - rofi
+      - state: present
+        aur: true
+        names:
+          - river #         The WM
+          - way-displays #  Configure monitor setup
+          - swww #          Background images
+          - wlopm #         Output manger (turn screens on/off)
+          - rofi-lbonn-wayland-git
+          # - rofi-lbonn-wayland # rofi-lbonn-wayland-git while the other one does not work
