@@ -11,6 +11,7 @@ base-packages:
       - libnotify
 
       # Audio drivers
+      # https://wiki.archlinux.org/title/PipeWire
       - pipewire
       - pipewire-alsa
       - wireplumber

@@ -1,5 +1,3 @@
-
-
 - name: Create config directories
   ansible.builtin.file:
     path: "{{ ansible_env.HOME}}/{{ item.path }}"
@@ -17,3 +15,12 @@
     mode: "{{ item.mode }}"
   with_community.general.filetree: "{{ role_path }}/templates/"
   when: item.state == 'file'
+
+- name: Install packages
+  ansible.builtin.include_role:
+    name: packages
+  vars:
+    packages:
+      - state: present
+        names:
+          - wl-clipboard
