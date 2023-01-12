@@ -20,7 +20,4 @@
   ansible.builtin.include_role:
     name: packages
   vars:
-    packages:
-      - state: present
-        names:
-          - wl-clipboard
+    packages: "{{ wayland_packages }}"
