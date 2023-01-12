@@ -1,0 +1,25 @@
+#!/bin/bash
+
+PWNAME="$1"
+PWPATH=$(jq -r ".[\"$PWNAME\"].path" documents/exportkeys-data.json )
+
+if [[ "$PWPATH" == "null" ]]; then
+    echo "No pw found"
+    exit
+fi
+
+
+COMMAND="\"show -f $PWPATH\""
+echo "Enter PW (hidden):"
+#kpcli --readonly --kdb="/home/philipp/documents/MyPws.kdbx" --command "$COMMAND"
+pwoutput=$(kpcli --readonly --kdb="/home/philipp/documents/MyPws.kdbx" --command "show -f $PWPATH")
+
+re="export ([^ ]*).*export ([^ ]*)"
+if [[ $pwoutput =~ $re ]]; then
+    export ${BASH_REMATCH[1]};
+    export ${BASH_REMATCH[2]};
+    export HASKEY="$PWNAME"
+    zsh
+fi
+
+
