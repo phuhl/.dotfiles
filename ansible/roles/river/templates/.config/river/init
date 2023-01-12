@@ -171,12 +171,12 @@ riverctl set-cursor-warp on-focus-change
 riverctl default-layout rivertile
 rivertile -view-padding 6 -outer-padding 6 &
 
-# Background img
-swww init &
-swww img ~/images/downloads/wallpapers/19513k34grf1ejpg.jpg
-
 # Display layout manager
 way-displays &
+
+# Background img
+swww init &
+sleep 3 && swww img ~/images/downloads/wallpapers/19513k34grf1ejpg.jpg &
 
 # Lock screen when idle
 # If annoying, maybe install and look into: sway-audio-idle-inhibit
