@@ -1,6 +1,6 @@
 # Display Server
-# either "wayland", "xserver", "none"
-display_server: wayland
+# either bspwm, river, kde
+window_manager: bspwm
 
 # Git
 git_authorname: phuhl

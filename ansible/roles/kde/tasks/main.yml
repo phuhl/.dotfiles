@@ -1,25 +1,27 @@
-
-- name: Create directory
-  ansible.builtin.file:
-    path: "{{ ansible_env.HOME}}/.config/zsh"
-    state: directory
-- name: Create symlinks
-  ansible.builtin.file:
-    src: "{{ role_path }}/templates/autostart.zsh"
-    path: "{{ ansible_env.HOME}}/.config/zsh/autostart.zsh"
-    state: link
-    follow: false # avoid corrupting target files if the link already exists
-- name: Install wayland
-  ansible.builtin.include_role:
-    name: wayland
-- name: Install Kde
-  ansible.builtin.include_role:
-    name: packages
-  vars:
-    packages:
-      - state: present
-        names:
-          - plasma
-          - plasma-wayland-session
-          - ttf-liberation
-          - ttf-dejavu
+- name: Install KDE?
+  when: window_manager == "kde"
+  block:
+    - name: Create directory
+      ansible.builtin.file:
+        path: "{{ ansible_env.HOME}}/.config/zsh"
+        state: directory
+    - name: Create symlinks
+      ansible.builtin.file:
+        src: "{{ role_path }}/templates/autostart.zsh"
+        path: "{{ ansible_env.HOME}}/.config/zsh/autostart.zsh"
+        state: link
+        follow: false # avoid corrupting target files if the link already exists
+    - name: Install wayland
+      ansible.builtin.include_role:
+        name: wayland
+    - name: Install Kde
+      ansible.builtin.include_role:
+        name: packages
+      vars:
+        packages:
+          - state: present
+            names:
+              - plasma
+              - plasma-wayland-session
+              - ttf-liberation
+              - ttf-dejavu

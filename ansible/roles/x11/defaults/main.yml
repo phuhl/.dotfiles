@@ -1,0 +1,32 @@
+xserver_packages:
+  - state: absent
+    names:
+      - emacs-gcc-wayland-devel-bin
+      - vlc-git
+
+  - state: present
+    names:
+      # Tools
+      - emacs
+      - vlc
+      - redshift
+      - rxvt-unicode
+
+      # X server tools
+      - xsel
+      - xorg-server-common
+      - xorg-server-devel
+      - xorg-server
+      - xorg-xfd
+      - xorg-xinit
+      - xorg-util-macros
+      - xorg-setxkbmap
+      - xorg-xauth
+      - xorg-xdpyinfo
+      - xorg-xkbcomp
+      - xorg-xmodmap
+      - xorg-xprop
+      - xorg-xrandr
+      - xorg-xrdb
+      - xorg-xset
+      - xorg-xsetroot
