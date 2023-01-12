@@ -1,6 +1,6 @@
 # Display Server
 # either bspwm, river, kde
-window_manager: bspwm
+window_manager: river
 
 # Git
 git_authorname: phuhl
