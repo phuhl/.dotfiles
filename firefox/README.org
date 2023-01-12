@@ -12,13 +12,12 @@ Hence, here what I need in text form:
 
 * Extensions
 
-- Bookmarklet context menu
-- HTTPS everywhere
-- Simple tab groups
-- uBlock Origin
-- uMatrix
-- Tampermonkey
-
+- [[https://addons.mozilla.org/en-US/firefox/addon/bookmarklets-context-menu/][Bookmarklets context menu]]
+- [[https://addons.mozilla.org/en-US/firefox/addon/simple-tab-groups/][Simple tab groups]]
+- [[https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/][uBlock Origin]]
+- [[https://addons.mozilla.org/en-US/firefox/addon/umatrix/][uMatrix]]
+- [[https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/][Tampermonkey]]
+- [[https://addons.mozilla.org/en-US/firefox/addon/vimium-ff/][Vimium]]
 
 ** uBlock Origin
 
@@ -243,4 +242,8 @@ map <a-F> moveTabRight
 # Similar to Emacs help commands.
 map <c-h> showHelp
 #+END_EXAMPLE
+
+** HTTPS only mode
+
+- [X] Settings -> Privacy & Security -> HTTPS-Only Mode
 
