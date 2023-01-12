@@ -1,0 +1,17 @@
+wayland_packages:
+  - state: present
+    names:
+      - wl-clipboard
+  - state: absent
+    names:
+      - emacs
+      - vlc
+  - state: present
+    aur: true
+    names:
+      # Wayland version of tools
+      - emacs-gcc-wayland-devel-bin
+      - vlc-git
+
+      # Wayland specific
+      - alacritty

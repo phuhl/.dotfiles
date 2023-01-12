@@ -83,6 +83,10 @@ Run this:
 #+BEGIN_SRC sh
 git clone https://github.com/phuhl/.dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
+cp vars.yml ansible/inventory/host_vars/localhost
+
+# Edit variables in ansible/inventory/host_vars/localhost/vars.yml to your likings
+
 pacman -S ansible
 ansible-playbook setup.yml -i inventory -K
 #reboot

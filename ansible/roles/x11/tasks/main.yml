@@ -20,4 +20,4 @@
   ansible.builtin.include_role:
     name: packages
   vars:
-    packages: "{{ wayland_packages }}"
+    packages: "{{ xserver_packages }}"

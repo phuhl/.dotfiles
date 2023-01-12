@@ -11,10 +11,12 @@
     - rslsync
     - ssh
 
-    # Window managers. Choose one:
-    # - kde
+    # Window managers. Choose in inventory/host_vars/localhost/vars.yml
+    - kde
     - river
+    - bspwm
 
     # Implicitly called, should not be needed explicitly, just here
     # for completion or when I want to run this role manually.
     # - wayland
+    # - x11

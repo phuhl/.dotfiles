@@ -1,27 +1,27 @@
----
-- name: Install rslsync
-  vars:
-    the_user: "{{ ansible_user_id }}"
-  tasks:
-    - name: Install AUR package
-      aur:
-        use: yay
-        state: present
-        name:
-          - rslsync
-
+- name: Install AUR package
+  aur:
+    use: yay
+    state: present
+    name:
+      - rslsync
+- name: Check if config exists
+  stat:
+    path: "{{ ansible_env.HOME}}/.config/rslsync/rslsync.conf"
+  register: configStat
+- name: Config file
+  when: not configStat.stat.exists
+  block:
     - name: Create config file
       become: yes
       ansible.builtin.copy:
         remote_src: true
         src: "/etc/rslsync.conf"
         dest: "{{ ansible_env.HOME}}/.config/rslsync/rslsync.conf"
-        mode: '0700'
-        owner: "{{ the_user }}"
-
+        mode: "0700"
+        owner: "{{ ansible_user_id }}"
     - name: Set device name
       lineinfile:
-        regexp: "^([ ]*)\"device_name\"[ ]*:.*$"
+        regexp: '^([ ]*)"device_name"[ ]*:.*$'
         line: '\1"device_name": "{{ ansible_hostname }}",'
         backrefs: true
         dest: "{{ ansible_env.HOME}}/.config/rslsync/rslsync.conf"
@@ -43,19 +43,17 @@
         line: '\1"pid_file": "{{ ansible_env.HOME}}/.local/run/resilio.pid",'
         backrefs: true
         dest: "{{ ansible_env.HOME}}/.config/rslsync/rslsync.conf"
-
-    - name: Creates directories
-      file:
-        path: "{{ ansible_env.HOME}}/.local/lib/rslsync"
-        state: directory
-    - name: Creates directories
-      file:
-        path: "{{ ansible_env.HOME}}/.local/run"
-        state: directory
-
-    - name: Enable and start service
-      ansible.builtin.systemd:
-        name: rslsync
-        scope: user
-        enabled: yes
-        state: started
+- name: Creates directories
+  file:
+    path: "{{ ansible_env.HOME}}/.local/lib/rslsync"
+    state: directory
+- name: Creates directories
+  file:
+    path: "{{ ansible_env.HOME}}/.local/run"
+    state: directory
+- name: Enable and start service
+  ansible.builtin.systemd:
+    name: rslsync
+    scope: user
+    enabled: yes
+    state: started
