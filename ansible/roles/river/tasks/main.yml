@@ -30,6 +30,7 @@
               - brightnessctl # Control brightness from CLI
               - swaylock #      Lock screen
               - swayidle #      Deamon to handle screen timeout
+              - gammastep
           - state: removed
             names:
               - rofi
