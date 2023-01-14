@@ -20,6 +20,10 @@ riverctl map normal Super+Shift Escape exit
 # Super+l to lock the screen
 riverctl map normal Super l spawn swaylock
 
+# Super+z to show notifications
+riverctl map normal Super z spawn toggleNotificationCenter
+
+
 # Super+J and Super+K to focus the next/previous view in the layout stack
 riverctl map normal Super n focus-view next
 riverctl map normal Super e focus-view previous
@@ -127,10 +131,9 @@ do
     # Eject the optical drive (well if you still have one that is)
     riverctl map $mode None XF86Eject spawn 'eject -T'
 
-    # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
-    riverctl map $mode None XF86AudioRaiseVolume  spawn 'pamixer -i 5'
-    riverctl map $mode None XF86AudioLowerVolume  spawn 'pamixer -d 5'
-    riverctl map $mode None XF86AudioMute         spawn 'pamixer --toggle-mute'
+    riverctl map $mode None XF86AudioRaiseVolume  spawn 'volume inc'
+    riverctl map $mode None XF86AudioLowerVolume  spawn 'volume dec'
+    riverctl map $mode None XF86AudioMute         spawn 'volume mute'
 
     # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
     riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'
@@ -139,8 +142,8 @@ do
     riverctl map $mode None XF86AudioNext  spawn 'playerctl next'
 
     # Control screen backlight brightness with light (https://github.com/haikarainen/light)
-    riverctl map $mode None XF86MonBrightnessUp   spawn 'light -A 5'
-    riverctl map $mode None XF86MonBrightnessDown spawn 'light -U 5'
+    riverctl map $mode None XF86MonBrightnessUp   spawn 'brightness inc'
+    riverctl map $mode None XF86MonBrightnessDown spawn 'brightness dec'
 done
 
 # Set background and border color
@@ -166,6 +169,11 @@ riverctl hide-cursor timeout 5000 # milliseconds
 riverctl hide-cursor when-typing enabled
 riverctl set-cursor-warp on-focus-change
 
+riverctl input pointer-1267-12753-VEN_04F3:00_04F3:31D1_Touchpad drag enabled
+riverctl input pointer-1267-12753-VEN_04F3:00_04F3:31D1_Touchpad middle-emulation enabled
+riverctl input pointer-1267-12753-VEN_04F3:00_04F3:31D1_Touchpad tap enabled
+riverctl input pointer-1267-12753-VEN_04F3:00_04F3:31D1_Touchpad tap-button-map left-right-middle
+
 # Set the default layout generator to be rivertile and start it.
 # River will send the process group of the init executable SIGTERM on exit.
 riverctl default-layout rivertile
@@ -184,3 +192,4 @@ swayidle -w &
 
 
 waybar &
+gammastep &
