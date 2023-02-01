@@ -1,0 +1,27 @@
+- name: Create backlight udev rule
+  become: true
+  ansible.builtin.copy:
+    src: "{{ role_path }}/templates/90-backlight.rules"
+    dest: "/etc/udev/rules.d/90-backlight.rules"
+    mode: "0600"
+
+- name: Add user to video group
+  become: no
+  vars:
+    the_user: "{{ ansible_user_id }}"
+  block:
+    - name: Add user to video group
+      become: yes
+      user:
+        name: "{{ the_user }}"
+        append: true
+        groups: video
+
+- name: Install acpilight
+  ansible.builtin.include_role:
+    name: packages
+  vars:
+    packages:
+      - state: present
+        names:
+          - acpilight

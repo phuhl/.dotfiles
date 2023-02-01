@@ -5,6 +5,7 @@
     # Base setup:
     - zsh
     - autologin
+    - backlight
     - packages
     - git
     - dotfiles

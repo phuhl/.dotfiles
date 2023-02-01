@@ -3,7 +3,14 @@
     path: "{{ ansible_env.HOME}}/{{ item.path }}"
     state: directory
     mode: "{{ item.mode }}"
-  with_community.general.filetree: "{{ role_path }}/templates/"
+  with_community.general.filetree: "{{ role_path }}/templates/link"
+  when: item.state == 'directory'
+- name: Create directories
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME}}/{{ item.path }}"
+    state: directory
+    mode: "{{ item.mode }}"
+  with_community.general.filetree: "{{ role_path }}/templates/copy"
   when: item.state == 'directory'
 
 - name: Create symlinks
@@ -13,5 +20,13 @@
     state: link
     follow: false # avoid corrupting target files if the link already exists
     mode: "{{ item.mode }}"
-  with_community.general.filetree: "{{ role_path }}/templates/"
+  with_community.general.filetree: "{{ role_path }}/templates/link"
+  when: item.state == 'file'
+
+- name: Copy templated configs
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ ansible_env.HOME}}/{{ item.path }}"
+    mode: "{{ item.mode }}"
+  with_community.general.filetree: "{{ role_path }}/templates/copy"
   when: item.state == 'file'

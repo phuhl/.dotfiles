@@ -56,11 +56,12 @@ window#waybar.PCSX2 #window {
 #idle_inhibitor,
 #mode,
 #window,
+#custom-notification,
 #tray {
   margin-top: 8px;
   margin-left: 12px;
   margin-bottom: 0;
-  border-radius: 26px;
+  border-radius: 100px;
   background: #282a36;
   color: #f8f8f2;
   transition: none;
@@ -100,7 +101,7 @@ window#waybar.PCSX2 #window {
     color: #f8f8f2;
 }
 
-#idle_inhibitor {
+#idle_inhibitor, #custom-notification {
     padding-right: 20px;
 }
 #idle_inhibitor:hover {
