@@ -1,0 +1,165 @@
+#!/bin/bash
+
+export DISPLAY=:0
+export XAUTHORITY=/home/philipp/.Xauthority
+export XDG_SESSION_CLASS=user
+export XDG_SESSION_TYPE=x11
+export HOME=/home/philipp
+export PATH="$PATH:/usr/bin:/usr/local/bin"
+export DISPLAY=:0
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+export GDK_SCALE=$(sh hdpi.sh)
+
+export DPI=$(bc -l <<< "$GDK_SCALE * 90" | cut -d. -f1)
+
+
+DO_NOT_START_PANEL=$1
+
+CONNECTED=$(xrandr | grep " connected" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/")
+NUM_OF_DISPLS=$(echo $CONNECTED | wc -w)
+# https://blog.summercat.com/configuring-mixed-dpi-monitors-with-xrandr.html
+
+
+if [[ $NUM_OF_DISPLS > 1 ]]; then
+    if [[ $NUM_OF_DISPLS > 2 ]]; then
+        CONFIG=$(cat $HOME/.config/screens3)
+    else
+        CONFIG=$(cat $HOME/.config/screens)
+    fi
+else
+    CONFIG=$(cat $HOME/.config/screen)
+fi
+
+TO_USE=""
+TO_NOT_USE=""
+while read config; do
+    display=$(echo $config | awk '{print $1;}')
+    for con in $CONNECTED; do
+        echo "con $con"
+        if [[ $con == $display ]]; then
+            TO_USE=$TO_USE$display$'\n'
+        fi
+    done
+done <<< "$CONFIG"
+
+
+
+FIRST_DISP=$(echo "$TO_USE" | head -1)
+if [[ $NUM_OF_DISPLS > 1 ]]; then
+    SECOND_DISP=$(echo "$TO_USE" | head -2 | tail -1)
+    if [[ $NUM_OF_DISPLS > 2 ]]; then
+        # https://blog.summercat.com/configuring-mixed-dpi-monitors-with-xrandr.html
+        xrandr --dpi $DPI \
+               --output $SECOND_DISP --primary --mode  2560x1440  \
+               --output $FIRST_DISP --mode  2560x1440 --left-of $SECOND_DISP \
+               --output eDP-1 --off
+    else
+#        xrandr --dpi $DPI \
+#               --output eDP-1 --mode 1920x1080 \
+#               --output DP-2 --mode 3840x2160 --above eDP-1
+        echo "$FIRST_DISP $SECOND_DISP $DPI"
+        xrandr --dpi $DPI \
+               --output $FIRST_DISP --mode 1920x1080 \
+               --output $SECOND_DISP --mode 3840x2160 --left-of $FIRST_DISP
+#               --output DP-1 --mode 3840x2160 --left-of eDP-1
+
+
+        # xrandr --dpi $DPI --fb 3840x3960 \
+            # --output eDP-1 --mode 3200x1800 --pos 0x0 \
+            # --output DP2-8 --mode 1920x1080 --scale 2x2 --pos 0x-2160  #  --panning 3200x3960+0+0
+    fi
+else
+    xrandr --output DP-1 --off
+    xrandr --output DP-2-1-1 --off
+    xrandr --output DP-2-1-8 --off
+    xrandr --output DP-1-1-1 --off
+    xrandr --output DP-1-1-8 --off
+    xrandr --dpi $DPI --output eDP-1 --mode 1920x1080
+fi
+
+for display in $CONNECTED; do
+    if [[ "$(echo $TO_USE | grep "$display" )" == "" ]]; then
+        TO_NOT_USE=$TO_NOT_USE$display$'\n'
+    fi
+done
+
+for display in $TO_USE; do
+    # command="xrandr --output $display --auto"
+    if [[ $last ]]; then
+        command="$command --above $last"
+    fi
+    last=$display
+#    eval $command
+
+
+    while read config; do
+        display1=$(echo $config | awk '{print $1;}')
+        desktops=$(echo $config | awk '{$1 = ""; print $0;}')
+        if [[ $display == $display1 ]]; then
+            position=$(xrandr | grep "$display connected" | awk '{print $3;}')
+            eval "bspc monitor $display -d $desktops"
+        fi
+    done <<< "$CONFIG"
+
+done
+
+for display in $TO_NOT_USE; do
+    eval "bspc monitor $display -r"
+done
+
+function get_order {
+    order=$(bspc query -M)
+    for display in $TO_USE; do
+        bspwmid=$(bspc query -M -m $display)
+        order=$(echo $order | sed -e "s/$bspwmid/$display/")
+    done
+    order=($order)
+}
+get_order
+pos=0
+for display in $TO_USE; do
+    if [[ ${order[$pos]} != $display ]]; then
+        eval "bspc monitor ${order[$pos]} --swap $display"
+
+        get_order
+    fi
+    pos=$(($pos+1))
+done
+
+if [[ "$DPI" -gt 200 ]]; then
+    echo "--force-device-scale-factor=2" > $HOME/.config/chromium-flags.conf
+else
+    echo "--force-device-scale-factor=1" > $HOME/.config/chromium-flags.conf
+fi
+
+if [[ ! $DO_NOT_START_PANEL ]]; then
+    nitrogen --restore &
+    killall polybar
+    killall plank
+    sleep 1
+    first=1
+
+    export POLY_HEIGHT=$(bc -l <<< "19 / 90 * $DPI")
+    export POLY_LINE_SIZE=$(bc -l <<< "1 / 90 * $DPI")
+
+    for display in $TO_USE; do
+        if [[ $first == 1 ]]; then
+            export POLYMONITOR=$display
+            polybar main &
+            first=0
+        else
+            export POLYMONITOR=$display
+            polybar secondary &
+        fi
+    done
+
+    plank &
+
+    sleep 0.1
+#    bspc config top_padding $(bc -l <<< "17 / 90 * $DPI")
+    bspc config window_gap $(bc -l <<< "8 / 90 * $DPI")
+    bspc config border_radius $(bc -l <<< "10 / 90 * $DPI")
+fi
+
+exit
+ 

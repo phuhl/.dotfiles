@@ -93,8 +93,7 @@ bspc rule -a Spotify desktop=^9
 bspc rule -a crx_hnpfjngllnobngcgfapefoaidbinmjnm:Whatsapp desktop=^0
 bspc rule -a :crx_behehkmaacfijackbkoidojkfhoecefo desktop=^0
 
-# optional external rules
-bspc config external_rules_command $HOME/.dotfiles/bspwm/external-rules.sh
+xdotool search --name Plank windowraise 
 
 ### Desktoprelated stuff
 exec $HOME/.dotfiles/system/launch_linux_desktop.sh &
