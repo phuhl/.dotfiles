@@ -8,8 +8,13 @@ if [ "$1" == "dec" ]; then
     xbacklight -dec 10
 fi
 
-#BRIGHTNESS=$(xbacklight -get)
-#NOTI_ID=$(notify-send.py "Brightness" "" \
-#                         --hint string:image-path:video-display boolean:transient:true \
-#                                int:has-percentage:$BRIGHTNESS \
-#                         --replaces-process "brightness-popup")
+BRIGHTNESS=$(xbacklight -get)
+ICON=video-display
+
+notify-send.sh "Bildschirmhelligkeit" \
+               --hint string:image-path:$ICON \
+               --hint byte:transient:1 \
+               --hint int:value:$BRIGHTNESS \
+               -a "" \
+               -t 1000 \
+               -R /tmp/brightness-notification 

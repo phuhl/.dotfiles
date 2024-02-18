@@ -1,5 +1,15 @@
 #!/bin/sh
 
+# dbus-update-activation-environment --systemd DISPLAY
+dbus-update-activation-environment --systemd DISPLAY XAUTHORITY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river
+
+systemctl --user import-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY
+hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY XAUTHORITY WAYLAND_DISPLAY
+
+
+
+
 # See the river(1), riverctl(1), and rivertile(1) man pages for complete
 # documentation.
 
@@ -10,6 +20,7 @@ riverctl map normal Super Return spawn alacritty
 riverctl map normal Super+Shift Return spawn emacs
 riverctl map normal Super q spawn firefox
 riverctl map normal Super Space spawn launcher
+riverctl map normal None Print spawn screenshot
 
 # Super+Q to close the focused view
 riverctl map normal Super+Shift Q close
@@ -18,28 +29,28 @@ riverctl map normal Super+Shift Q close
 riverctl map normal Super+Shift Escape exit
 
 # Super+l to lock the screen
-riverctl map normal Super l spawn swaylock
+riverctl map normal Super l spawn "waylock lock"
 
 # Super+z to show notifications
 riverctl map normal Super z spawn toggleNotificationCenter
 
 
 # Super+J and Super+K to focus the next/previous view in the layout stack
-riverctl map normal Super n focus-view next
-riverctl map normal Super e focus-view previous
+riverctl map normal Super Period focus-view next
+riverctl map normal Super Comma focus-view previous
 
 # Super+Shift+J and Super+Shift+K to swap the focused view with the next/previous
 # view in the layout stack
-riverctl map normal Super+Shift n swap next
-riverctl map normal Super+Shift e swap previous
+riverctl map normal Super+Shift Period swap next
+riverctl map normal Super+Shift Comma swap previous
 
 # Super+Period and Super+Comma to focus the next/previous output
-riverctl map normal Super Period focus-output right
-riverctl map normal Super Comma focus-output left
+riverctl map normal Super+Control Period focus-output right
+riverctl map normal Super+Control Comma focus-output left
 
 # Super+Shift+{Period,Comma} to send the focused view to the next/previous output
-riverctl map normal Super+Shift Period send-to-output right
-riverctl map normal Super+Shift Comma send-to-output left
+riverctl map normal Super+Shift+Control Period send-to-output right
+riverctl map normal Super+Shift+Control Comma send-to-output left
 
 # Super+Return to bump the focused view to the top of the layout stack
 #riverctl map normal Super Return zoom
@@ -159,6 +170,13 @@ riverctl set-repeat 50 300
 # riverctl float-filter-add app-id float
 # riverctl float-filter-add title "popup title with spaces"
 riverctl float-filter-add title "Ediff"
+riverctl float-filter-add app-id "flameshot"
+riverctl float-filter-add title "Firefox — Sharing Indicator"
+riverctl float-filter-add app-id "file-roller"
+riverctl float-filter-add title "KeePassXC - Browser Access Request"
+riverctl float-filter-add title "KeePassXC -  Access Request"
+riverctl float-filter-add title "OpenRCT2"
+riverctl float-filter-add app-id "TeamViewer"
 
 # Set app-ids and titles of views which should use client side decorations
 # riverctl csd-filter-add app-id "gedit"
@@ -180,7 +198,7 @@ riverctl default-layout rivertile
 rivertile -view-padding 6 -outer-padding 6 &
 
 # Display layout manager
-way-displays &
+way-displays > /tmp/way-displays.${XDG_VTNR}.${USER}.log 2>&1 &
 
 # Background img
 swww init &
@@ -193,3 +211,4 @@ swayidle -w &
 
 waybar &
 gammastep &
+deadd-notification-center &

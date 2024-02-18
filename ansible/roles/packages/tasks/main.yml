@@ -1,3 +1,9 @@
+- name: Enable pacman parallel downloading
+  become: yes
+  ansible.builtin.lineinfile:
+    path: /etc/pacman.conf
+    regexp: "^#?ParallelDownloads = "
+    line: "ParallelDownloads = 7"
 - name: Update Repositories
   become: yes
   pacman:
@@ -18,7 +24,7 @@
   pacman:
     state: "{{item.state}}"
     name: "{{item.names}}"
-  loop: "{{packages}}"  
+  loop: "{{packages}}"
   when: '"aur" not in item'
 - name: Setup Yay
   block:
@@ -44,6 +50,7 @@
         name: yay
 - name: Install AUR packages
   become: yes
+  become_user: aur_builder
   aur:
     use: yay
     state: "{{item.state}}"
@@ -58,4 +65,3 @@
     name: bluetooth
     enabled: yes
     state: started
-

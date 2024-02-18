@@ -49,6 +49,7 @@ packages:
       - zsh
       - acpi
       - playerctl # Multi media controls
+      - pamixer # Pulse audio mixer
       - hunspell
       - hunspell-de
       - hunspell-en_us
@@ -60,6 +61,8 @@ packages:
       - firefox
       - viewnior
       - torbrowser-launcher
+      - pavucontrol # Audio interface GUI tool
+      - keepassxc
 
       # Configuration tools
       - v4l-utils # Webcam setup tool
@@ -68,10 +71,12 @@ packages:
       - exfat-utils
       - ntfs-3g
 
+      # Codecs
+      - x264
+
   - state: present
     aur: true
     names:
-      - keeweb-desktop-bin
       - kpcli
       - volta-bin
       - nerd-fonts-complete

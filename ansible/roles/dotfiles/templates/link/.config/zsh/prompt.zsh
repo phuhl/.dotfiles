@@ -20,9 +20,9 @@ git_dirty() {
   else
     if [[ $($git status --porcelain) == "" ]]
     then
-      echo "on %{$fg_bold[green]%}$(git_prompt_info)%{$reset_color%}"
+      echo " on %{$fg_bold[green]%}$(git_prompt_info)%{$reset_color%}"
     else
-      echo "on %{$fg_bold[red]%}$(git_prompt_info)%{$reset_color%}"
+      echo " on %{$fg_bold[red]%}$(git_prompt_info)%{$reset_color%}"
     fi
   fi
 }
@@ -53,15 +53,19 @@ directory_name() {
 has_pw() {
     if [[ $HASKEY ]]
     then
-        echo "%{$fg_bold[yellow]%}%{$bg[red]%}o¬ $HASKEY%{$reset_color%}"
+        echo " %{$fg_bold[yellow]%}%{$bg[red]%}o¬ $HASKEY%{$reset_color%}"
     else
         echo ""
     fi
 }
 
+virtualenv_info() { 
+    [ $VIRTUAL_ENV ] && echo ' ('`basename $VIRTUAL_ENV`') '
+}
+
 set_prompt () {
 #  export RPROMPT='%{$fg_bold[cyan]%}%{$reset_color%} '
-  export PROMPT=$'\n $(directory_name) $(git_dirty)$(need_push) $(has_pw)\n$ '
+  export PROMPT=$'\n $(directory_name)$(git_dirty)$(need_push)$(has_pw)$(virtualenv_info)\n$ '
 }
 
 precmd() {

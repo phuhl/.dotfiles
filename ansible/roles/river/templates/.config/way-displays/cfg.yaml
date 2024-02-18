@@ -13,9 +13,10 @@ ALIGN: TOP
 # The default ORDER is simply the order in which the displays are discovered.
 # Define your own.
 ORDER:
-  #- 'DP-2'
-  #- 'monitor description'
-  #- 'HDMI-1'
+  - "Dell Inc. SE2717H/HX K9V8V89Q0M5L (DP-3 via HDMI)"
+  - "Dell Inc. DELL U2719D F8FJY13"
+  - "Dell Inc. DELL U2719DC BRM3Y13"
+  - "Sharp Corporation 0x1551"
 
 # The default is to scale each display by DPI.
 # This may be disabled and scale 1 will be used, unless a SCALE has been specified.
@@ -23,8 +24,14 @@ AUTO_SCALE: TRUE
 
 # Auto scale may be overridden for each display.
 SCALE:
-  - NAME_DESC: "Sharp Corporation 0x1551 (eDP-1)"
+  - NAME_DESC: "Sharp Corporation 0x1551"
     SCALE: 2.5
+  - NAME_DESC: "Dell Inc. DELL U2719D F8FJY13"
+    SCALE: 1
+  - NAME_DESC: "Dell Inc. DELL U2719DC BRM3Y13"
+    SCALE: 1
+  - NAME_DESC: "Dell Inc. SE2717H/HX K9V8V89Q0M5L (DP-3 via HDMI)"
+    SCALE: 1
 
 # Override the preferred mode.
 # WARNING: this may result in an unusable display. See https://github.com/alex-courtis/way-displays#known-issues-with-workarounds

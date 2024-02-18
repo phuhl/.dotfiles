@@ -1,0 +1,3 @@
+#!/bin/bash
+
+wl-copy -t text/html < "$1"

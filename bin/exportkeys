@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PWNAME="$1"
-PWPATH=$(jq -r ".[\"$PWNAME\"].path" documents/exportkeys-data.json )
+PWPATH=$(jq -r ".[\"$PWNAME\"].path" $HOME/documents/exportkeys-data.json )
 
 if [[ "$PWPATH" == "null" ]]; then
     echo "No pw found"
@@ -9,12 +9,9 @@ if [[ "$PWPATH" == "null" ]]; then
 fi
 
 
-COMMAND="\"show -f $PWPATH\""
-echo "Enter PW (hidden):"
-#kpcli --readonly --kdb="/home/philipp/documents/MyPws.kdbx" --command "$COMMAND"
-pwoutput=$(kpcli --readonly --kdb="/home/philipp/documents/MyPws.kdbx" --command "show -f $PWPATH")
+pwoutput=$(keepassxc-cli show --all -s "$HOME/documents/MyPws.kdbx" "$PWPATH")
 
-re="export ([^ ]*).*export ([^ ]*)"
+re="export ([^ ]*).*export ([^[:space:]]*)"
 if [[ $pwoutput =~ $re ]]; then
     export ${BASH_REMATCH[1]};
     export ${BASH_REMATCH[2]};

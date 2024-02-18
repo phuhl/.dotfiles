@@ -1,0 +1,29 @@
+#!/bin/bash
+
+lock1 (){
+    running=$(pidof swaylock)
+    if [ ! $running ]; then
+        dolock &
+        sleep 1
+    fi
+}
+
+dolock (){
+    swayidle -w timeout 10 'wlopm --off "*"' resume 'wlopm --on "*"' &
+    SWAYIDLE_PID=$!
+    swaylock
+    kill $SWAYIDLE_PID
+}
+
+
+
+case "$1" in
+    lock)
+	lock1
+	;;
+    *)
+	echo "Usage: $0 {lock}"
+	exit 2
+esac
+
+exit 0

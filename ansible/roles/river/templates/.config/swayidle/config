@@ -1,5 +1,5 @@
-timeout 300 'swaylock -f'
-timeout 303 'wlopm --off "*"' resume 'wlopm --on "*"'
+timeout 600 'swaylock -f'
+timeout 603 'wlopm --off "*"' resume 'wlopm --on "*"'
 #timeout 600 'swaymsg "output * dpms off"'
 # Lock/unlock does not seem to work with river atm
 #lock 'wlopm --off "*"'

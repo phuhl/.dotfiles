@@ -31,6 +31,9 @@
               - swaylock #      Lock screen
               - swayidle #      Deamon to handle screen timeout
               - gammastep
+              - xdg-desktop-portal # Service for screen sharing
+              - xdg-desktop-portal-wlr # Wl roots backend for # xdg-desktop-portal
+              - slurp # Used for screen sharing geometry stuff
           - state: removed
             names:
               - rofi
@@ -43,3 +46,9 @@
               - wlopm #         Output manger (turn screens on/off)
               - rofi-lbonn-wayland-git
               # - rofi-lbonn-wayland # rofi-lbonn-wayland-git while the other one does not work
+- name: Enable and start service for screen sharing
+  ansible.builtin.systemd:
+    name: xdg-desktop-portal
+    scope: user
+    enabled: yes
+    state: started
