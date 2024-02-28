@@ -1,0 +1,34 @@
+---
+# https://wiki.archlinux.org/title/TLP
+- name: Set up powersaving for laptops
+  #   when: is_laptop == true
+  block:
+    - name: Install packages
+      ansible.builtin.include_role:
+        name: packages
+      vars:
+        packages:
+          - state: present
+            names:
+              - tlp
+              - ethtool
+          - state: present
+            aur: true
+            names:
+              - tlpui
+    - name: Mask rfkill services
+      become: yes
+      ansible.builtin.systemd:
+        name: systemd-rfkill.service
+        masked: true
+    - name: Mask rfkill socket
+      become: yes
+      ansible.builtin.systemd:
+        name: systemd-rfkill.socket
+        masked: true
+    - name: Enable and start tlp service
+      become: yes
+      ansible.builtin.systemd:
+        name: tlp
+        enabled: yes
+        state: started
