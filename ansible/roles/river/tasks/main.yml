@@ -46,9 +46,9 @@
               - wlopm #         Output manger (turn screens on/off)
               - rofi-lbonn-wayland-git
               # - rofi-lbonn-wayland # rofi-lbonn-wayland-git while the other one does not work
-- name: Enable and start service for screen sharing
-  ansible.builtin.systemd:
-    name: xdg-desktop-portal
-    scope: user
-    enabled: yes
-    state: started
+    - name: Enable and start service for screen sharing
+      ansible.builtin.systemd:
+        name: xdg-desktop-portal
+        scope: user
+        enabled: yes
+        state: started
