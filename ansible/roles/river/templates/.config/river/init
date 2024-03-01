@@ -165,18 +165,19 @@ riverctl border-color-unfocused 0x333333
 # Set keyboard repeat rate
 riverctl set-repeat 50 300
 
-# Use lswt -j
-# Make certain views start floating
-# riverctl float-filter-add app-id float
-# riverctl float-filter-add title "popup title with spaces"
-riverctl float-filter-add title "Ediff"
-riverctl float-filter-add app-id "flameshot"
-riverctl float-filter-add title "Firefox — Sharing Indicator"
-riverctl float-filter-add app-id "file-roller"
-riverctl float-filter-add title "KeePassXC - Browser Access Request"
-riverctl float-filter-add title "KeePassXC -  Access Request"
-riverctl float-filter-add title "OpenRCT2"
-riverctl float-filter-add app-id "TeamViewer"
+# Use lswt -j to find the app-id and title of views
+# Make certain views start with specific properties
+riverctl rule-add -app-id "emacs" ssd
+riverctl rule-add -title "Ediff" float
+riverctl rule-add -app-id "flameshot" float
+riverctl rule-add -title "Firefox — Sharing Indicator" float
+riverctl rule-add -app-id "file-roller" float
+riverctl rule-add -title "KeePassXC - Browser Access Request" float
+riverctl rule-add -title "KeePassXC -  Access Request" float
+riverctl rule-add -title "OpenRCT2" float
+riverctl rule-add -app-id "TeamViewer" float
+riverctl rule-add -app-id "com.gabm.satty" fullscreen
+
 
 # Set app-ids and titles of views which should use client side decorations
 # riverctl csd-filter-add app-id "gedit"
@@ -201,8 +202,8 @@ rivertile -view-padding 6 -outer-padding 6 &
 way-displays > /tmp/way-displays.${XDG_VTNR}.${USER}.log 2>&1 &
 
 # Background img
-swww init &
-sleep 3 && swww img ~/images/downloads/wallpapers/19513k34grf1ejpg.jpg &
+swaybg -m fill -i ~/images/downloads/wallpapers/19513k34grf1ejpg.jpg &
+
 
 # Lock screen when idle
 # If annoying, maybe install and look into: sway-audio-idle-inhibit
