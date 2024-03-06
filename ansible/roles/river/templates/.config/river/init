@@ -36,6 +36,8 @@ riverctl map normal Super z spawn toggleNotificationCenter
 
 
 # Super+J and Super+K to focus the next/previous view in the layout stack
+riverctl map normal Super Tab focus-view next
+riverctl map normal Super+Shift Tab focus-view previous
 riverctl map normal Super Period focus-view next
 riverctl map normal Super Comma focus-view previous
 
