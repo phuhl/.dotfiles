@@ -1,8 +1,11 @@
+/* Source:
+ * https://github.com/riverwm/river/wiki#how-do-i-disable-gtk-decorations-eg-title-bar
+ */
 /* No (default) titlebar on wayland */
 headerbar.titlebar.default-decoration {
   background: transparent;
   padding: 0;
-  margin: 0 0 -17px 0;
+  margin: 0 0 -19px 0;
   border: 0;
   min-height: 0;
   font-size: 0;

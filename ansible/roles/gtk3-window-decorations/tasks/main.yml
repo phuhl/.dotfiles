@@ -1,0 +1,18 @@
+- name: Create directories for content files
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME}}/{{ item.path }}"
+    state: directory
+  with_community.general.filetree: "{{ role_path }}/content/"
+  when: item.state == 'directory'
+- name: Ensure content for content CSS files
+  ansible.builtin.blockinfile:
+    block: "{{ lookup('ansible.builtin.file', item.src) }}"
+    path: "{{ ansible_env.HOME}}/{{ item.path }}"
+    append_newline: true
+    prepend_newline: true
+    backup: true
+    create: true
+    state: "{% if present %}present{% else %}absent{% endif %}"
+    marker: "/* {mark} ANSIBLE MANAGED BLOCK */"
+  with_community.general.filetree: "{{ role_path }}/content/"
+  when: item.state == 'file'
