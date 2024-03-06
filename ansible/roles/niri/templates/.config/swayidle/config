@@ -1,0 +1,6 @@
+timeout 600 'waylock lock-niri'
+#timeout 600 'swaymsg "output * dpms off"'
+# Lock/unlock does not seem to work with river atm
+#lock 'wlopm --off "*"'
+#unlock 'wlopm --on "*"'
+before-sleep 'swaylock -f'

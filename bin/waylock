@@ -1,9 +1,13 @@
 #!/bin/bash
 
-lock1 (){
+lock (){
     running=$(pidof swaylock)
     if [ ! $running ]; then
-        dolock &
+        if [ "$wm" = "niri" ]; then
+            lockniri &
+        else
+            dolock &
+        fi
         sleep 1
     fi
 }
@@ -15,14 +19,23 @@ dolock (){
     kill $SWAYIDLE_PID
 }
 
-
+lockniri (){
+    swayidle -w timeout 10 'niri msg action power-off-monitors' &
+    SWAYIDLE_PID=$!
+    swaylock
+    kill $SWAYIDLE_PID
+}
 
 case "$1" in
     lock)
-	lock1
+	lock
+	;;
+  lock-niri)
+  wm="niri"
+	lock
 	;;
     *)
-	echo "Usage: $0 {lock}"
+	echo "Usage: $0 {lock}|{lock-niri}"
 	exit 2
 esac
 

@@ -1,0 +1,66 @@
+- name: Install Niri?
+  when: window_manager == "niri"
+  block:
+    - name: Install wayland
+      ansible.builtin.include_role:
+        name: wayland
+    - name: Install Niri packages
+      ansible.builtin.include_role:
+        name: packages
+      vars:
+        packages:
+          - state: present
+            names:
+              - brightnessctl # Control brightness from CLI
+              - swaylock #      Lock screen
+              - swayidle #      Deamon to handle screen timeout
+              - gammastep
+              - xdg-desktop-portal-gtk # Service for screen sharing
+              - xdg-desktop-portal-gnome # Service for screen sharing
+              - gnome-keyring
+              - slurp #         Used for screen sharing geometry stuff
+              - grim #          CLI tool for taking screenshots on wayland
+              - swaybg #        Background images
+          - state: removed
+            names:
+              - rofi
+              # - xdg-desktop-portal-wlr
+              # - xdg-desktop-portal
+          - state: present
+            aur: true
+            names:
+              - niri-git #         The WM
+              - wlopm #         Output manger (turn screens on/off)
+              - rofi-lbonn-wayland-git
+              # - satty #         Screenshot tool like flameshot that
+              # actually works on river but not, yet, on niri
+              # - rofi-lbonn-wayland # rofi-lbonn-wayland-git while the other one does not work
+
+    - name: Create directories for template files
+      ansible.builtin.file:
+        path: "{{ ansible_env.HOME}}/{{ item.path }}"
+        state: directory
+      with_community.general.filetree: "{{ role_path }}/templates/"
+      when: item.state == 'directory'
+
+    - name: Create symlinks for template files
+      ansible.builtin.file:
+        src: "{{ item.src }}"
+        path: "{{ ansible_env.HOME}}/{{ item.path }}"
+        state: link
+        follow: false #         avoid corrupting target files if the link already exists
+      with_community.general.filetree: "{{ role_path }}/templates/"
+      when: item.state == 'file'
+
+    - name: Hide GTK Window Decorations
+      ansible.builtin.include_role:
+        name: gtk3-window-decorations
+      vars:
+        present: false
+
+    - name: Enable and start service for screen sharing
+      ansible.builtin.systemd:
+        name: xdg-desktop-portal
+        scope: user
+        enabled: yes
+        state: started

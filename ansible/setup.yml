@@ -16,6 +16,7 @@
     # Window managers. Choose in inventory/host_vars/localhost/vars.yml
     - kde
     - river
+    - niri
     - bspwm
 
     # Implicitly called, should not be needed explicitly, just here
