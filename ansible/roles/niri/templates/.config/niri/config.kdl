@@ -65,6 +65,12 @@ input {
     // Uncomment this if you would like to configure the power button elsewhere
     // (i.e. logind.conf).
     // disable-power-key-handling
+
+    // Uncomment this to make the mouse warp to the center of newly focused windows.
+    warp-mouse-to-focus
+
+    // Focus windows and outputs automatically when moving the mouse into them.
+    // focus-follows-mouse
 }
 
 // You can configure outputs by their name, which you can find
@@ -179,7 +185,7 @@ layout {
         // defaulting to 180 (top-to-bottom gradient).
         // You can use any CSS linear-gradient tool on the web to set these up.
         //
-        active-gradient from="#ffbb00" to="#ff0000" angle=-30
+        active-gradient from="#51d0ff" to="#51ffec" angle=-30
 
         // You can also color the gradient relative to the entire view
         // of the workspace, rather than relative to just the window itself.
@@ -391,7 +397,7 @@ window-rule {
 // Use lswt -j to find the app-id and title of views
 window-rule {
     match title=r#"^Ediff$"#
-    default-column-width { proportion 0.1; }
+    default-column-width { fixed 300; }
 }
 
 window-rule {
@@ -463,8 +469,8 @@ binds {
     // Mod+L     { focus-column-right; }
 
     Mod+Shift+Comma  { move-column-left; }
-    Mod+Shift+E  { move-window-down-or-to-workspace-down; }
-    Mod+Shift+I    { move-window-up-or-to-workspace-up; }
+    Mod+Shift+I  { move-window-down-or-to-workspace-down; }
+    Mod+Shift+E    { move-window-up-or-to-workspace-up; }
     Mod+Shift+Period { move-column-right; }
     // Mod+Ctrl+H     { move-column-left; }
     // Mod+Ctrl+J     { move-window-down; }
@@ -487,10 +493,6 @@ binds {
     Mod+Ctrl+Down  { focus-monitor-down; }
     Mod+Ctrl+Up    { focus-monitor-up; }
     Mod+Ctrl+Period { focus-monitor-right; }
-    Mod+Ctrl+H     { focus-monitor-left; }
-    Mod+Ctrl+J     { focus-monitor-down; }
-    Mod+Ctrl+K     { focus-monitor-up; }
-    Mod+Ctrl+L     { focus-monitor-right; }
 
     Mod+Shift+Ctrl+Comma  { move-column-to-monitor-left; }
     Mod+Shift+Ctrl+I  { move-column-to-monitor-down; }
@@ -589,8 +591,8 @@ binds {
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
 
-    // Print { spawn "screenshot"; }
-    Print { screenshot; }
+    Print { spawn "screenshot"; }
+    // Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
 

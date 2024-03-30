@@ -13,4 +13,4 @@ echo "Starting Niri"
 # https://github.com/swaywm/sway/issues/5732
 
 # XDG_CURRENT_DESKTOP=niri dbus-run-session niri
-niri-session
+niri-session > /tmp/niri.log 2>&1

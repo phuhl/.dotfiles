@@ -12,7 +12,6 @@
   border: none;
   border-radius: 0;
   font-family: Nerd Font Hack;
-  font-size: 14px;
   min-height: 18px;
 }
 
@@ -33,7 +32,7 @@ window#waybar.hidden {
   /*
     color: #f8f8f2;
   background: #282a36;
-    */
+   */
   color: transparent;
   background: transparent;
 }
@@ -57,17 +56,58 @@ window#waybar.PCSX2 #window {
 #mode,
 #window,
 #taskbar,
-#custom-notification,
 #tray {
   margin-top: 8px;
-  margin-left: 12px;
   margin-bottom: 0;
-  border-radius: 100px;
   background: #282a36;
   color: #f8f8f2;
   transition: none;
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+#tags,
+#mode,
+#window {
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 100px;
   padding-left: 15px;
   padding-right: 15px;
+}
+
+#taskbar.icons {
+  margin-left: 10px;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+  padding-left: 20px;
+  padding-right: 0px;
+}
+
+#taskbar.title {
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+  padding-right: 15px;
+}
+
+#pulseaudio,
+#cpu,
+#memory {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#clock {
+  padding-right: 15px;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+  margin-right: 10px;
+}
+
+#pulseaudio {
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+  padding-left: 20px;
 }
 
 #taskbar button,
@@ -112,4 +152,20 @@ window#waybar.PCSX2 #window {
 }
 #idle_inhibitor:hover {
   background: #550000;
+}
+
+#taskbar.icons button.active {
+  background: #868681;
+  color: #000;
+}
+
+#taskbar.title button {
+  font-size: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+
+#taskbar.title button.active {
+  font-size: 14px;
+  padding-right: 5px;
 }
