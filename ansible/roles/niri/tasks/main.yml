@@ -64,4 +64,3 @@
         name: xdg-desktop-portal
         scope: user
         enabled: yes
-        state: started
