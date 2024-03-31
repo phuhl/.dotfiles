@@ -3,6 +3,7 @@
   hosts: all
   roles:
     # Base setup:
+    - system
     - zsh
     - autologin
     - backlight
