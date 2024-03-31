@@ -4,6 +4,7 @@
     path: /etc/pacman.conf
     regexp: "^#?ParallelDownloads = "
     line: "ParallelDownloads = 7"
+    insertafter: "^\\[options\\]"
 - name: Update Repositories
   become: yes
   pacman:
