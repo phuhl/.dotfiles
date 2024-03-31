@@ -12,6 +12,14 @@
     mode: "{{ item.mode }}"
   with_community.general.filetree: "{{ role_path }}/templates/copy"
   when: item.state == 'directory'
+- name: Create directories for Root
+  ansible.builtin.file:
+    path: "/root/{{ item.path }}"
+    state: directory
+    mode: "{{ item.mode }}"
+  with_community.general.filetree: "{{ role_path }}/templates/root"
+  when: item.state == 'directory'
+  become: true
 
 - name: Create symlinks
   ansible.builtin.file:
@@ -30,3 +38,12 @@
     mode: "{{ item.mode }}"
   with_community.general.filetree: "{{ role_path }}/templates/copy"
   when: item.state == 'file'
+
+- name: Copy templated configs for root
+  template:
+    src: "{{ item.src }}"
+    dest: "/root/{{ item.path }}"
+    mode: "{{ item.mode }}"
+  with_community.general.filetree: "{{ role_path }}/templates/root"
+  when: item.state == 'file'
+  become: true
