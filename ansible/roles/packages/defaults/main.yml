@@ -53,6 +53,7 @@ packages:
       - hunspell
       - hunspell-de
       - hunspell-en_us
+      - nano
 
       # Desktop tools
       - flameshot
