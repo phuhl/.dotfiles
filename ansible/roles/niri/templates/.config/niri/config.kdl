@@ -1,6 +1,8 @@
 // This config is in the KDL format: https://kdl.dev
 // "/-" comments out the following node.
 
+// spawn-at-startup "alacritty"
+
 input {
     keyboard {
         xkb {
@@ -174,7 +176,7 @@ layout {
         active-color "#ff0000"
 
         // Color of the ring on inactive monitors.
-        inactive-color "#333333"
+        inactive-gradient from="#51d0ffbb" to="#51ffecbb" angle=-30
 
         // Additionally, theres a legacy RGBA syntax:
         // active-color 127 200 255 255
@@ -198,11 +200,11 @@ layout {
     border {
         // The settings are the same as for the focus ring.
         // If you enable the border, you probably want to disable the focus ring.
-        off
 
-        width 2
-        active-color "#ffc87f"
-        inactive-color "#505050"
+
+        width 4
+        active-color "#50505000"
+        inactive-color "#50505000"
 
         // active-gradient from="#ffbb66" to="#ffc880" angle=45 relative-to="workspace-view"
         // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
@@ -235,8 +237,8 @@ layout {
     // Top and bottom struts will simply add outer gaps in addition to the area occupied by
     // layer-shell panels and regular gaps.
     struts {
-        // left 64
-        // right 64
+        // left 32
+        // right 32
         // top 64
         // bottom 64
     }
@@ -295,51 +297,33 @@ hotkey-overlay {
 
 // Animation settings.
 animations {
-    // Uncomment to turn off all animations.
-    // off
-
-    // Slow down all animations by this factor. Values below 1 speed them up instead.
-    // slowdown 3.0
-
-    // You can configure all individual animations.
-    // Available settings are the same for all of them:
-    // - off disables the animation.
-    // - duration-ms sets the duration of the animation in milliseconds.
-    // - curve sets the easing curve. Currently, available curves
-    //   are "ease-out-cubic" and "ease-out-expo".
-
-    // Animation when switching workspaces up and down,
-    // including after the touchpad gesture.
     workspace-switch {
-        // off
-        // duration-ms 250
-        // curve "ease-out-cubic"
+        spring damping-ratio=0.8 stiffness=1000 epsilon=0.0001
     }
 
-    // All horizontal camera view movement:
-    // - When a window off-screen is focused and the camera scrolls to it.
-    // - When a new window appears off-screen and the camera scrolls to it.
-    // - When a window resizes bigger and the camera scrolls to show it in full.
-    // - And so on.
-    horizontal-view-movement {
-        // off
-        // duration-ms 250
-        // curve "ease-out-cubic"
-    }
-
-    // Window opening animation. Note that this one has different defaults.
     window-open {
-        // off
-        // duration-ms 150
-        // curve "ease-out-expo"
+        spring damping-ratio=0.7 stiffness=800 epsilon=0.0001
     }
 
-    // Config parse error and new default config creation notification
-    // open/close animation.
+    window-close {
+        duration-ms 150
+        curve "ease-out-quad"
+    }
+
+    horizontal-view-movement {
+        spring damping-ratio=0.8 stiffness=2000 epsilon=0.00001
+    }
+
+    window-movement {
+        spring damping-ratio=0.6 stiffness=800 epsilon=0.0001
+    }
+
+    window-resize {
+        spring damping-ratio=0.6 stiffness=800 epsilon=0.0001
+    }
+
     config-notification-open-close {
-        // off
-        // duration-ms 250
-        // curve "ease-out-cubic"
+        spring damping-ratio=0.6 stiffness=1000 epsilon=0.001
     }
 }
 
@@ -383,6 +367,11 @@ animations {
     // open-fullscreen false
 }
 
+window-rule {
+    geometry-corner-radius 8
+    clip-to-geometry true
+}
+
 // Here is a useful example. Work around WezTerms initial configure bug
 // by setting an empty default-column-width.
 window-rule {
@@ -398,6 +387,9 @@ window-rule {
 window-rule {
     match title=r#"^Ediff$"#
     default-column-width { fixed 300; }
+    max-width 700
+    max-height 500
+    min-height 500
 }
 
 window-rule {
@@ -415,6 +407,17 @@ window-rule {
     default-column-width { fixed 750; }
     open-on-output "eDP-1"
 }
+
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    block-out-from "screencast"
+}
+
+// window-rule {
+//     match is-active=false
+//     opacity 0.95
+//     draw-border-with-background false
+// }
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
@@ -463,6 +466,10 @@ binds {
     Mod+I  { focus-window-or-workspace-down; }
     Mod+E    { focus-window-or-workspace-up; }
     Mod+Period { focus-column-right; }
+
+    Mod+WheelScrollDown cooldown-ms=150 { focus-column-left; }
+    Mod+WheelScrollUp   cooldown-ms=150 { focus-column-right; }
+
     // Mod+H     { focus-column-left; }
     // Mod+J     { focus-window-down; }
     // Mod+K     { focus-window-up; }
@@ -607,38 +614,4 @@ binds {
     // directly scanned out. It is therefore useful to check if direct scanout
     // is working.
     // Mod+Shift+Ctrl+T { toggle-debug-tint; }
-}
-
-// Settings for debugging. Not meant for normal use.
-// These can change or stop working at any point with little notice.
-debug {
-    // Make niri take over its DBus services even if it is not running as a session.
-    // Useful for testing screen recording changes without having to relogin.
-    // The main niri instance will *not* currently take back the services; so you will
-    // need to relogin in the end.
-    // dbus-interfaces-in-non-session-instances
-
-    // Wait until every frame is done rendering before handing it over to DRM.
-    // wait-for-frame-completion-before-queueing
-
-    // Enable direct scanout into overlay planes.
-    // May cause frame drops during some animations on some hardware.
-    // enable-overlay-planes
-
-    // Disable the use of the cursor plane.
-    // The cursor will be rendered together with the rest of the frame.
-    // disable-cursor-plane
-
-    // Override the DRM device that niri will use for all rendering.
-    // render-drm-device "/dev/dri/renderD129"
-
-    // Enable the color-transformations capability of the Smithay renderer.
-    // May cause a slight decrease in rendering performance.
-    // enable-color-transformations-capability
-
-    // Emulate zero (unknown) presentation time returned from DRM.
-    // This is a thing on NVIDIA proprietary drivers, so this flag can be
-    // used to test that we do not break too hard on those systems.
-    // emulate-zero-presentation-time
-
 }
