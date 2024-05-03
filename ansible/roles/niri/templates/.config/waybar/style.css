@@ -11,7 +11,8 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: Nerd Font Hack;
+  /* font-family: Nerd Font Hack; */
+  font-family: Symbols Nerd Font;
   min-height: 18px;
 }
 
