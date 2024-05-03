@@ -10,7 +10,7 @@ wayland_packages:
     aur: true
     names:
       # Wayland version of tools
-      - emacs29-git
+      - emacs-wayland
       - vlc-git
 
       # Wayland specific
