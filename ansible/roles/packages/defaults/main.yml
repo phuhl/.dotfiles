@@ -30,6 +30,7 @@ packages:
       - ttf-dejavu
       - ttf-roboto-mono
       - ttf-roboto
+      - ttf-nerd-fonts-symbols
       - adobe-source-han-sans-cn-fonts
       - adobe-source-han-sans-jp-fonts
       - adobe-source-han-sans-kr-fonts
@@ -80,4 +81,3 @@ packages:
     names:
       - kpcli
       - volta-bin
-      - nerd-fonts-complete
