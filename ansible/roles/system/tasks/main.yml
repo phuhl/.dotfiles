@@ -19,8 +19,9 @@
     path: /etc/sudoers
     line: "%wheel ALL=(ALL:ALL) ALL"
     validate: "visudo -cf %s"
-
-
-
-
-
+- name: Raise password enter timeout for sudo command
+  become: yes
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    line: "Defaults passwd_tries=3, passwd_timeout=60"
+    validate: "visudo -cf %s"
