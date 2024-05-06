@@ -7,7 +7,7 @@
   // Choose the order of the modules
   "modules-left": ["wlr/taskbar#icons", "wlr/taskbar#title"],
   "modules-center": [],
-  "modules-right": ["pulseaudio",  "cpu", "memory", "network", "battery", "tray", "clock" ],
+  "modules-right": ["pulseaudio", "custom/bluetooth-battery", "cpu", "memory", "network", "battery", "tray", "clock" ],
   // Modules configuration
   // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -120,5 +120,13 @@
       "default": ["", "", ""]
     },
     "on-click": "pavucontrol"
-  }
+  },
+  "custom/bluetooth-battery": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": 5,
+    "exec": "~/.config/waybar/modules/bluetooth-battery.sh",
+    "exec-if": "~/.config/waybar/scripts/bluetooth_battery_status.sh >/dev/null 2>&1",
+    "signal": 9
+  },
 }
