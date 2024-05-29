@@ -415,6 +415,17 @@ window-rule {
     block-out-from "screencast"
 }
 
+window-rule {
+    match app-id=r#"^qalculate-gtk$"#
+
+    min-height 600
+    max-height 600
+
+    max-width 600
+    min-width 600
+}
+ 
+
 // window-rule {
 //     match is-active=false
 //     opacity 0.95

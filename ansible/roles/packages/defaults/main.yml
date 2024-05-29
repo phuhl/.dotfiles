@@ -55,6 +55,7 @@ packages:
       - hunspell-de
       - hunspell-en_us
       - nano
+      - qalculate-gtk
 
       # Desktop tools
       - flameshot
