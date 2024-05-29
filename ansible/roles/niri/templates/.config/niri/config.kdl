@@ -274,6 +274,8 @@ cursor {
     // `XCURSOR_THEME` and `XCURSOR_SIZE` env variables.
     // xcursor-theme "default"
     // xcursor-size 24
+    xcursor-theme "breeze_cursors"
+    xcursor-size 24
 }
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.

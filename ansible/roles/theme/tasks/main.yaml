@@ -1,0 +1,21 @@
+- name: Install packages
+  ansible.builtin.include_role:
+    name: dotfiles
+  vars:
+    templatesdir: "{{ role_path }}/../theme/templates"
+- name: Install packages
+  ansible.builtin.include_role:
+    name: packages
+  vars:
+    packages:
+      - state: present
+        names:
+          # Kvantum to set arc theme on QT
+          - kvantum-qt5
+          - kvantum
+          # Arc Theme for GTK
+          - arc-gtk-theme
+- name: Set Arc GTK Theme
+  ansible.builtin.command: gsettings set org.gnome.desktop.interface gtk-theme Arc
+- name: Set Arc Qt Theme
+  ansible.builtin.command: kvantummanager --set KvArc
