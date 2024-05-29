@@ -3,21 +3,21 @@
     path: "{{ ansible_env.HOME}}/{{ item.path }}"
     state: directory
     mode: "{{ item.mode }}"
-  with_community.general.filetree: "{{ role_path }}/templates/link"
+  with_community.general.filetree: "{{ templatesdir }}/link"
   when: item.state == 'directory'
 - name: Create directories
   ansible.builtin.file:
     path: "{{ ansible_env.HOME}}/{{ item.path }}"
     state: directory
     mode: "{{ item.mode }}"
-  with_community.general.filetree: "{{ role_path }}/templates/copy"
+  with_community.general.filetree: "{{ templatesdir }}/copy"
   when: item.state == 'directory'
 - name: Create directories for Root
   ansible.builtin.file:
     path: "/root/{{ item.path }}"
     state: directory
     mode: "{{ item.mode }}"
-  with_community.general.filetree: "{{ role_path }}/templates/root"
+  with_community.general.filetree: "{{ templatesdir }}/root"
   when: item.state == 'directory'
   become: true
 
@@ -28,7 +28,7 @@
     state: link
     follow: false # avoid corrupting target files if the link already exists
     mode: "{{ item.mode }}"
-  with_community.general.filetree: "{{ role_path }}/templates/link"
+  with_community.general.filetree: "{{ templatesdir }}/link"
   when: item.state == 'file'
 
 - name: Copy templated configs
@@ -36,7 +36,7 @@
     src: "{{ item.src }}"
     dest: "{{ ansible_env.HOME}}/{{ item.path }}"
     mode: "{{ item.mode }}"
-  with_community.general.filetree: "{{ role_path }}/templates/copy"
+  with_community.general.filetree: "{{ templatesdir }}/copy"
   when: item.state == 'file'
 
 - name: Copy templated configs for root
@@ -44,6 +44,9 @@
     src: "{{ item.src }}"
     dest: "/root/{{ item.path }}"
     mode: "{{ item.mode }}"
-  with_community.general.filetree: "{{ role_path }}/templates/root"
+  with_community.general.filetree: "{{ templatesdir }}/root"
   when: item.state == 'file'
   become: true
+- name: Print the gateway for each host when defined
+  ansible.builtin.debug:
+    msg: "{{ templatesdir }}"
