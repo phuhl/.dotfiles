@@ -110,46 +110,6 @@ input {
     position x=1280 y=0
 }
 
-output "DP-7" {
-    // Uncomment this line to disable this output.
-    // off
-
-    // Scale is a floating-point number, but at the moment only integer values work.
-    scale 1.0
-    position x=0 y=0
-}
-output "DP-6" {
-    // Uncomment this line to disable this output.
-    // off
-
-    // Scale is a floating-point number, but at the moment only integer values work.
-    scale 1.0
-}
-
-output "DP-9" {
-    // Uncomment this line to disable this output.
-    // off
-
-    // Scale is a floating-point number, but at the moment only integer values work.
-    scale 1.0
-    position x=0 y=0
-}
-output "DP-8" {
-    // Uncomment this line to disable this output.
-    // off
-
-    // Scale is a floating-point number, but at the moment only integer values work.
-    scale 1.0
-}
-
-output "eDP-1" {
-    // Uncomment this line to disable this output.
-    // off
-
-    // Scale is a floating-point number, but at the moment only integer values work.
-    scale 2.0
-}
-
 layout {
     // By default focus ring and border are rendered as a solid background rectangle
     // behind windows. That is, they will show up through semitransparent windows.

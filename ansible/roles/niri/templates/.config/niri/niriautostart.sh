@@ -19,3 +19,6 @@ swayidle -w &
 
 # Background img
 swaybg -m fill -i ~/images/downloads/wallpapers/19513k34grf1ejpg.jpg &
+
+# Automatic monitor setup
+kanshi &
