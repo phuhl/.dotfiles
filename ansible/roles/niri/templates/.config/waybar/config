@@ -7,7 +7,7 @@
   // Choose the order of the modules
   "modules-left": ["wlr/taskbar#icons", "wlr/taskbar#title"],
   "modules-center": [],
-  "modules-right": ["pulseaudio",  "cpu", "memory", "network", "battery", "tray", "clock" ],
+  "modules-right": ["pulseaudio", "custom/bluetooth-battery", "cpu", "memory", "network", "battery", "tray", "clock" ],
   // Modules configuration
   // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -72,11 +72,11 @@
     "format-alt": "{:%Y-%m-%d}"
   },
   "cpu": {
-    "format": "{usage}% ",
+    "format": " {usage}%",
     "tooltip": false
   },
   "memory": {
-    "format": "{}% "
+    "format": " {}%"
   },
   "battery": {
     "states": {
@@ -103,21 +103,30 @@
   },
   "pulseaudio": {
     // "scroll-step": 1, // %, can be a float
-    "format": "{volume}% {icon} {format_source}",
-    "format-bluetooth": "{volume}% {icon} {format_source}",
-    "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": " {format_source}",
-    "format-source": "   {volume}% ",
+    "format": "{icon} {volume}%{format_source}",
+    "format-bluetooth": "{icon}  {volume}%{format_source}",
+    "format-bluetooth-muted": " {format_source}",
+    "format-muted": " {format_source}",
+//      "format-source": "   {volume}% ",
+    "format-source": "",
     "format-source-muted": "",
     "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
+      "headphone": ["", "", ""],
+      "hands-free": ["", "", ""],
+      "headset": ["", "", ""],
       "phone": "",
       "portable": "",
       "car": "",
       "default": ["", "", ""]
     },
     "on-click": "pavucontrol"
-  }
+  },
+  "custom/bluetooth-battery": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": 5,
+    "exec": "~/.config/waybar/modules/bluetooth-battery.sh",
+    "exec-if": "~/.config/waybar/scripts/bluetooth_battery_status.sh >/dev/null 2>&1",
+    "signal": 9
+  },
 }

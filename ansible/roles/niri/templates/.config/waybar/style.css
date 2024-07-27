@@ -11,7 +11,8 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: Nerd Font Hack;
+  /* font-family: Nerd Font Hack; */
+  font-family: Symbols Nerd Font;
   min-height: 18px;
 }
 
@@ -56,6 +57,7 @@ window#waybar.PCSX2 #window {
 #mode,
 #window,
 #taskbar,
+#custom-bluetooth-battery,
 #tray {
   margin-top: 8px;
   margin-bottom: 0;
