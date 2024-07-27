@@ -5,13 +5,11 @@ wayland_packages:
   - state: absent
     names:
       - emacs
-      - vlc
   - state: present
     aur: true
     names:
       # Wayland version of tools
       - emacs-wayland
-      - vlc-git
 
       # Wayland specific
       - alacritty

@@ -66,6 +66,7 @@ packages:
       - torbrowser-launcher
       - pavucontrol # Audio interface GUI tool
       - keepassxc
+      - vlc
 
       # Configuration tools
       - v4l-utils # Webcam setup tool
