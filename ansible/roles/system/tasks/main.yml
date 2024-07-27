@@ -13,6 +13,13 @@
     path: /etc/sudoers
     line: "@includedir /etc/sudoers.d"
     validate: "visudo -cf %s"
+- name: Ensure sudoers.d directory has right permissions
+  become: yes
+  ansible.builtin.file:
+    path: /etc/sudoers.d
+    state: directory
+    mode: "440"
+    owner: root
 - name: Ensure sudo can do everything
   become: yes
   ansible.builtin.lineinfile:
