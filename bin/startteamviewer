@@ -1,0 +1,10 @@
+#!/bin/bash
+
+export DISPLAY=:12345
+export QT_QPA_PLATFORM=""
+teamviewer --daemon start
+xwayland-satellite :12345 &
+xwaylandPid=$!
+teamviewer
+
+kill $xwaylandPid
