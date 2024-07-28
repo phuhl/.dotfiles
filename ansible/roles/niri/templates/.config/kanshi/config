@@ -1,21 +1,21 @@
 profile {
-        output eDP-1 enable scale 2
+        output eDP-1 enable scale 2.2
 }
 
 profile {
-        output eDP-1 enable scale 2
+        output eDP-1 enable scale 2.2
         output DP-9 enable scale 1 position 0,0
         output DP-8 enable scale 1
 }
 
 profile {
-        output eDP-1 enable scale 2
+        output eDP-1 enable scale 2.2
         output DP-5 enable scale 1 position 0,0
         output DP-4 enable scale 1
 }
 
 profile {
-        output eDP-1 enable scale 2
+        output eDP-1 enable scale 2.2
         output DP-7 enable scale 1 position 0,0
         output DP-6 enable scale 1
 }
