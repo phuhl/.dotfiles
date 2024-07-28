@@ -12,9 +12,15 @@
         names:
           # Kvantum to set arc theme on QT
           - kvantum-qt5
-          - kvantum
+          # - kvantum
           # Arc Theme for GTK
           - arc-gtk-theme
+      - state: present
+        aur: true
+        names:
+          # Design/theme
+          - kvantum-qt6-git
+
 - name: Set Arc GTK Theme
   ansible.builtin.command: gsettings set org.gnome.desktop.interface gtk-theme Arc
 - name: Set Arc Qt Theme
