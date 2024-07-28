@@ -72,7 +72,7 @@ input {
     warp-mouse-to-focus
 
     // Focus windows and outputs automatically when moving the mouse into them.
-    // focus-follows-mouse
+    focus-follows-mouse
 }
 
 // You can configure outputs by their name, which you can find
@@ -405,8 +405,8 @@ window-rule {
 }
 
 window-rule {
-    match app-id=r#"^pavucontrol$"#
-    default-column-width { fixed 750; }
+    match app-id=r#"pavucontrol$"#
+    default-column-width { fixed 600; }
     open-on-output "eDP-1"
 }
 
@@ -626,5 +626,5 @@ binds {
     // This debug bind will tint all surfaces green, unless they are being
     // directly scanned out. It is therefore useful to check if direct scanout
     // is working.
-    // Mod+Shift+Ctrl+T { toggle-debug-tint; }
+    // Mod+Shift+Ctrl+T { debug-toggle-opaque-regions; }
 }
