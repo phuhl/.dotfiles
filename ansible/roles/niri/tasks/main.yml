@@ -33,6 +33,7 @@
               - niri-git #         The WM
               - wlopm #         Output manger (turn screens on/off)
               - rofi-lbonn-wayland-git
+              - xwayland-satellite
               # - satty #         Screenshot tool like flameshot that
               # actually works on river but not, yet, on niri
               # - rofi-lbonn-wayland # rofi-lbonn-wayland-git while the other one does not work

@@ -9,3 +9,6 @@ git_authoremail: git@ph-uhl.com
 # Location
 latitude: 50.78
 longitude: 5.08
+
+# Keymap
+keymap: colemak
