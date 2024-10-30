@@ -72,7 +72,7 @@ input {
     warp-mouse-to-focus
 
     // Focus windows and outputs automatically when moving the mouse into them.
-    focus-follows-mouse
+    focus-follows-mouse max-scroll-amount="30%"
 }
 
 // You can configure outputs by their name, which you can find
@@ -119,42 +119,20 @@ layout {
     // Niri will draw focus ring and border *around* windows that agree to omit their
     // client-side decorations.
 
-    // You can change how the focus ring looks.
-    focus-ring {
-        // Uncomment this line to disable the focus ring.
-        // off
-
-        // How many logical pixels the ring extends out from the windows.
+    focus-ring { // light
         width 4
-
-        // Colors can be set in a variety of ways:
-        // - CSS named colors: "red"
-        // - RGB hex: "#rgb", "#rgba", "#rrggbb", "#rrggbbaa"
-        // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
-
-        // Color of the ring on the active monitor.
         active-color "#ff0000"
-
-        // Color of the ring on inactive monitors.
         inactive-gradient from="#51d0ffbb" to="#51ffecbb" angle=-30
-
-        // Additionally, theres a legacy RGBA syntax:
-        // active-color 127 200 255 255
-
-        // You can also use gradients. They take precedence over solid colors.
-        // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
-        // The angle is the same as in linear-gradient, and is optional,
-        // defaulting to 180 (top-to-bottom gradient).
-        // You can use any CSS linear-gradient tool on the web to set these up.
-        //
         active-gradient from="#51d0ff" to="#51ffec" angle=-30
-
-        // You can also color the gradient relative to the entire view
-        // of the workspace, rather than relative to just the window itself.
-        // To do that, set relative-to="workspace-view".
-        //
-        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
     }
+
+    /-focus-ring { // dark
+        width 4
+        active-color "#ff0000"
+        inactive-gradient from="#ffac50bb" to="#ffcc50bb" angle=-30
+        active-gradient from="#ffac50" to="#ffcc50" angle=-30
+    }
+
 
     // You can also add a border. It is similar to the focus ring, but always visible.
     border {
@@ -364,11 +342,11 @@ window-rule {
     default-column-width { proportion 1.0; }
 }
 
-window-rule {
-    match app-id=r#"pavucontrol$"#
-    default-column-width { fixed 600; }
-    open-on-output "eDP-1"
-}
+// window-rule {
+//     match app-id=r#"pavucontrol$"#
+//     default-column-width { fixed 600; }
+//     open-on-output "eDP-1"
+// }
 
 window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
@@ -385,6 +363,10 @@ window-rule {
     min-width 600
 }
  
+window-rule {
+    match app-id="evince" title="Unknown"
+    default-column-width { proportion 0.333; }
+}
 
 // window-rule {
 //     match is-active=false

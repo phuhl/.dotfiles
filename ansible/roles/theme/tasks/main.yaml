@@ -1,4 +1,4 @@
-- name: Install packages
+- name: Install dotfiles
   ansible.builtin.include_role:
     name: dotfiles
   vars:
@@ -15,6 +15,7 @@
           # - kvantum
           # Arc Theme for GTK
           - arc-gtk-theme
+          - darkman
       - state: present
         aur: true
         names:
@@ -25,3 +26,8 @@
   ansible.builtin.command: gsettings set org.gnome.desktop.interface gtk-theme Arc
 - name: Set Arc Qt Theme
   ansible.builtin.command: kvantummanager --set KvArc
+- name: Disable auto start of darkman (as it is started with niri)
+  ansible.builtin.systemd:
+    name: darkman.service
+    scope: user
+    enabled: false

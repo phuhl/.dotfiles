@@ -38,21 +38,11 @@
               # actually works on river but not, yet, on niri
               # - rofi-lbonn-wayland # rofi-lbonn-wayland-git while the other one does not work
 
-    - name: Create directories for template files
-      ansible.builtin.file:
-        path: "{{ ansible_env.HOME}}/{{ item.path }}"
-        state: directory
-      with_community.general.filetree: "{{ role_path }}/templates/"
-      when: item.state == 'directory'
-
-    - name: Create symlinks for template files
-      ansible.builtin.file:
-        src: "{{ item.src }}"
-        path: "{{ ansible_env.HOME}}/{{ item.path }}"
-        state: link
-        follow: false #         avoid corrupting target files if the link already exists
-      with_community.general.filetree: "{{ role_path }}/templates/"
-      when: item.state == 'file'
+    - name: Install dotfiles
+      ansible.builtin.include_role:
+        name: dotfiles
+      vars:
+        templatesdir: "{{ role_path }}/../niri/templates"
 
     - name: Hide GTK Window Decorations
       ansible.builtin.include_role:

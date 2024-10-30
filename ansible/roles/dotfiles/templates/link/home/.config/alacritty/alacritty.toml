@@ -1,0 +1,16 @@
+
+[general]
+import = ["alacritty-theme.toml"]
+
+[window]
+opacity = 1
+blur = false
+padding = { x = 12, y = 10 }
+title = "Terminal"
+
+[scrolling]
+history = 20000
+multiplier = 5
+
+[font]
+normal = { family = "Roboto Mono", style = "Regular" }

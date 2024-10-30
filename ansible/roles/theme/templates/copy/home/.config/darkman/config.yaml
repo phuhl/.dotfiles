@@ -1,0 +1,5 @@
+lat: {{ latitude }}
+lng: {{ longitude }}
+
+dbusserver: true
+portal: true
