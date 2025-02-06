@@ -120,15 +120,13 @@ layout {
     // client-side decorations.
 
     focus-ring { // light
-        width 4
-        active-color "#ff0000"
+        width 3
         inactive-gradient from="#51d0ffbb" to="#51ffecbb" angle=-30
         active-gradient from="#51d0ff" to="#51ffec" angle=-30
     }
 
     /-focus-ring { // dark
-        width 4
-        active-color "#ff0000"
+        width 3
         inactive-gradient from="#ffac50bb" to="#ffcc50bb" angle=-30
         active-gradient from="#ffac50" to="#ffcc50" angle=-30
     }
@@ -140,9 +138,10 @@ layout {
         // If you enable the border, you probably want to disable the focus ring.
 
 
-        width 4
-        active-color "#50505000"
-        inactive-color "#50505000"
+        width 1
+
+        inactive-gradient from="#bbbbbbff" to="#555555ff" angle=-30
+        active-gradient from="#ffffffff" to="#ffffffff" angle=-30
 
         // active-gradient from="#ffbb66" to="#ffc880" angle=45 relative-to="workspace-view"
         // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
@@ -188,6 +187,15 @@ layout {
     //   together with the previously focused column.
     // - "always", the focused column will always be centered.
     center-focused-column "never"
+
+    shadow {
+       on
+       draw-behind-window true
+       offset x=1 y=1
+       spread 1
+       softness 14
+       color "#00000070"
+    }
 }
 
 // Add lines like this to spawn processes at startup.
@@ -339,6 +347,11 @@ window-rule {
 
 window-rule {
     match app-id=r#"^emacs$"#
+    default-column-width { proportion 1.0; }
+}
+
+window-rule {
+    match app-id=r#"^firefox$"#
     default-column-width { proportion 1.0; }
 }
 

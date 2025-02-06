@@ -22,6 +22,7 @@
               - grim #          CLI tool for taking screenshots on wayland
               - swaybg #        Background images
               - waybar #        Bar
+	      - kanshi #        Output manager
           - state: removed
             names:
               - rofi
