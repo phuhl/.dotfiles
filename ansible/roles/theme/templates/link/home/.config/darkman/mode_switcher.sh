@@ -37,8 +37,8 @@ light)
     kvantummanager --set KvArc
 
     # niri
-    sed -i 's/ \/-\(focus-ring { \/\/ light\)/ \1/
-            s/ \(focus-ring { \/\/ dark\)/ \/-\1/' "$HOME"/.config/niri/config.kdl
+    sed -i 's/ \/-\(.* { \/\/ light\)/ \1/
+            s/ \(.* { \/\/ dark\)/ \/-\1/' "$HOME"/.config/niri/config.kdl
 
 
     # alacritty
@@ -55,8 +55,8 @@ dark)
     kvantummanager --set KvArcDark
 
     # niri
-    sed -i 's/ \(focus-ring { \/\/ light\)/ \/-\1/
-            s/ \/-\(focus-ring { \/\/ dark\)/ \1/' "$HOME"/.config/niri/config.kdl
+    sed -i 's/ \(.* { \/\/ light\)/ \/-\1/
+            s/ \/-\(.* { \/\/ dark\)/ \1/' "$HOME"/.config/niri/config.kdl
 
     # alacritty
     sed -i 's/light/dark/' "$HOME"/.config/alacritty/alacritty-theme.toml

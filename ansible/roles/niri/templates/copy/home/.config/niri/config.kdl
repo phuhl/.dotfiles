@@ -133,18 +133,18 @@ layout {
 
 
     // You can also add a border. It is similar to the focus ring, but always visible.
-    border {
-        // The settings are the same as for the focus ring.
-        // If you enable the border, you probably want to disable the focus ring.
-
-
+    border { // light
         width 1
 
         inactive-gradient from="#bbbbbbff" to="#555555ff" angle=-30
-        active-gradient from="#ffffffff" to="#ffffffff" angle=-30
+        active-gradient from="#51d0ff" to="#51ffec" angle=-30
+    }
 
-        // active-gradient from="#ffbb66" to="#ffc880" angle=45 relative-to="workspace-view"
-        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+    /-border { // dark
+        width 1
+
+        inactive-gradient from="#bbbbbbff" to="#555555ff" angle=-30
+        active-gradient from="#ffac50" to="#ffcc50" angle=-30
     }
 
     // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
@@ -557,6 +557,9 @@ binds {
     // Finer height adjustments when in column with other windows.
     Mod+Shift+Minus { set-window-height "-10%"; }
     Mod+Shift+Equal { set-window-height "+10%"; }
+
+    Mod+Shift+Space { toggle-window-floating; }
+    Mod+Ctrl+Space { switch-focus-between-floating-and-tiling; }
 
     // Actions to switch layouts.
     // Note: if you uncomment these, make sure you do NOT have
