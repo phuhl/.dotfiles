@@ -38,7 +38,8 @@ light)
 
     # niri
     sed -i 's/ \/-\(.* { \/\/ light\)/ \1/
-            s/ \(.* { \/\/ dark\)/ \/-\1/' "$HOME"/.config/niri/config.kdl
+            s/ *\(.* { \/\/ dark\)/ \/-\1/
+            s/\/-\/-/\/-/' "$HOME"/.config/niri/config.kdl
 
 
     # alacritty
@@ -50,13 +51,14 @@ light)
     ;;
 dark)
     # Set mode for GTK4 applications
-        niri msg action do-screen-transition && dconf write /org/gnome/desktop/interface/color-scheme '"prefer-dark"'
+    niri msg action do-screen-transition && dconf write /org/gnome/desktop/interface/color-scheme '"prefer-dark"'
 
     kvantummanager --set KvArcDark
 
     # niri
-    sed -i 's/ \(.* { \/\/ light\)/ \/-\1/
-            s/ \/-\(.* { \/\/ dark\)/ \1/' "$HOME"/.config/niri/config.kdl
+    sed -i 's/ *\(.* { \/\/ light\)/ \/-\1/
+            s/ \/-\(.* { \/\/ dark\)/ \1/
+            s/\/-\/-/\/-/' "$HOME"/.config/niri/config.kdl
 
     # alacritty
     sed -i 's/light/dark/' "$HOME"/.config/alacritty/alacritty-theme.toml
