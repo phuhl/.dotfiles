@@ -275,6 +275,12 @@ animations {
     }
 }
 
+layer-rule {
+    match namespace="^wallpaper$"
+    place-within-backdrop true
+}
+
+
 // Window rules let you adjust behavior for individual windows.
 // They are processed in order of appearance in this file.
 // (This example rule is commented out with a "/-" in front.)

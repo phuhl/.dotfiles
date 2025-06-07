@@ -18,7 +18,7 @@ deadd-notification-center &
 swayidle -w &
 
 # Background img
-#swaybg -m fill -i ~/images/downloads/wallpapers/19513k34grf1ejpg.jpg &
+swaybg -m fill -i ~/images/downloads/wallpapers/19513k34grf1ejpg_blurred.jpg &
 
 # Automatic monitor setup
 kanshi &
