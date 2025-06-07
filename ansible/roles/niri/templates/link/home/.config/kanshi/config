@@ -25,3 +25,9 @@ profile {
         output eDP-1 enable scale 2.2
         output DP-7 enable scale 1 position 0,0
 }
+
+
+profile {
+        output eDP-1 enable scale 2.2
+        output DP-1 enable scale 1 position 0,0
+}

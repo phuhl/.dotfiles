@@ -10,3 +10,5 @@ alias add-key="ssh-add ~/.ssh/philipp@admin_LT3"
 alias dashboard="~/git/dashboard/dashboard.sh"
 
 alias eq="emacs -q -nw"
+
+alias viewimg="loupe"
