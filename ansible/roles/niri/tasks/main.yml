@@ -12,7 +12,8 @@
           - state: present
             names:
               - brightnessctl # Control brightness from CLI
-              - swaylock #      Lock screen
+              # - swaylock #      Lock screen
+              - hyprlock #      Lock screen
               - swayidle #      Deamon to handle screen timeout
               - gammastep
               - xdg-desktop-portal-gtk # Service for screen sharing
