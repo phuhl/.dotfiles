@@ -61,7 +61,8 @@ window#waybar.PCSX2 #window {
 #tray {
   margin-top: 8px;
   margin-bottom: 0;
-  background: #282a36;
+  /*   background: #282a36;*/
+  background: rgba(40, 42, 54, 0.6);
   color: #f8f8f2;
   transition: none;
   padding-left: 7px;

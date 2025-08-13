@@ -3,8 +3,7 @@
 import = ["alacritty-theme.toml"]
 
 [window]
-opacity = 1
-blur = false
+blur = true
 padding = { x = 12, y = 10 }
 title = "Terminal"
 

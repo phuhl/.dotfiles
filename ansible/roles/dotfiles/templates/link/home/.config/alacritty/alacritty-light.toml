@@ -1,8 +1,232 @@
+[window]
+opacity = 0.85
+
 [colors]
 
 [colors.primary]
 
+    # This section documents the [colors.primary] table of the configuration file.
 
+    foreground = "#111111"
 
+        # Default: "#d8d8d8"
 
+    background ="#ffffff"
+
+        # Default: "#181818"
+
+    dim_foreground ="#664433"
+
+        # If this is not set, the color is automatically calculated based on the foreground color.
+
+        # Default: "#828482"
+
+    bright_foreground ="None"
+
+        # This color is only used when draw_bold_text_with_bright_colors is true.
+
+        # If this is not set, the normal foreground will be used.
+
+        # Default: "None"
+
+# cursor = { text = "CellBackground", cursor = "CellForeground" }
+
+    # Colors which should be used to draw the terminal cursor.
+
+    # Allowed values are hexadecimal colors like #ff00ff, or CellForeground/CellBackground, which references the affected cell.
+
+    # Default: { text = "CellBackground", cursor = "CellForeground" }
+
+# vi_mode_cursor = { text = "CellBackground", cursor = "CellForeground" }
+
+    # Colors for the cursor when the vi mode is active.
+
+    # Allowed values are hexadecimal colors like #ff00ff, or CellForeground/CellBackground, which references the affected cell.
+
+    # Default: { text = "CellBackground", cursor = "CellForeground" }
+
+[colors.search]
+
+    # This section documents the [colors.search] table of the configuration.
+
+    # Allowed values are hexadecimal colors like #ff00ff, or CellForeground/CellBackground, which references the affected cell.
+
+    matches = { foreground = "#181818", background = "#ac4242" }
+
+        # Default: { foreground = "#181818", background = "#ac4242" }
+
+    focused_match = { foreground = "#181818", background = "#f4bf75" }
+
+        # Default: { foreground = "#181818", background = "#f4bf75" }
+
+[colors.hints]
+
+    # This section documents the [colors.hints] table of the configuration.
+
+    start = { foreground = "#181818", background = "#f4bf75" }
+
+        # First character in the hint label.
+
+        # Allowed values are hexadecimal colors like #ff00ff, or CellForeground/CellBackground, which references the affected cell.
+
+        # Default: { foreground = "#181818", background = "#f4bf75" }
+
+    end = { foreground = "#181818", background = "#ac4242" }
+
+        # All characters after the first one in the hint label.
+
+        # Allowed values are hexadecimal colors like #ff00ff, or CellForeground/CellBackground, which references the affected cell.
+
+        # Default: { foreground = "#181818", background = "#ac4242" }
+
+# line_indicator = { foreground = "None", background = "None" }
+
+    # Color used for the indicator displaying the position in history during search and vi mode.
+
+    # Setting this to "None" will use the opposing primary color.
+
+    # Default: { foreground = "None", background = "None" }
+
+# footer_bar = { foreground = "#181818", background = "#d8d8d8" }
+
+    # Color used for the footer bar on the bottom, used by search regex input, hyperlink URI preview, etc.
+
+    # Default: { foreground = "#181818", background = "#d8d8d8" }
+
+# selection = { text = "CellBackground", background = "CellForeground" }
+
+    # Colors used for drawing selections.
+
+    # Allowed values are hexadecimal colors like #ff00ff, or CellForeground/CellBackground, which references the affected cell.
+
+    # Default: { text = "CellBackground", background = "CellForeground" }
+
+[colors.normal]
+
+    # This section documents the [colors.normal] table of the configuration.
+
+    black = "#111111"
+
+        # Default: "#181818"
+
+    red = "#EC3E00"
+
+        # Default: "#ac4242"
+
+    green = "#4C8F00"
+
+        # Default: "#90a959"
+
+    yellow = "#F0B700"
+
+        # Default: "#f4bf75"
+
+    blue = "#0B6E9F"
+
+        # Default: "#6a9fb5"
+
+    magenta = "#782851"
+
+        # Default: "#aa759f"
+
+    cyan = "#369CA1"
+
+        # Default: "#75b5aa"
+
+    white = "#d8d8d8"
+
+        # Default: "#d8d8d8"
+
+[colors.bright]
+
+    # This section documents the [colors.bright] table of the configuration.
+
+    black = "#6b6b6b"
+
+        # Default: "#6b6b6b"
+
+    red = "#c55555"
+
+        # Default: "#c55555"
+
+    green = "#aac474"
+
+        # Default: "#aac474"
+
+    yellow = "#feca88"
+
+        # Default: "#feca88"
+
+    blue = "#82b8c8"
+
+        # Default: "#82b8c8"
+
+    magenta = "#c28cb8"
+
+        # Default: "#c28cb8"
+
+    cyan = "#93d3c3"
+
+        # Default: "#93d3c3"
+
+    white = "#f8f8f8"
+
+        # Default: "#f8f8f8"
+
+[colors.dim]
+
+    # This section documents the [colors.dim] table of the configuration.
+
+    # If the dim colors are not set, they will be calculated automatically based on the normal colors
+    # .
+
+    black = "#333333"
+
+        # Default: "#0f0f0f"
+
+    red = "#712b2b"
+
+        # Default: "#712b2b"
+
+    green = "#5f6f3a"
+
+        # Default: "#5f6f3a"
+
+    yellow = "#a17e4d"
+
+        # Default: "#a17e4d"
+
+    blue = "#456877"
+
+        # Default: "#456877"
+
+    magenta = "#704d68"
+
+        # Default: "#704d68"
+
+    cyan = "#4d7770"
+
+        # Default: "#4d7770"
+
+    white = "#8e8e8e"
+
+        # Default: "#8e8e8e"
+
+# indexed_colors = []
+
+    # The indexed colors include all colors from 16 to 256. When these are not set, theyre filled with sensible defaults.
+
+    # Default: []
+
+# transparent_background_colors = false
+
+    # Whether or not window.opacity applies to all cell backgrounds, or only to the default background. When set to true all cells will be transparent regardless of their background color.
+
+    # Default: false
+
+# draw_bold_text_with_bright_colors = false
+
+    # When true, bold text is drawn using the bright color variants.
+
+    # Default: false
 

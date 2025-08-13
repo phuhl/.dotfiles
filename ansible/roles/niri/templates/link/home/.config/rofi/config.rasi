@@ -40,13 +40,22 @@ window {
     fullscreen: false;
     background-color:               @background;
     text-color:                     @foreground;
-    border-radius:                  10px;
+    /*    border-radius:                  10px; */
     height:                         50%;
     width:                          50%;
     x-offset:                       0;
     y-offset:                       25%;
     location:                       north;
     anchor:                         north;
+}
+
+mainbox {
+    background-color:               @background-color;
+    /*    margin:                         20% 25% 25% 25%; */
+    children:                       [ inputbar, listview ];
+    spacing:                        15px;
+    padding:                        30px 25px 15px 25px;
+    border-radius:                  10px; 
 }
 
 prompt {
@@ -93,15 +102,6 @@ listview {
     cycle:                          false;
     dynamic:                        true;
     layout:                         vertical;
-}
-
-mainbox {
-    background-color:               @background-color;
-    /*    margin:                         20% 25% 25% 25%; */
-    children:                       [ inputbar, listview ];
-    spacing:                        15px;
-    padding:                        30px 25px 15px 25px;
-    border-radius:                  10px;
 }
 
 element {
