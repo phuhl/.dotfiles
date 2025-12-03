@@ -24,7 +24,7 @@ swaybg -m fill -i ~/images/downloads/wallpapers/19513k34grf1ejpg_blurred.jpg &
 kanshi &
 
 # Start darkman
-darkman get &
+darkman run &
 
 # Desktop icons + wallpaper
 pcmanfm-qt --desktop &
