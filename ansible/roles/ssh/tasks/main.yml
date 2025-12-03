@@ -1,6 +1,6 @@
 - name: Create directories
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME}}/{{ item.path }}"
+    path: "{{ ansible_facts['env']['HOME']}}/{{ item.path }}"
     state: directory
     mode: "{{ item.mode }}"
   with_community.general.filetree: "{{ role_path }}/templates/"
@@ -9,7 +9,7 @@
 - name: Create symlinks
   ansible.builtin.file:
     src: "{{ item.src }}"
-    path: "{{ ansible_env.HOME}}/.config/{{ item.path }}"
+    path: "{{ ansible_facts['env']['HOME']}}/.config/{{ item.path }}"
     state: link
     follow: false # avoid corrupting target files if the link already exists
     mode: "{{ item.mode }}"
@@ -20,7 +20,7 @@
   ansible.builtin.copy:
     force: false
     src: "{{ role_path }}/templates/.ssh/config"
-    dest: "{{ ansible_env.HOME}}/.ssh/config"
+    dest: "{{ ansible_facts['env']['HOME']}}/.ssh/config"
     mode: "0600"
 
 - name: Enable and start service

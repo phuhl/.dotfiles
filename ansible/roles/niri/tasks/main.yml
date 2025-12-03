@@ -24,6 +24,7 @@
               - swaybg #        Background images
               - waybar #        Bar
               - kanshi #        Output manager
+              # - niri #         The WM
           - state: removed
             names:
               - rofi
@@ -32,7 +33,6 @@
           - state: present
             aur: true
             names:
-              - niri-git #         The WM
               - wlopm #         Output manger (turn screens on/off)
               - rofi-lbonn-wayland-git
               - xwayland-satellite

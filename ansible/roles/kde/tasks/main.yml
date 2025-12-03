@@ -3,12 +3,12 @@
   block:
     - name: Create directory
       ansible.builtin.file:
-        path: "{{ ansible_env.HOME}}/.config/zsh"
+        path: "{{ ansible_facts['env']['HOME']}}/.config/zsh"
         state: directory
     - name: Create symlinks
       ansible.builtin.file:
         src: "{{ role_path }}/templates/autostart.zsh"
-        path: "{{ ansible_env.HOME}}/.config/zsh/autostart.zsh"
+        path: "{{ ansible_facts['env']['HOME']}}/.config/zsh/autostart.zsh"
         state: link
         follow: false # avoid corrupting target files if the link already exists
     - name: Install wayland

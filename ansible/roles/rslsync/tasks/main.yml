@@ -6,7 +6,7 @@
       - rslsync
 - name: Check if config exists
   stat:
-    path: "{{ ansible_env.HOME}}/.config/rslsync/rslsync.conf"
+    path: "{{ ansible_facts['env']['HOME']}}/.config/rslsync/rslsync.conf"
   register: configStat
 - name: Config file
   when: not configStat.stat.exists
@@ -16,40 +16,40 @@
       ansible.builtin.copy:
         remote_src: true
         src: "/etc/rslsync.conf"
-        dest: "{{ ansible_env.HOME}}/.config/rslsync/rslsync.conf"
+        dest: "{{ ansible_facts['env']['HOME']}}/.config/rslsync/rslsync.conf"
         mode: "0700"
-        owner: "{{ ansible_user_id }}"
+        owner: "{{ ansible_facts['user_id'] }}"
     - name: Set device name
       lineinfile:
         regexp: '^([ ]*)"device_name"[ ]*:.*$'
         line: '\1"device_name": "{{ ansible_hostname }}",'
         backrefs: true
-        dest: "{{ ansible_env.HOME}}/.config/rslsync/rslsync.conf"
+        dest: "{{ ansible_facts['env']['HOME']}}/.config/rslsync/rslsync.conf"
     - name: Set list url name
       lineinfile:
         regexp: '^([ ]*)"listen":.*$'
         line: '\1"listen": "127.0.0.1:8888",'
         backrefs: true
-        dest: "{{ ansible_env.HOME}}/.config/rslsync/rslsync.conf"
+        dest: "{{ ansible_facts['env']['HOME']}}/.config/rslsync/rslsync.conf"
     - name: Set list url name
       lineinfile:
         regexp: '^([ ]*)"storage_path"[ ]*:.*$'
-        line: '\1"storage_path": "{{ ansible_env.HOME}}/.local/lib/rslsync",'
+        line: '\1"storage_path": "{{ ansible_facts["env"]["HOME"]}}/.local/lib/rslsync",'
         backrefs: true
-        dest: "{{ ansible_env.HOME}}/.config/rslsync/rslsync.conf"
+        dest: "{{ ansible_facts['env']['HOME']}}/.config/rslsync/rslsync.conf"
     - name: Set list url name
       lineinfile:
         regexp: '^([ ]*)"pid_file"[ ]*:.*$'
-        line: '\1"pid_file": "{{ ansible_env.HOME}}/.local/run/resilio.pid",'
+        line: '\1"pid_file": "{{ ansible_facts["env"]["HOME"]}}/.local/run/resilio.pid",'
         backrefs: true
-        dest: "{{ ansible_env.HOME}}/.config/rslsync/rslsync.conf"
+        dest: "{{ ansible_facts['env']['HOME']}}/.config/rslsync/rslsync.conf"
 - name: Creates directories
   file:
-    path: "{{ ansible_env.HOME}}/.local/lib/rslsync"
+    path: "{{ ansible_facts['env']['HOME']}}/.local/lib/rslsync"
     state: directory
 - name: Creates directories
   file:
-    path: "{{ ansible_env.HOME}}/.local/run"
+    path: "{{ ansible_facts['env']['HOME']}}/.local/run"
     state: directory
 - name: Enable and start service
   ansible.builtin.systemd:

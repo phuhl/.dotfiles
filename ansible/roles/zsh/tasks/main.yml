@@ -2,7 +2,7 @@
 - name: Set up zsh for user
   become: no
   vars:
-    the_user: "{{ ansible_user_id }}"
+    the_user: "{{ ansible_facts['user_id'] }}"
   block:
     - name: change user shell to zsh
       become: yes

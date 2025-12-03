@@ -8,5 +8,5 @@
     - name: Create gitconfig.local
       template:
         src: "{{ role_path }}/templates/gitconfig.local"
-        dest: "{{ ansible_env.HOME }}/.gitconfig.local"
+        dest: "{{ ansible_facts['env']['HOME'] }}/.gitconfig.local"
         mode: 0644

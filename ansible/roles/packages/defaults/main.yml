@@ -81,5 +81,4 @@ packages:
   - state: present
     aur: true
     names:
-      - kpcli
       - volta-bin
