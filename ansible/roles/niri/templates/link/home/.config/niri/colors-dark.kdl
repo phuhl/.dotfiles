@@ -1,0 +1,30 @@
+layout {
+    // By default focus ring and border are rendered as a solid background rectangle
+    // behind windows. That is, they will show up through semitransparent windows.
+    // This is because windows using client-side decorations can have an arbitrary shape.
+    //
+    // If you do not like that, you should uncomment `prefer-no-csd` below.
+    // Niri will draw focus ring and border *around* windows that agree to omit their
+    // client-side decorations.
+
+    focus-ring {
+        width 3
+        inactive-gradient from="#ffac50bb" to="#ffcc50bb" angle=-30
+        active-gradient from="#ffac50" to="#ffcc50" angle=-30
+    }
+
+
+    // You can also add a border. It is similar to the focus ring, but always visible.
+    border {
+        width 1
+
+        inactive-gradient from="#bbbbbbff" to="#555555ff" angle=-30
+        active-gradient from="#ffac50" to="#ffcc50" angle=-30
+    }
+}
+
+recent-windows {
+  highlight {
+    active-color "#ffac50"
+  }                
+}

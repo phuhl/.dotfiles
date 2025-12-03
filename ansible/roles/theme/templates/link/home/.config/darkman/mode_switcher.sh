@@ -37,9 +37,8 @@ light)
     kvantummanager --set KvArc
 
     # niri
-    sed -i 's/ \/-\(.* { \/\/ light\)/ \1/
-            s/ *\(.* { \/\/ dark\)/ \/-\1/
-            s/\/-\/-/\/-/' "$HOME"/.config/niri/config.kdl
+    sed -i 's/include "colors-dark.kdl"/include "colors-light.kdl"/' \
+         "$HOME"/.config/niri/theme.kdl
 
 
     # alacritty
@@ -56,9 +55,9 @@ dark)
     kvantummanager --set KvArcDark
 
     # niri
-    sed -i 's/ *\(.* { \/\/ light\)/ \/-\1/
-            s/ \/-\(.* { \/\/ dark\)/ \1/
-            s/\/-\/-/\/-/' "$HOME"/.config/niri/config.kdl
+    sed -i 's/include "colors-light.kdl"/include "colors-dark.kdl"/' \
+        "$HOME"/.config/niri/theme.kdl
+
 
     # alacritty
     sed -i 's/light/dark/' "$HOME"/.config/alacritty/alacritty-theme.toml

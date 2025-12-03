@@ -1,0 +1,81 @@
+input {
+    keyboard {
+        xkb {
+            // You can set rules, model, layout, variant and options.
+            // For more information, see xkeyboard-config(7).
+
+            // For example:
+            layout "us(colemak)"
+//           layout "de"
+        }
+
+        // You can set the keyboard repeat parameters. The defaults match wlroots and sway.
+        // Delay is in milliseconds before the repeat starts. Rate is in characters per second.
+        repeat-delay 200
+        repeat-rate 30
+
+        // Niri can remember the keyboard layout globally (the default) or per-window.
+        // - "global" - layout change is global for all windows.
+        // - "window" - layout is tracked for each window individually.
+        // track-layout "global"
+    }
+
+    // Next sections include libinput settings.
+    // Omitting settings disables them, or leaves them at their default values.
+    touchpad {
+        tap
+        // dwt
+        // dwtp
+        // natural-scroll
+        // accel-speed 0.2
+        accel-profile "adaptive"
+        // tap-button-map "left-middle-right"
+    }
+
+    mouse {
+        // natural-scroll
+        // accel-speed 0.2
+        // accel-profile "flat"
+    }
+
+    trackpoint {
+        // natural-scroll
+        // accel-speed 0.2
+        // accel-profile "flat"
+    }
+
+    tablet {
+        // Set the name of the output (see below) which the tablet will map to.
+        // If this is unset or the output does not exist, the tablet maps to one of the
+        // existing outputs.
+        map-to-output "eDP-1"
+    }
+
+    touch {
+        // Set the name of the output (see below) which touch input will map to.
+        // If this is unset or the output does not exist, touch input maps to one of the
+        // existing outputs.
+        map-to-output "eDP-1"
+    }
+
+    // By default, niri will take over the power button to make it sleep
+    // instead of power off.
+    // Uncomment this if you would like to configure the power button elsewhere
+    // (i.e. logind.conf).
+    // disable-power-key-handling
+
+    // Uncomment this to make the mouse warp to the center of newly focused windows.
+    warp-mouse-to-focus
+
+    // Focus windows and outputs automatically when moving the mouse into them.
+    focus-follows-mouse max-scroll-amount="30%"
+}
+
+cursor {
+    // Change the theme and size of the cursor as well as set the
+    // `XCURSOR_THEME` and `XCURSOR_SIZE` env variables.
+    // xcursor-theme "default"
+    // xcursor-size 24
+    xcursor-theme "breeze_cursors"
+    xcursor-size 24
+}

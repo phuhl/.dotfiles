@@ -1,0 +1,101 @@
+// This config is in the KDL format: https://kdl.dev
+// "/-" comments out the following node.
+
+include "inputs.kdl"
+include "layout.kdl"
+include "animations.kdl"
+include "layers.kdl"
+include "windows-rules.kdl"
+include "keybinds.kdl"
+include "theme.kdl"
+
+
+// Add lines like this to spawn processes at startup.
+// Note that running niri as a session supports xdg-desktop-autostart,
+// which may be more convenient to use.
+// spawn-at-startup "alacritty" "-e" "fish"
+
+// spawn-at-startup "alacritty"
+spawn-at-startup "~/.config/niri/niriautostart.sh"
+
+// You can override environment variables for processes spawned by niri.
+environment {
+    // Set a variable like this:
+    // QT_QPA_PLATFORM "wayland"
+
+    // Remove a variable by using null as the value:
+    // DISPLAY null
+}
+
+
+
+
+// You can configure outputs by their name, which you can find
+// by running `niri msg outputs` while inside a niri instance.
+// The built-in laptop monitor is usually called "eDP-1".
+// Remember to uncomment the node by removing "/-"!
+/-output "eDP-1" {
+    // Uncomment this line to disable this output.
+    // off
+
+    // Scale is a floating-point number, but at the moment only integer values work.
+    scale 2.0
+
+    // Transform allows to rotate the output counter-clockwise, valid values are:
+    // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
+    transform "normal"
+
+    // Resolution and, optionally, refresh rate of the output.
+    // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
+    // If the refresh rate is omitted, niri will pick the highest refresh rate
+    // for the resolution.
+    // If the mode is omitted altogether or is invalid, niri will pick one automatically.
+    // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
+    mode "1920x1080@120.030"
+
+    // Position of the output in the global coordinate space.
+    // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
+    // The cursor can only move between directly adjacent outputs.
+    // Output scale has to be taken into account for positioning:
+    // outputs are sized in logical, or scaled, pixels.
+    // For example, a 3840×2160 output with scale 2.0 will have a logical size of 1920×1080,
+    // so to put another output directly adjacent to it on the right, set its x to 1920.
+    // It the position is unset or results in an overlap, the output is instead placed
+    // automatically.
+    position x=1280 y=0
+}
+
+
+// overview {
+//     workspace-shadow {
+//         off
+//     }
+// }
+
+
+// Uncomment this line to ask the clients to omit their client-side decorations if possible.
+// If the client will specifically ask for CSD, the request will be honored.
+// Additionally, clients will be informed that they are tiled, removing some rounded corners.
+prefer-no-csd
+
+// You can change the path where screenshots are saved.
+// A ~ at the front will be expanded to the home directory.
+// The path is formatted with strftime(3) to give you the screenshot date and time.
+// screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+// You can also set this to null to disable saving screenshots to disk.
+screenshot-path null
+
+// Settings for the "Important Hotkeys" overlay.
+hotkey-overlay {
+    // Uncomment this line if you do not want to see the hotkey help at niri startup.
+    skip-at-startup
+}
+
+
+recent-windows {
+  highlight {
+    corner-radius 8
+    padding 15
+  }                
+}

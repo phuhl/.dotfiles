@@ -1,4 +1,10 @@
 #!/bin/bash
 
 # grim -g "$(slurp)" - | wl-copy
-grim -g "$(slurp -o -r -c '#ff0000ff')" - | satty --filename - --fullscreen
+# grim -g "$(slurp -o -r -c '#ff0000ff')" - | satty --filename - --fullscreen
+
+
+niri msg action screenshot --path /tmp/screenshot.png
+inotifywait -q -e close_write /tmp/screenshot.png
+satty --filename /tmp/screenshot.png
+

@@ -1,0 +1,130 @@
+// Use lswt -j to find the app-id and title of views
+
+
+// Window rules let you adjust behavior for individual windows.
+// They are processed in order of appearance in this file.
+// (This example rule is commented out with a "/-" in front.)
+/-window-rule {
+    // Match directives control which windows this rule will apply to.
+    // You can match by app-id and by title.
+    // The window must match all properties of the match directive.
+    match app-id="org.myapp.MyApp" title="My Cool App"
+
+    // There can be multiple match directives. A window must match any one
+    // of the rules match directives.
+    //
+    // If there are no match directives, any window will match the rule.
+    match title="Second App"
+
+    // You can also add exclude directives which have the same properties.
+    // If a window matches any exclude directive, it will not match this rule.
+    //
+    // Both app-id and title are regular expressions.
+    // Raw KDL strings are helpful here.
+    exclude app-id=r#"\.unwanted\."#
+
+    // Here are the properties that you can set on a window rule.
+    // You can override the default column width.
+    default-column-width { proportion 0.75; }
+
+    // You can set the output that this window will initially open on.
+    // If such an output does not exist, it will open on the currently
+    // focused output as usual.
+    open-on-output "eDP-1"
+
+    // Make this window open as a maximized column.
+    open-maximized true
+
+    // Make this window open fullscreen.
+    open-fullscreen true
+    // You can also set this to false to prevent a window from opening fullscreen.
+    // open-fullscreen false
+}
+
+window-rule {
+    geometry-corner-radius 8
+    clip-to-geometry true
+    draw-border-with-background false
+}
+
+// Here is a useful example. Work around WezTerms initial configure bug
+// by setting an empty default-column-width.
+window-rule {
+    // This regular expression is intentionally made as specific as possible,
+    // since this is the default config, and we want no false positives.
+    // You can get away with just app-id="wezterm" if you want.
+    // The regular expression can match anywhere in the string.
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}
+}
+
+
+window-rule {
+    match title=r#"^Ediff$"#
+    default-column-width { fixed 300; }
+    max-width 700
+    max-height 500
+    min-height 500
+}
+
+window-rule {
+    match app-id=r#"^org.gnome.Weather$"#
+    default-window-height { fixed 700; }
+    default-column-width { fixed 900; }
+}
+
+
+window-rule {
+    match app-id=r#"^Alacritty$"#
+    default-column-width { fixed 700; }
+}
+
+window-rule {
+    match app-id=r#"^emacs$"#
+    default-column-width { proportion 1.0; }
+}
+
+window-rule {
+    match app-id=r#"^firefox$"#
+    default-column-width { proportion 1.0; }
+}
+
+// window-rule {
+//     match app-id=r#"pavucontrol$"#
+//     default-column-width { fixed 600; }
+//     open-on-output "eDP-1"
+// }
+
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    block-out-from "screencast"
+}
+
+window-rule {
+    match app-id=r#"^qalculate-gtk$"#
+
+    min-height 600
+    max-height 600
+
+    max-width 600
+    min-width 600
+}
+ 
+window-rule {
+    match app-id="evince" title="Unknown"
+    default-column-width { proportion 0.333; }
+}
+
+
+// window-rule {
+//     match is-active=false
+//     opacity 0.95
+//     draw-border-with-background false
+// }
+
+window-rule {
+    match app-id="com.gabm.satty"
+    open-fullscreen false
+    open-floating true
+}
+
