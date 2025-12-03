@@ -15,14 +15,14 @@ lock (){
 dolock (){
     swayidle -w timeout 10 'wlopm --off "*"' resume 'wlopm --on "*"' &
     SWAYIDLE_PID=$!
-    swaylock
+    hyprlock
     kill $SWAYIDLE_PID
 }
 
 lockniri (){
     swayidle -w timeout 10 'niri msg action power-off-monitors' &
     SWAYIDLE_PID=$!
-    swaylock
+    hyprlock
     kill $SWAYIDLE_PID
 }
 
