@@ -24,20 +24,6 @@ window#waybar.hidden {
   opacity: 0.2;
 }
 
-#window {
-  margin-top: 8px;
-  padding-left: 16px;
-  padding-right: 16px;
-  border-radius: 26px;
-  transition: none;
-  /*
-    color: #f8f8f2;
-  background: #282a36;
-   */
-  color: transparent;
-  background: transparent;
-}
-
 window#waybar.termite #window,
 window#waybar.Firefox #window,
 window#waybar.Navigator #window,
@@ -58,20 +44,19 @@ window#waybar.PCSX2 #window {
 #window,
 #taskbar,
 #custom-bluetooth-battery,
-#tray {
+#tray,
+#workspaces {
   margin-top: 8px;
   margin-bottom: 0;
   /*   background: #282a36;*/
   background: rgba(40, 42, 54, 0.6);
   color: #f8f8f2;
-  transition: none;
   padding-left: 7px;
   padding-right: 7px;
 }
 
 #tags,
-#mode,
-#window {
+#mode {
   margin-left: 10px;
   margin-right: 10px;
   border-radius: 100px;
@@ -80,17 +65,27 @@ window#waybar.PCSX2 #window {
 }
 
 #taskbar.icons {
-  margin-left: 10px;
-  border-top-left-radius: 100px;
-  border-bottom-left-radius: 100px;
-  padding-left: 20px;
+  padding-left: 0px;
   padding-right: 0px;
 }
 
-#taskbar.title {
+#window {
   border-top-right-radius: 100px;
   border-bottom-right-radius: 100px;
   padding-right: 15px;
+}
+
+#workspaces {
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+  margin-left: 10px;
+  padding-left: 20px;
+  padding-right: 10px;
+}
+#workspaces button {
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #f8f8f2;
 }
 
 #pulseaudio,
@@ -115,12 +110,17 @@ window#waybar.PCSX2 #window {
 
 #taskbar button,
 #tags button {
-  transition: none;
-  background: transparent;
   color: #868681;
   font-size: 16px;
+}
+#tags button {
   padding-left: 10px;
   padding-right: 10px;
+}
+
+#taskbar button {
+  padding-left: 10px;
+  padding-right: 6px;
 }
 
 #taskbar button.active {
@@ -136,12 +136,23 @@ window#waybar.PCSX2 #window {
 }
 
 #tags button:hover {
-  transition: none;
   box-shadow: inherit;
   text-shadow: inherit;
   color: #ff3333;
   background: #550000;
   border-radius: 24px;
+}
+
+button,
+#taskbar.icons button {
+  transition: background 0.2s ease-out;
+  margin: 0 1px;
+  border-radius: 4px;
+}
+
+button:hover,
+#taskbar.icons button.active:hover {
+  background: #b0b0a0;
 }
 
 #tags button.urgent {
@@ -160,15 +171,4 @@ window#waybar.PCSX2 #window {
 #taskbar.icons button.active {
   background: #868681;
   color: #000;
-}
-
-#taskbar.title button {
-  font-size: 0px;
-  padding: 0px;
-  margin: 0px;
-}
-
-#taskbar.title button.active {
-  font-size: 14px;
-  padding-right: 5px;
 }
